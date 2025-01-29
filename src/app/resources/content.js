@@ -281,10 +281,34 @@ const about = {
 
 const blog = {
   label: "Resources",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  title: "Useful Resources & Links",
+  description: `A collection of helpful resources curated by ${person.name}`,
+  resources: [
+    {
+      title: "Notes",
+      description: "A collection of my notes on various topics.",
+      imageSrc: "/images/resources/essays.png",
+      link: "https://essays.nadeemramli.com"
+    },
+    {
+      title: "Essays",
+      description: "A collection of my essays on various topics.",
+      imageSrc: "/images/resources/essays.png",
+      link: "https://essays.nadeemramli.com"
+    },
+    {
+      title: "Essays",
+      description: "A collection of my essays on various topics.",
+      imageSrc: "/images/resources/essays.png",
+      link: "https://essays.nadeemramli.com"
+    },
+    {
+      title: "Essays",
+      description: "A collection of my essays on various topics.",
+      imageSrc: "/images/resources/essays.png",
+      link: "https://essays.nadeemramli.com"
+    },
+  ]
 };
 
 const work = {

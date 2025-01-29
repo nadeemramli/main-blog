@@ -1,32 +1,50 @@
-import { getPosts } from "@/app/utils/utils";
 import { Grid } from "@/once-ui/components";
-import Post from "./Post";
+import { ResourceCard } from "./ResourceCard";
+import { blog } from "@/app/resources/content";
 
 interface PostsProps {
   range?: [number] | [number, number];
   columns?: "1" | "2" | "3";
-  thumbnail?: boolean;
 }
 
-export function Posts({ range, columns = "1", thumbnail = false }: PostsProps) {
-  const allBlogs = getPosts(["src", "app", "blog", "posts"]);
+export function Posts({ range, columns = "3" }: PostsProps) {
+  const resources = blog.resources;
 
-  const sortedBlogs = allBlogs.sort((a, b) => {
-    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
-  });
-
-  const displayedBlogs = range
-    ? sortedBlogs.slice(range[0] - 1, range.length === 2 ? range[1] : sortedBlogs.length)
-    : sortedBlogs;
+  const displayedResources = range
+    ? resources.slice(
+        range[0] - 1,
+        range.length === 2 ? range[1] : resources.length
+      )
+    : resources;
 
   return (
     <>
-      {displayedBlogs.length > 0 && (
-        <Grid columns={columns} mobileColumns="1" fillWidth marginBottom="40" gap="m">
-          {displayedBlogs.map((post) => (
-            <Post key={post.slug} post={post} thumbnail={thumbnail} />
-          ))}
-        </Grid>
+      {displayedResources.length > 0 && (
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 var(--static-space-24)",
+          }}
+        >
+          <Grid
+            columns={columns}
+            mobileColumns="1"
+            fillWidth
+            marginBottom="40"
+            gap="24"
+            style={{
+              gridTemplateColumns: "repeat(3, 1fr)",
+              justifyItems: "center",
+              width: "100%",
+              maxWidth: "100%",
+            }}
+          >
+            {displayedResources.map((resource, index) => (
+              <ResourceCard key={index} {...resource} />
+            ))}
+          </Grid>
+        </div>
       )}
     </>
   );
