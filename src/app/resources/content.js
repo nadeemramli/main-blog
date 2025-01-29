@@ -51,10 +51,10 @@ const home = {
   label: "Home",
   title: `${person.name}'s Index`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>A Wannabe Product Manager & Indie Hacker</>,
+  headline: <>A Wannabe Product Manager</>,
   subline: (
     <>
-      I'm Nadeem, a growth dude at <InlineCode>checkpoint.xyz</InlineCode>, where I build products. After hours, I stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
+      A dude at <InlineCode>checkpoint.xyz</InlineCode> where I build products. After hours, I stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
     </>
   ),
 };
