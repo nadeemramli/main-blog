@@ -1,5 +1,5 @@
 import { Grid } from "@/once-ui/components";
-import { ResourceCard } from "./ResourceCard";
+import { ResourceCard } from "../ResourceCard";
 import { blog } from "@/app/resources/content";
 
 interface PostsProps {

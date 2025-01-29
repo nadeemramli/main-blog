@@ -1,0 +1,64 @@
+---
+title: "Mapping of Metrics (Under Development)"
+publishedAt: "2024-09-01"
+summary: "Under development. Mapping of Metrics is a project that helps you map your metrics to your goals."
+images:
+  - "/images/projects/mapping-of-metrics/1.png"
+  - "/images/projects/mapping-of-metrics/2.png"
+team:
+  - name: "Nadeem Ramli"
+    role: "Software Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/mnadeemramli"
+link: "https://github.com/nadeemramli/metric-map-app"
+---
+
+## Overview
+
+It's my first project ever building a product.
+
+My goal is simple: I want to help people to map their business metrics to their goals.
+We have advanced tools to help you do this, but they are not easy to use.
+We have tools like Google Sheets, Excel, but they are not easy to use.
+
+Mapping of Metrics democratizes the process of mapping metrics to goals.
+Now your Sales, Marketing, and Product teams can easily map their metrics to their goals.
+No need fancy Data Analytics background.
+
+## Key Features
+
+- **Figma Plugin Integration**: Developed a custom Figma plugin that extracts design tokens such as colors, typography, and spacing values, and exports them in a format compatible with our codebase.
+- **Code Generation**: Integrated an automated process that translates Figma components into React code using a combination of design tokens and pre-built component templates. This allowed developers to focus more on logic and less on repetitive UI coding.
+- **Continuous Sync**: Established a CI/CD pipeline that continuously synchronizes design changes from Figma to the codebase, ensuring design updates are reflected instantly without manual intervention.
+- **Scalable Design System**: Leveraged a design system that remains the single source of truth for both designers and developers, making it easy to maintain consistency even as the product evolves.
+
+## Technologies Used
+
+- **Django, PostgreSQL, Celery**: For building the back-end codebase.
+- **React and Next.js**: For building the front-end codebase with clean, reusable components.
+- **Shadcn/UI**: For building the front-end codebase with clean, reusable components.
+- **GitHub Actions**: For automating the pipeline and syncing design changes to the repository.
+
+## Challenges and Learnings
+
+One of the challenges I faced is the authentication system. I wanted to the app to be accessible to everyone, so I decided to use django-tenant-schemas.
+This is a great library, but it's not easy to use. Just like authentication, I had to ensure all components are "tenant aware". This way users can only access their own data.
+
+This also allow user to have multiple "projects". User can create a new project, and start mapping their metrics to play around with their goals.
+
+There are few more challenges, I faced. I won't go into details here, but it's related to:
+
+- Backend
+  - Authentication
+  - Database schemas
+  - Celery / asynchronous tasks
+  - Testing and API documentation
+- Frontend
+  - Slicers for Context/Redux
+  - API calls
+  - Integrating React Flow / React Flow Editor
+  - UI/UX
+
+## Outcome
+
+The project is stalled for now. I will very much continue working on this project. It just needs more time.

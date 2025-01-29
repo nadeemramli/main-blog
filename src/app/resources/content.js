@@ -79,9 +79,11 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        A results-driven growth marketer with a passion for building products, and 4 years of experience in performance marketing.
+        - A results-driven growth marketer with a passion for building products.
         <br />
-        I'm a self-taught product manager and indie hacker.
+        - 4 years of experience in performance marketing.
+        <br />
+        - A self-taught product manager and surely a wannabe indie developer.
       </>
     ),
   },
@@ -90,24 +92,24 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Checkpoint.xyz",
+        timeframe: "2025 - Present",
+        role: "Product Manager",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Undefined.
           </>,
         ],
         images: [
-          // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/projects/daylog/1.png",
+            alt: "DayLog",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/mapping-of-metrics/1.png",
+            alt: "Mapping of Metrics",
             width: 16,
             height: 9,
           },
@@ -115,23 +117,27 @@ const about = {
       },
       {
         company: "FAR Capital Sdn. Bhd.",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        timeframe: "March 2023 - November 2024",
+        role: "Digital Marketing Manager / Technical Marketer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Technical Product Manager, overseeing the whole far.academy ecosystem and 
+            lead gen campaign for the event “Sunday Session”.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            A lot of other stuff too.
           </>,
         ],
         images: [
-          // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/resume/farcapital.png",
+            alt: "FAR Capital Sdn. Bhd.",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/resume/faracademy.png",
+            alt: "FAR Academy",
             width: 16,
             height: 9,
           },
@@ -143,19 +149,17 @@ const about = {
         role: "Growth/Product Marketer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+             Managing the whole demand generation activities for the startup to find more ICP.  Land 4 big client and reached monthly KPIs.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Improve the website's value proposition, deep dig in keyword semantics for startup positioning.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/resume/adasight.png",
+            alt: "Adasight B.V.",
             width: 16,
             height: 9,
           },
@@ -226,7 +230,7 @@ const about = {
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
+    display: false, // set to false to hide this section
     title: "Studies",
     institutions: [
       {
@@ -244,9 +248,8 @@ const about = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
-        // optional: leave the array empty if you don't want to display images
+        title: "GTM Tactics",
+        description: <>Performance-based Growth, A bit of PLG, Virality-based Growth</>,
         images: [
           {
             src: "/images/projects/project-01/cover-02.jpg",
@@ -263,9 +266,8 @@ const about = {
         ],
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
-        // optional: leave the array empty if you don't want to display images
+        title: "Marketing Analytics",
+        description: <>GTM, GA, CRO Tools (Hotjar, PostHog, Clarity,etc)</>,
         images: [
           {
             src: "/images/projects/project-01/cover-04.jpg",
@@ -273,6 +275,30 @@ const about = {
             width: 16,
             height: 9,
           },
+        ],
+      },
+      {
+        title: "Performance Marketing",
+        description: <>Google Ads, Facebook Ads, TikTok Ads, LinkedIn Ads, etc.</>,
+        images: [
+        ],
+      },
+      {
+        title: "No-Code Tools, Automation",
+        description: <>Python, Notion, Google Sheets, etc.</>,
+        images: [
+          {
+            src: "/images/skills/notioncert.png",
+            alt: "Notion",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        title: "Product Analytics",
+        description: <>Amplitude, PostHog, etc.</>,
+        images: [
         ],
       },
     ],

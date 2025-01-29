@@ -11,7 +11,7 @@ import {
   Button,
   SmartLink,
 } from "@/once-ui/components";
-import styles from "./Posts.module.scss";
+import styles from "./blog/Posts.module.scss";
 
 interface ResourceCardProps {
   title: string;
