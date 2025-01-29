@@ -1,6 +1,9 @@
 {
   "name": "@once-ui-system/magic-portfolio",
   "version": "1.3.0",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

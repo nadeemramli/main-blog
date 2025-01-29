@@ -11,9 +11,6 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "md", "mdx"],
   images: {
     unoptimized: true, // Required for static export
-  },
-  engines: {
-    node: ">=18.18.0"
   }
 };
 
