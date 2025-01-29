@@ -12,6 +12,9 @@ const nextConfig = {
   images: {
     unoptimized: true, // Required for static export
   },
+  engines: {
+    node: ">=18.18.0"
+  }
 };
 
 export default withMDX(nextConfig);
