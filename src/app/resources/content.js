@@ -49,13 +49,12 @@ const social = [
 
 const home = {
   label: "Home",
-  title: `${person.name}'s Portfolio`,
+  title: `${person.name}'s Index`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
   headline: <>A Wannabe Product Manager & Indie Hacker</>,
   subline: (
     <>
-      I'm Nadeem, a growth dude at <InlineCode>checkpoint.xyz</InlineCode>, where I build products.
-      After hours, I stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
+      I'm Nadeem, a growth dude at <InlineCode>checkpoint.xyz</InlineCode>, where I build products. After hours, I stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
     </>
   ),
 };
@@ -115,7 +114,7 @@ const about = {
         ],
       },
       {
-        company: "FLY",
+        company: "FAR Capital Sdn. Bhd.",
         timeframe: "2022 - Present",
         role: "Senior Design Engineer",
         achievements: [
@@ -139,9 +138,9 @@ const about = {
         ],
       },
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Adasight B.V.",
+        timeframe: "May 2023 - November 2023",
+        role: "Growth/Product Marketer",
         achievements: [
           <>
             Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
@@ -163,44 +162,66 @@ const about = {
         ],
       },
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Group M / WPP",
+        timeframe: "March 2022 - July 2022",
+        role: "Performance Marketer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Media Buying, Media Planning, Marketing Analytics, Scaled-Up Marketing Operation,
+            AdOps, Excel, Reporting.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
-          </>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
-        achievements: [
-          <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            It's cool to work with the best of the best. Corporate-wise.
           </>,
         ],
         images: [],
+      },
+      {
+        company: "NCIG (M) Sdn. Bhd.",
+        timeframe: "September 2021 - March 2022",
+        role: "Performance Marketer",
+        achievements: [
+          <>
+            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
+            engagement and 30% faster load times.
+          </>,
+          <>
+            Spearheaded the integration of AI tools into design workflows, enabling designers to
+            iterate 50% faster.
+          </>,
+        ],
+        images: [
+          // optional: leave the array empty if you don't want to display images
+          {
+            src: "/images/resume/ncig.jpg",
+            alt: "NCIG (M) Sdn. Bhd.",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },
+      {
+        company: "Monocal Sdn. Bhd",
+        timeframe: "February 2021 - August 2021",
+        role: "Growth Strategist",
+        achievements: [
+          <>
+            Growth Strategy, B2B Marketing, User Research, Google Ads,
+            Google Analytics, Google Tag Manager, Facebook Ads, Facebook Pixel,
+            Chatbot, Content Marketing, Automation.
+          </>,
+          <>
+            Paying tribute to the OG agency, cause that's where I started.
+          </>,
+        ],
+        images: [
+          {
+            src: "/images/resume/monocal.jpg",
+            alt: "Monocal Sdn. Bhd",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
