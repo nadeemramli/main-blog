@@ -1,7 +1,6 @@
-import { Column, Flex, Heading } from "@/once-ui/components";
-import { Posts } from "@/components/blog/Posts";
 import { baseURL } from "@/app/resources";
 import { blog, person } from "@/app/resources/content";
+import { BlogContent } from "@/components/BlogContent";
 
 export async function generateMetadata() {
   const title = blog.title;
@@ -34,7 +33,7 @@ export async function generateMetadata() {
 
 export default function Blog() {
   return (
-    <Column maxWidth="s">
+    <>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -57,13 +56,7 @@ export default function Blog() {
           }),
         }}
       />
-      <Heading marginBottom="l" variant="display-strong-s">
-        {blog.title}
-      </Heading>
-      <Column fillWidth flex={1}>
-        <Posts range={[1, 3]} />
-        <Posts range={[4]} columns="2" />
-      </Column>
-    </Column>
+      <BlogContent />
+    </>
   );
 }
