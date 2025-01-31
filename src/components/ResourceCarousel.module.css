@@ -1,6 +1,6 @@
 .embla {
   position: relative;
-  padding: 40px;
+  padding: 40px 0;
   max-width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
@@ -18,7 +18,8 @@
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-left: -10px;
+  margin-left: calc(10% - 10px);
+  margin-right: calc(10% - 10px);
 }
 
 .embla__slide {
@@ -78,4 +79,58 @@
 
 .embla__button__next {
   right: 20px;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 425px) {
+  .embla__container {
+    margin-left: calc(10% - 10px);
+    margin-right: calc(10% - 10px);
+  }
+  
+  .embla__slide {
+    min-width: 80%;
+  }
+
+  .embla__button {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .embla__button__prev {
+    left: 10px;
+  }
+
+  .embla__button__next {
+    right: 10px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .embla__container {
+    margin-left: calc(7.5% - 10px);
+    margin-right: calc(7.5% - 10px);
+  }
+  
+  .embla__slide {
+    min-width: 85%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .embla__container {
+    margin-left: calc(5% - 10px);
+    margin-right: calc(5% - 10px);
+  }
+  
+  .embla__slide {
+    min-width: 90%;
+  }
+
+  .embla__button {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
 } 
