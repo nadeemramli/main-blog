@@ -1,4 +1,3 @@
-import { getPosts } from "@/app/utils/utils";
 import { Column } from "@/once-ui/components";
 import { ResourceCard } from "@/components/ResourceCard";
 import { resources } from "@/app/resources/content";

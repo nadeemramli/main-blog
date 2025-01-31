@@ -6,7 +6,6 @@ import {
   Text,
   Button,
   Avatar,
-  Arrow,
   Column,
   Scroller,
   RevealFx,
@@ -16,7 +15,6 @@ import Projects from "@/components/projects/Projects";
 import { baseURL, routes } from "@/app/resources";
 import { home, about, person } from "@/app/resources/content";
 import { Posts } from "@/components/resource/Posts";
-import { getPosts } from "@/app/utils/utils";
 
 export async function generateMetadata() {
   const title = home.title;
