@@ -54,7 +54,7 @@ const home = {
   headline: <>A Wannabe Product Manager</>,
   subline: (
     <>
-      A dude at <InlineCode>checkpoint.xyz</InlineCode> where I build products. After hours, I stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
+      A dude at <InlineCode>checkpoint.xyz</InlineCode> where I build products. One day, I will stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
     </>
   ),
 };
@@ -186,12 +186,8 @@ const about = {
         role: "Performance Marketer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            DTC Industry, Sales-led Growth, Marketing Analytics, Marketing Automation,
+            Product Launch, Demographic Expansion, Community Building, Email/SMS Marketing.
           </>,
         ],
         images: [
@@ -251,7 +247,7 @@ const about = {
         title: "GTM Tactics",
         description: <>Performance-based Growth, A bit of PLG, Virality-based Growth</>,
         images: [
-          {
+          /*{
             src: "/images/projects/project-01/cover-02.jpg",
             alt: "Project image",
             width: 16,
@@ -262,19 +258,19 @@ const about = {
             alt: "Project image",
             width: 16,
             height: 9,
-          },
+          },*/
         ],
       },
       {
         title: "Marketing Analytics",
         description: <>GTM, GA, CRO Tools (Hotjar, PostHog, Clarity,etc)</>,
         images: [
-          {
+          /*{
             src: "/images/projects/project-01/cover-04.jpg",
             alt: "Project image",
             width: 16,
             height: 9,
-          },
+          },*/
         ],
       },
       {
@@ -287,12 +283,12 @@ const about = {
         title: "No-Code Tools, Automation",
         description: <>Python, Notion, Google Sheets, etc.</>,
         images: [
-          {
+          /*{
             src: "/images/skills/notioncert.png",
             alt: "Notion",
             width: 16,
             height: 9,
-          },
+          },*/
         ],
       },
       {
@@ -311,28 +307,28 @@ const blog = {
   description: `A collection of helpful resources curated by ${person.name}`,
   resources: [
     {
-      title: "Notes",
-      description: "A collection of my notes on various topics.",
+      title: "Essays",
+      description: "My digital garden, which is a collection of my essays on various topics.",
       imageSrc: "/images/resources/essays.png",
       link: "https://essays.nadeemramli.com"
     },
     {
-      title: "Essays",
-      description: "A collection of my essays on various topics.",
-      imageSrc: "/images/resources/essays.png",
-      link: "https://essays.nadeemramli.com"
+      title: "Digital Library",
+      description: "Book summaries and notes.",
+      imageSrc: "/images/resources/digital-library.png",
+      link: "https://curation.nadeemramli.com"
     },
     {
-      title: "Essays",
-      description: "A collection of my essays on various topics.",
-      imageSrc: "/images/resources/essays.png",
-      link: "https://essays.nadeemramli.com"
+      title: "Trial and Error",
+      description: "My journal of product development, growth marketing and design",
+      imageSrc: "/images/resources/trial-and-error.png",
+      link: "https://trial-and-error.nadeemramli.com"
     },
     {
-      title: "Essays",
-      description: "A collection of my essays on various topics.",
-      imageSrc: "/images/resources/essays.png",
-      link: "https://essays.nadeemramli.com"
+      title: "Library of Mental Models",
+      description: "A collection of mental models, distilled from the best books.",
+      imageSrc: "/images/resources/mental-models.png",
+      link: "https://nadeemramli.notion.site/mental-models-library"
     },
   ]
 };
