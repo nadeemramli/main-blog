@@ -11,7 +11,7 @@ import {
   Button,
   SmartLink,
 } from "@/once-ui/components";
-import styles from "./blog/Posts.module.scss";
+import styles from "@/components/projects/Projects.module.scss";
 
 interface ResourceCardProps {
   title: string;
@@ -27,9 +27,9 @@ export function ResourceCard({
   link,
 }: ResourceCardProps) {
   return (
-    <Card width={24} radius="l-4" direction="column" className={styles.hover}>
+    <Card width={18} radius="l-4" direction="column" className={styles.hover}>
       <SmartImage
-        sizes="640px"
+        sizes="580px"
         fillWidth
         aspectRatio="4 / 3"
         radius="l"

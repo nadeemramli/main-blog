@@ -14,6 +14,6 @@ export {
   newsletter,
   home,
   about,
-  blog,
-  work,
+  resources,
+  projects,
 } from "@/app/resources/content";

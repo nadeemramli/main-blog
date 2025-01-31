@@ -47,6 +47,12 @@ const social = [
   },
 ];
 
+const projects = {
+  title: "Projects",
+  description: "A collection of projects and experiments I've worked on.",
+  label: "Projects"
+};
+
 const home = {
   label: "Home",
   title: `${person.name}'s Index`,
@@ -122,7 +128,7 @@ const about = {
         achievements: [
           <>
             Technical Product Manager, overseeing the whole far.academy ecosystem and 
-            lead gen campaign for the event “Sunday Session”.
+            lead gen campaign for the event "Sunday Session".
           </>,
           <>
             A lot of other stuff too.
@@ -301,7 +307,7 @@ const about = {
   },
 };
 
-const blog = {
+const resources = {
   label: "Resources",
   title: "Useful Resources & Links",
   description: `A collection of helpful resources curated by ${person.name}`,
@@ -333,12 +339,4 @@ const blog = {
   ]
 };
 
-const work = {
-  label: "Projects",
-  title: "My projects",
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
-};
-
-export { person, social, newsletter, home, about, blog, work };
+export { person, social, newsletter, home, about, projects, resources };

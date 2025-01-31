@@ -10,6 +10,20 @@ import {
   Text,
 } from "@/once-ui/components";
 
+interface Metadata {
+  title: string;
+  publishedAt: string;
+  summary: string;
+  images: string[];
+  team?: { avatar: string }[];
+}
+
+interface Project {
+  metadata: Metadata;
+  slug: string;
+  content: string;
+}
+
 interface ProjectCardProps {
   href: string;
   priority?: boolean;

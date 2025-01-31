@@ -3,14 +3,14 @@ const baseURL = "demo.magic-portfolio.com";
 const routes = {
   "/": true,
   "/about": true,
-  "/work": true,
-  "/blog": true,
+  "/projects": true,
+  "/resources": true,
 };
 
 // Enable password protection on selected routes
 // Set password in pages/api/authenticate.ts
 const protectedRoutes = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": true,
+  "/projects/automate-design-handovers-with-a-figma-to-code-pipeline": true,
 };
 
 const style = {

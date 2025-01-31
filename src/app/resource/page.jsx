@@ -1,10 +1,10 @@
 import { ResourceCarousel } from "@/components/ResourceCarousel";
-import { blog } from "@/app/resources/content";
+import { resources } from "@/app/resources/content";
 
 export default function ResourcesPage() {
   return (
     <div>
-      <ResourceCarousel resources={blog.resources} />
+      <ResourceCarousel resources={resources.resources} />
     </div>
   );
 } 

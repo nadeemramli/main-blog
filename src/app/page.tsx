@@ -11,11 +11,11 @@ import {
   Scroller,
   RevealFx,
 } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
+import Projects from "@/components/projects/Projects";
 
 import { baseURL, routes } from "@/app/resources";
 import { home, about, person } from "@/app/resources/content";
-import { Posts } from "@/components/blog/Posts";
+import { Posts } from "@/components/resource/Posts";
 import { getPosts } from "@/app/utils/utils";
 
 export async function generateMetadata() {
@@ -48,8 +48,6 @@ export async function generateMetadata() {
 }
 
 export default function Home() {
-  const allProjects = getPosts(["src", "app", "work", "projects"]);
-
   return (
     <Column maxWidth="m" gap="xl" horizontal="center">
       <Column fillWidth paddingY="l" gap="m">
@@ -107,7 +105,7 @@ export default function Home() {
         <Projects range={[1, 1]} />
       </RevealFx>
 
-      {routes["/blog"] && (
+      {routes["/resources"] && (
         <Column fillWidth gap="xl">
           <Flex fillWidth gap="24" mobileDirection="column">
             <Flex flex={1} paddingLeft="l">

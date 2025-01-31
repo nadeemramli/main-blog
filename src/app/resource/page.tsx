@@ -1,10 +1,10 @@
 import { baseURL } from "@/app/resources";
-import { blog, person } from "@/app/resources/content";
-import { BlogContent } from "@/components/BlogContent";
+import { resources, person } from "@/app/resources/content";
+import { ResourceCarousel } from "@/components/ResourceCarousel";
 
 export async function generateMetadata() {
-  const title = blog.title;
-  const description = blog.description;
+  const title = resources.title;
+  const description = resources.description;
   const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -14,7 +14,7 @@ export async function generateMetadata() {
       title,
       description,
       type: "website",
-      url: `https://${baseURL}/blog`,
+      url: `https://${baseURL}/resources`,
       images: [
         {
           url: ogImage,
@@ -31,7 +31,7 @@ export async function generateMetadata() {
   };
 }
 
-export default function Blog() {
+export default function Resources() {
   return (
     <>
       <script
@@ -41,10 +41,10 @@ export default function Blog() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
-            headline: blog.title,
-            description: blog.description,
-            url: `https://${baseURL}/blog`,
-            image: `${baseURL}/og?title=${encodeURIComponent(blog.title)}`,
+            headline: resources.title,
+            description: resources.description,
+            url: `https://${baseURL}/resources`,
+            image: `${baseURL}/og?title=${encodeURIComponent(resources.title)}`,
             author: {
               "@type": "Person",
               name: person.name,
@@ -56,7 +56,7 @@ export default function Blog() {
           }),
         }}
       />
-      <BlogContent />
+      <ResourceCarousel resources={resources.resources} />
     </>
   );
 }
