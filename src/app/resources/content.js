@@ -328,7 +328,7 @@ const resources = {
       title: "Trial and Error",
       description: "My journal of product development, growth marketing and design",
       imageSrc: "/images/resources/trial-and-error.png",
-      link: "https://trial-and-error.nadeemramli.com"
+      link: "https://build.nadeemramli.com"
     },
     {
       title: "Library of Mental Models",
