@@ -5,6 +5,7 @@ const routes = {
   "/about": true,
   "/projects": true,
   "/resources": true,
+  "/now": true,
 };
 
 // Enable password protection on selected routes
@@ -13,27 +14,31 @@ const protectedRoutes = {
   "/projects/automate-design-handovers-with-a-figma-to-code-pipeline": true,
 };
 
+// Operator Console (design.md): light-only, emerald is the nearest enum to
+// mint #76D2B6, red is reserved for the status-indicator language.
 const style = {
-  theme: "dark", // dark | light
-  neutral: "gray", // sand | gray | slate
-  brand: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
-  accent: "violet", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  theme: "light", // dark | light
+  neutral: "sand", // sand | gray | slate
+  brand: "emerald", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
+  accent: "red", // blue | indigo | violet | magenta | pink | red | orange | yellow | moss | green | emerald | aqua | cyan
   solid: "contrast", // color | contrast
-  solidStyle: "plastic", // flat | plastic
+  solidStyle: "flat", // flat | plastic
   border: "rounded", // rounded | playful | conservative
   surface: "filled", // filled | translucent
   transition: "all", // all | micro | macro
 };
 
+// All ambient effects are off: the Operator Console desk surface (WebGL
+// dither, Phase 1+) replaces the Once UI Background layer entirely.
 const effects = {
   mask: {
-    cursor: true,
+    cursor: false,
     x: 0,
     y: 0,
     radius: 75,
   },
   gradient: {
-    display: true,
+    display: false,
     x: 50,
     y: 0,
     width: 100,
@@ -44,7 +49,7 @@ const effects = {
     opacity: 50,
   },
   dots: {
-    display: true,
+    display: false,
     size: 1,
     color: "brand-on-background-weak",
     opacity: 20,
@@ -76,7 +81,7 @@ const mailchimp = {
       radius: 100,
     },
     gradient: {
-      display: true,
+      display: false,
       x: 100,
       y: 50,
       width: 100,
@@ -98,7 +103,7 @@ const mailchimp = {
       opacity: 100,
     },
     grid: {
-      display: true,
+      display: false,
       color: "neutral-alpha-weak",
       opacity: 100,
     },

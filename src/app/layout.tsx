@@ -6,8 +6,7 @@ import classNames from "classnames";
 import { Footer, Header, RouteGuard } from "@/components";
 import { baseURL, effects, style } from "@/app/resources";
 
-import { Inter } from "next/font/google";
-import { Source_Code_Pro } from "next/font/google";
+import localFont from "next/font/local";
 
 import { person, home } from "@/app/resources/content";
 import { Background, Column, Flex, ToastProvider } from "@/once-ui/components";
@@ -39,9 +38,11 @@ export async function generateMetadata() {
   };
 }
 
-const primary = Inter({
+// Self-hosted fonts (next/font/local) so the build does not depend on
+// network access to fonts.googleapis.com. Files live in ./fonts.
+const primary = localFont({
+  src: "./fonts/inter.woff2",
   variable: "--font-primary",
-  subsets: ["latin"],
   display: "swap",
 });
 
@@ -49,19 +50,23 @@ type FontConfig = {
   variable: string;
 };
 
-/*
-	Replace with code for secondary and tertiary fonts
-	from https://once-ui.com/customize
-*/
-const secondary: FontConfig | undefined = undefined;
-const tertiary: FontConfig | undefined = undefined;
-/*
- */
-
-const code = Source_Code_Pro({
-  variable: "--font-code",
-  subsets: ["latin"],
+// design.md: Inter carries all reading and display type, so the secondary
+// (heading) slot maps to Inter as well.
+const secondary = localFont({
+  src: "./fonts/inter.woff2",
+  variable: "--font-secondary",
   display: "swap",
+});
+
+const tertiary: FontConfig | undefined = undefined;
+
+// JetBrains Mono variable (wght 400–600) — the console "chrome" mono:
+// labels, readouts, nav, timestamps, badges (design.md §3).
+const code = localFont({
+  src: "./fonts/jetbrains-mono.woff2",
+  variable: "--font-code",
+  display: "swap",
+  weight: "400 600",
 });
 
 interface RootLayoutProps {
@@ -92,6 +97,10 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     >
       <ToastProvider>
         <Column
+          // Browser extensions (e.g. ColorZilla) inject attributes like
+          // `cz-shortcut-listen` onto <body> before React hydrates, causing a
+          // benign hydration mismatch. Suppress it just for this element.
+          suppressHydrationWarning
           style={{ minHeight: "100vh" }}
           as="body"
           fillWidth

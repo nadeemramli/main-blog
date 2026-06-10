@@ -9,6 +9,10 @@ type Team = {
   linkedIn: string;
 };
 
+// Project lifecycle state, rendered as the LED/badge status language on the
+// Projects "device rack" (design.md §5.9, §6.4).
+type ProjectStatus = "live" | "in-development" | "prototype" | "archived";
+
 type Metadata = {
   title: string;
   publishedAt: string;
@@ -18,6 +22,8 @@ type Metadata = {
   tag?: string;
   team: Team[];
   link?: string;
+  status: ProjectStatus;
+  metric?: string;
 };
 
 import { notFound } from 'next/navigation';
@@ -47,6 +53,8 @@ function readMDXFile(filePath: string) {
     tag: data.tag || [],
     team: data.team || [],
     link: data.link || "",
+    status: data.status || "prototype",
+    metric: data.metric || "",
   };
 
   return { metadata, content };
