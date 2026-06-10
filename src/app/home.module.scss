@@ -1,0 +1,287 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-section-gap);
+  width: 100%;
+  max-width: var(--console-page-max-width);
+  padding-top: 32px;
+}
+
+/* ── Hero console (design.md §6.1) ─────────────────────────── */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 232px 1fr 216px;
+  gap: var(--console-panel-padding);
+  align-items: center;
+}
+
+.gaugeModule {
+  display: flex;
+  justify-content: center;
+}
+
+.operatorLabel {
+  color: var(--console-lcd-dim);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--console-space-base);
+}
+
+.readoutXl {
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.roleLine {
+  margin-top: var(--console-space-base);
+  color: var(--console-lcd-dim);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--console-space-base) var(--console-gap);
+  margin-top: var(--console-gap);
+  padding-top: var(--console-gap);
+  border-top: 1px solid var(--console-lcd-dim);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  color: var(--console-lcd-dim);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Reference card: the shipping week (design.md §6.1). */
+.reference {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+  background: var(--console-well);
+  border-radius: var(--console-radius-panel-inner);
+  box-shadow: var(--console-shadow-inset);
+  padding: var(--console-gap);
+  min-height: 180px;
+}
+
+.refTitle {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+}
+
+.dayCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dayLabel {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--console-text-secondary);
+}
+
+.dayMark {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--console-radius-pill);
+  background: var(--console-panel-high);
+  box-shadow: var(--console-shadow-raised-sm);
+}
+
+.dayMark.ship {
+  background: var(--console-mint);
+}
+
+.legend {
+  font-family: var(--console-font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+/* One decorative hardware detail per shell (design.md §4). */
+.grille {
+  position: absolute;
+  right: var(--console-gap);
+  bottom: var(--console-gap);
+  width: 44px;
+  height: 28px;
+  background-image: radial-gradient(var(--console-border) 1px, transparent 1.5px);
+  background-size: 7px 7px;
+  opacity: 0.7;
+}
+
+.subline {
+  margin: var(--console-gap) 4px 0;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+
+  a {
+    color: var(--console-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
+
+/* ── Section eyebrows (design.md §3) ───────────────────────── */
+.eyebrow {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  margin-bottom: var(--console-gap);
+}
+
+/* ── Now log module (design.md §6.1) ───────────────────────── */
+.nowModule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+.nowHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--console-gap);
+}
+
+.nowTitle {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--console-text-primary);
+}
+
+.log {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.logLine {
+  display: flex;
+  gap: var(--console-gap);
+  padding: 10px 4px;
+  font-family: var(--console-font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--console-text-secondary);
+
+  & + .logLine {
+    border-top: 1px solid var(--console-border);
+  }
+}
+
+.logDate {
+  color: var(--console-text-tertiary);
+  flex-shrink: 0;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.nowKey {
+  align-self: flex-start;
+}
+
+/* ── Featured project (design.md §6.1/§6.4) ────────────────── */
+.featured {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+.screenImage {
+  display: block;
+  width: 100%;
+  border-radius: calc(var(--console-radius-lcd) - 8px);
+  filter: brightness(0.9);
+}
+
+.featuredInk {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-space-base);
+}
+
+.featuredTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--console-gap);
+  flex-wrap: wrap;
+}
+
+.featuredTitle {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--console-text-primary);
+}
+
+.featuredSummary {
+  margin: 0;
+  max-width: 68ch;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}
+
+.featuredKey {
+  align-self: flex-start;
+  margin-top: var(--console-space-base);
+}
+
+/* ── Responsive: stack control → screen → reference ────────── */
+@media (max-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .reference {
+    min-height: 0;
+  }
+}

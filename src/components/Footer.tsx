@@ -1,6 +1,6 @@
 import { Icon } from "@/once-ui/components";
 import { Key, Panel } from "@/components/console";
-import { person, social, about } from "@/app/resources/content";
+import { person, social } from "@/app/resources/content";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
@@ -9,15 +9,15 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <Panel as="div" padding="lg" className={styles.shell}>
-        <h2 className={styles.headline}>Let’s Build Together</h2>
+        <h2 className={styles.headline}>Follow the Build</h2>
         <p className={styles.sub}>
           I’m always up for new product ideas, collaborations, or just talking
           shop.
         </p>
         <div className={styles.actions}>
           {/* The page's one mint key (design.md §9). */}
-          <Key variant="primary" href={about.calendar.link}>
-            Schedule a Call
+          <Key variant="primary" href="https://essays.nadeemramli.com">
+            Read the Essays
           </Key>
           {social.map(
             (item) =>

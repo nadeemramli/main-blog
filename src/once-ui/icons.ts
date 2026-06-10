@@ -21,6 +21,19 @@ import {
   HiCalendarDays,
   HiClipboard,
   HiArrowRight,
+  HiClock,
+  HiBolt,
+  HiRocketLaunch,
+  HiMagnifyingGlass,
+  HiCog6Tooth,
+  HiArrowTrendingUp,
+  HiArrowPath,
+  HiLightBulb,
+  HiChartBar,
+  HiPresentationChartLine,
+  HiCursorArrowRays,
+  HiSquares2X2,
+  HiFlag,
 } from "react-icons/hi2";
 
 import {
@@ -31,7 +44,28 @@ import {
   PiImageDuotone,
 } from "react-icons/pi";
 
-import { FaDiscord, FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import {
+  FaDiscord,
+  FaGithub,
+  FaLinkedin,
+  FaXTwitter,
+  FaInstagram,
+  FaThreads,
+} from "react-icons/fa6";
+
+import {
+  SiNotion,
+  SiFigma,
+  SiPython,
+  SiZapier,
+  SiGooglesheets,
+  SiGoogle,
+  SiGoogleanalytics,
+  SiTiktok,
+  SiPosthog,
+  SiMake,
+  SiFacebook,
+} from "react-icons/si";
 
 export const iconLibrary: Record<string, IconType> = {
   chevronUp: HiChevronUp,
@@ -61,6 +95,34 @@ export const iconLibrary: Record<string, IconType> = {
   github: FaGithub,
   linkedin: FaLinkedin,
   x: FaXTwitter,
+  instagram: FaInstagram,
+  threads: FaThreads,
   clipboard: HiClipboard,
   arrowUpRightFromSquare: HiArrowTopRightOnSquare,
+  external: HiArrowTopRightOnSquare,
+  clock: HiClock,
+  bulb: HiLightBulb,
+  lightning: HiBolt,
+  rocket: HiRocketLaunch,
+  search: HiMagnifyingGlass,
+  settings: HiCog6Tooth,
+  repeat: HiArrowPath,
+  target: HiFlag,
+  chart: HiChartBar,
+  "trending-up": HiArrowTrendingUp,
+  analytics: SiGoogleanalytics,
+  clarity: HiCursorArrowRays,
+  amplitude: HiChartBar,
+  whimsical: HiSquares2X2,
+  // Brand / tool logos
+  notion: SiNotion,
+  figma: SiFigma,
+  python: SiPython,
+  zapier: SiZapier,
+  sheets: SiGooglesheets,
+  google: SiGoogle,
+  tiktok: SiTiktok,
+  posthog: SiPosthog,
+  make: SiMake,
+  facebook: SiFacebook,
 };

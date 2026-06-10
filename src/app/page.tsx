@@ -1,20 +1,14 @@
-import React from "react";
+import classNames from "classnames";
 
-import {
-  Heading,
-  Flex,
-  Text,
-  Button,
-  Avatar,
-  Column,
-  Scroller,
-  RevealFx,
-} from "@/once-ui/components";
-import Projects from "@/components/projects/Projects";
+import { Badge, Gauge, Key, Led, Panel, Screen } from "@/components/console";
+import TimeDisplay from "@/components/Header";
+import { ResourceCarousel } from "@/components/ResourceCarousel";
+import { getPosts } from "@/app/utils/utils";
 
 import { baseURL, routes } from "@/app/resources";
-import { home, about, person } from "@/app/resources/content";
-import { Posts } from "@/components/resource/Posts";
+import { home, person, resources, consoleData } from "@/app/resources/content";
+
+import styles from "./home.module.scss";
 
 export async function generateMetadata() {
   const title = home.title;
@@ -45,84 +39,134 @@ export async function generateMetadata() {
   };
 }
 
+const FEATURED_SLUG = "building-daylog";
+
 export default function Home() {
+  const featured = getPosts(["src", "app", "projects", "projects"]).find(
+    (post) => post.slug === FEATURED_SLUG,
+  );
+
   return (
-    <Column maxWidth="m" gap="xl" horizontal="center">
-      <Column fillWidth paddingY="l" gap="m">
-        <Column maxWidth="s">
-          <RevealFx
-            translateY="4"
-            fillWidth
-            horizontal="start"
-            paddingBottom="m"
-          >
-            <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
-            </Heading>
-          </RevealFx>
-          <RevealFx
-            translateY="8"
-            delay={0.2}
-            fillWidth
-            horizontal="start"
-            paddingBottom="m"
-          >
-            <Text
-              wrap="balance"
-              onBackground="neutral-weak"
-              variant="heading-default-xl"
-            >
-              {home.subline}
-            </Text>
-          </RevealFx>
-          <RevealFx translateY="12" delay={0.4} horizontal="start">
-            <Button
-              id="about"
-              data-border="rounded"
-              href="/about"
-              variant="secondary"
-              size="m"
-              arrowIcon
-            >
-              <Flex gap="8" vertical="center">
-                {about.avatar.display && (
-                  <Avatar
-                    style={{ marginLeft: "-0.75rem", marginRight: "0.25rem" }}
-                    src={person.avatar}
-                    size="m"
-                  />
-                )}
-                {about.title}
-              </Flex>
-            </Button>
-          </RevealFx>
-        </Column>
-      </Column>
+    <div className={styles.page}>
+      {/* Hero IS a console (design.md §6.1, locked). */}
+      <section>
+        <Panel as="div" padding="lg">
+          <div className={styles.heroGrid}>
+            <div className={styles.gaugeModule}>
+              <Gauge
+                percent={consoleData.focus.gaugePercent}
+                label={consoleData.focus.label}
+                value={consoleData.focus.value}
+              />
+            </div>
+            <Screen nodeId="NODE-NR.01" status="sync" scanlines>
+              <div className={styles.operatorLabel}>OPERATOR</div>
+              <div className={styles.readoutXl}>{person.name}</div>
+              <div className={styles.roleLine}>
+                GROWTH MARKETER · INDIE BUILDER · SYSTEMS THINKER
+              </div>
+              <div className={styles.statsGrid}>
+                {consoleData.stats.map((stat) => (
+                  <div key={stat.label} className={styles.stat}>
+                    <span className={styles.statLabel}>{stat.label}</span>
+                    <span className={styles.statValue}>
+                      {stat.value ?? (
+                        <TimeDisplay timeZone={person.location} />
+                      )}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Screen>
+            <div className={styles.reference}>
+              <div className={styles.refTitle}>Shipping Week</div>
+              <div className={styles.week}>
+                {consoleData.shippingWeek.map((d, index) => (
+                  <div key={index} className={styles.dayCol}>
+                    <span className={styles.dayLabel}>{d.day}</span>
+                    <span
+                      className={classNames(
+                        styles.dayMark,
+                        d.mark === "ship" && styles.ship,
+                      )}
+                    />
+                  </div>
+                ))}
+              </div>
+              <span className={styles.legend}>● ship · ○ build</span>
+              <div className={styles.grille} aria-hidden="true" />
+            </div>
+          </div>
+        </Panel>
+        <p className={styles.subline}>{home.subline}</p>
+      </section>
 
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
-      </RevealFx>
+      {/* What I'm Working On Now — log module (design.md §6.1). */}
+      <section>
+        <div className={styles.eyebrow}>SEC.01 — NOW LOG</div>
+        <Panel as="div" className={styles.nowModule}>
+          <div className={styles.nowHeader}>
+            <h2 className={styles.nowTitle}>What I’m Working On Now</h2>
+            <Led color="red" pulse label="REC" />
+          </div>
+          <ul className={styles.log}>
+            {consoleData.nowLog.map((line) => (
+              <li key={line.entry} className={styles.logLine}>
+                <span className={styles.logDate}>{line.date}</span>
+                <span aria-hidden="true">▸</span>
+                <span>{line.entry}</span>
+              </li>
+            ))}
+          </ul>
+          <Key href="/now" className={styles.nowKey}>
+            Full Status →
+          </Key>
+        </Panel>
+      </section>
 
-      {routes["/resources"] && (
-        <Column fillWidth gap="xl">
-          <Flex fillWidth gap="24" mobileDirection="column">
-            <Flex flex={1} paddingLeft="l">
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                Browse Resources
-              </Heading>
-            </Flex>
-            <Flex flex={3} paddingX="20">
-              <Scroller>
-                <Posts range={[1, 4]} columns="1" />
-              </Scroller>
-            </Flex>
-          </Flex>
-        </Column>
+      {/* Featured project — large Screen, §6.4 treatment. */}
+      {featured && (
+        <section>
+          <div className={styles.eyebrow}>SEC.02 — FEATURED PROJECT</div>
+          <Panel as="div" padding="lg" className={styles.featured}>
+            <Screen nodeId="NODE-PRJ.01" status="live">
+              {featured.metadata.images[0] && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={featured.metadata.images[0]}
+                  alt={featured.metadata.title}
+                  className={styles.screenImage}
+                />
+              )}
+            </Screen>
+            <div className={styles.featuredInk}>
+              <div className={styles.featuredTitleRow}>
+                <h2 className={styles.featuredTitle}>
+                  {featured.metadata.title}
+                </h2>
+                <Badge led="mint">Live</Badge>
+              </div>
+              <p className={styles.featuredSummary}>
+                {featured.metadata.summary}
+              </p>
+              <Key
+                href={`/projects/${featured.slug}`}
+                className={styles.featuredKey}
+              >
+                Read Case Study →
+              </Key>
+            </div>
+          </Panel>
+        </section>
       )}
 
-      <RevealFx translateY="8" delay={0.1}>
-        <Projects range={[2, 2]} />
-      </RevealFx>
-    </Column>
+      {/* Resources rail — handheld restyle lands in Phase 3.3. */}
+      {routes["/resources"] && (
+        <section>
+          <div className={styles.eyebrow}>SEC.03 — RESOURCES</div>
+          <ResourceCarousel resources={resources.resources} contained={true} />
+        </section>
+      )}
+    </div>
   );
 }

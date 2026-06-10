@@ -6,7 +6,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Growth Dude",
+  role: "Growth Marketer. Indie Builder. Systems Thinker.",
   avatar: "/images/avatar.jpg",
   location: "Asia/Kuala_Lumpur", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English", "Bahasa Melayu"], // optional: Leave the array empty if you don't want to display languages
@@ -36,9 +36,24 @@ const social = [
     link: "https://www.linkedin.com/in/mnadeemramli/",
   },
   {
-    name: "X",
+    name: "Twitter",
     icon: "x",
     link: "https://x.com/nadeemramli",
+  },
+  {
+    name: "Instagram",
+    icon: "instagram",
+    link: "https://www.instagram.com/nadeemramli/",
+  },
+  {
+    name: "Threads",
+    icon: "threads",
+    link: "https://threads.com/@nadeemramli",
+  },
+  {
+    name: "TikTok",
+    icon: "tiktok",
+    link: "https://tiktok.com/@nadeemramli",
   },
   {
     name: "Email",
@@ -57,10 +72,11 @@ const home = {
   label: "Home",
   title: `${person.name}'s Index`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>A Wannabe Product Manager</>,
+  headline: <>A Marketer and a Product Developer</>,
   subline: (
     <>
-      A dude at <InlineCode>checkpoint.xyz</InlineCode> where I build products. One day, I will stream on <InlineCode>twitch.tv/nadeemramli</InlineCode>.
+      I build useful digital products. Currently writing the{" "}
+      <a href="https://essays.nadeemramli.com" target="_blank" rel="noopener noreferrer">Order Series</a>.
     </>
   ),
 };
@@ -77,8 +93,20 @@ const about = {
     display: true,
   },
   calendar: {
-    display: true,
+    display: false, // "Schedule a Call" retired site-wide (content revision 2026-06)
     link: "https://cal.com/nadeemramli",
+  },
+  hero: {
+    display: true,
+    title: "Growth Marketer. Indie Builder. Systems Thinker.",
+    tagline: "I help ideas grow into real products through data, iteration, and meaningful user insights.",
+    primaryCTA: [
+      {
+        label: "Email me",
+        href: "mailto:m.nadeemramli@gmail.com",
+        variant: "secondary"
+      }
+    ]
   },
   intro: {
     display: true,
@@ -305,6 +333,260 @@ const about = {
       },
     ],
   },
+  caseStudies: {
+    display: true,
+    title: "Featured Case Studies",
+    studies: [
+      {
+        title: "FAR Academy Lead Gen Campaign",
+        thumbnail: "/images/case-studies/far-academy-thumb.png",
+        tldr: {
+          problem: "FAR Capital needed to generate quality leads for their Sunday Session investment education events",
+          solution: "Implemented multi-channel lead generation strategy with targeted Facebook ads and conversion optimization",
+          result: "Generated 2,500+ quality leads with 15% conversion rate, resulting in 150+ event attendees per session"
+        },
+        tags: ["Lead Generation", "Facebook Ads", "Conversion Optimization"],
+        fullStory: "Read full case study",
+        link: "#"
+      },
+      {
+        title: "Adasight B.V. ICP Discovery",
+        thumbnail: "/images/case-studies/adasight-thumb.png",
+        tldr: {
+          problem: "B2B startup needed to identify and acquire their ideal customer profile",
+          solution: "Conducted deep market research, refined value proposition, and implemented demand generation campaigns",
+          result: "Landed 4 major clients and consistently hit monthly KPIs within 6 months"
+        },
+        tags: ["B2B Marketing", "ICP Discovery", "Demand Generation"],
+        fullStory: "Read full case study",
+        link: "#"
+      },
+      {
+        title: "DTC Brand Scale-Up Strategy",
+        thumbnail: "/images/case-studies/dtc-scale-thumb.png",
+        tldr: {
+          problem: "DTC health brand needed to scale beyond initial market penetration",
+          solution: "Developed comprehensive marketing automation, expanded demographics, and built community engagement",
+          result: "3x revenue growth through demographic expansion and 45% increase in customer lifetime value"
+        },
+        tags: ["DTC Growth", "Marketing Automation", "Community Building"],
+        fullStory: "Read full case study",
+        link: "#"
+      }
+    ]
+  },
+  sideProjects: {
+    display: true,
+    title: "Side Projects",
+    projects: [
+      {
+        name: "Dealn",
+        role: "Builder & Marketer",
+        description: "SaaS platform for deal sourcing and management",
+        status: "In Development",
+        lessonsLearned: [
+          "MVP validation is crucial before feature expansion",
+          "User feedback drives better product decisions than assumptions",
+          "Focus on one core problem at a time"
+        ],
+        link: "https://dealn.app",
+        image: "/images/projects/dealn.png"
+      },
+      {
+        name: "Metrics Management Dashboard",
+        role: "Product Developer",
+        description: "Auto-reporting dashboard for performance marketers",
+        status: "Prototype",
+        lessonsLearned: [
+          "Automation saves 80% of manual reporting time",
+          "Visual data representation improves decision making",
+          "Integration complexity is often underestimated"
+        ],
+        link: "#",
+        image: "/images/projects/metrics-dashboard.png"
+      },
+      {
+        name: "Growth Experiment Framework",
+        role: "Systems Thinker",
+        description: "Systematic approach to growth experimentation",
+        status: "Active Use",
+        lessonsLearned: [
+          "Consistent testing beats sporadic big bets",
+          "Document everything for future reference",
+          "Small wins compound into significant growth"
+        ],
+        link: "#",
+        image: "/images/projects/growth-framework.png"
+      },
+      {
+        name: "YouTube Channel",
+        role: "Content Creator",
+        description: "Marketing and product development insights",
+        status: "Active",
+        lessonsLearned: [
+          "Consistency beats perfection in content creation",
+          "Authenticity resonates more than polished content",
+          "Teaching others reinforces your own learning"
+        ],
+        link: "#",
+        image: "/images/projects/youtube.png"
+      }
+    ]
+  },
+  howIWork: {
+    display: true,
+    title: "How I Work",
+    subtitle: "My systematic approach to building and marketing products",
+    steps: [
+      {
+        number: 1,
+        title: "Define the core problem",
+        description: "Before building anything, I dig deep to understand the real problem users face. No assumptions, just research.",
+        icon: "search",
+        details: [
+          "User interviews and surveys",
+          "Market research and competitive analysis",
+          "Problem validation through data"
+        ]
+      },
+      {
+        number: 2,
+        title: "Align metrics to user behavior",
+        description: "I establish clear success metrics that reflect actual user value, not vanity metrics.",
+        icon: "target",
+        details: [
+          "Define leading vs lagging indicators",
+          "Set up proper tracking and attribution",
+          "Focus on metrics that matter to business outcomes"
+        ]
+      },
+      {
+        number: 3,
+        title: "Launch with focus, test fast",
+        description: "Start small, launch early, and iterate based on real user feedback and data.",
+        icon: "rocket",
+        details: [
+          "MVP approach with core features only",
+          "A/B testing for optimization",
+          "Rapid experimentation cycles"
+        ]
+      },
+      {
+        number: 4,
+        title: "Evaluate by MER, retention, feedback",
+        description: "Success isn't just about acquisition - it's about sustainable growth and user satisfaction.",
+        icon: "chart",
+        details: [
+          "Marketing Efficiency Ratio (MER) analysis",
+          "Cohort retention analysis",
+          "Qualitative feedback loops"
+        ]
+      },
+      {
+        number: 5,
+        title: "Systematize what works",
+        description: "Once something works, I document it, automate it, and scale it systematically.",
+        icon: "settings",
+        details: [
+          "Process documentation and SOPs",
+          "Marketing automation setup",
+          "Scalable systems and workflows"
+        ]
+      }
+    ]
+  },
+  builderPrinciples: {
+    display: true,
+    title: "My Builder Principles",
+    subtitle: "The core beliefs that guide my approach to building and marketing",
+    principles: [
+      {
+        title: "Build fast, test smarter",
+        description: "Speed of iteration beats perfect planning. Test assumptions early and often.",
+        icon: "lightning"
+      },
+      {
+        title: "No metrics without meaning",
+        description: "Every metric should tie back to user value and business outcomes. Vanity metrics are just noise.",
+        icon: "target"
+      },
+      {
+        title: "PLG + Ads = Amplified Growth",
+        description: "Product-led growth provides the foundation, paid ads provide the amplification.",
+        icon: "trending-up"
+      },
+      {
+        title: "Respect user time and attention",
+        description: "Every interaction should provide value. Users' time is precious, don't waste it.",
+        icon: "clock"
+      },
+      {
+        title: "Iterate based on behavior, not hope",
+        description: "User behavior reveals truth. Opinions and assumptions can be misleading.",
+        icon: "repeat"
+      }
+    ]
+  },
+  toolsStack: {
+    display: true,
+    title: "My Tools & Stack",
+    subtitle: "The tools that help me build, analyze, and grow products effectively",
+    categories: [
+      {
+        category: "Product",
+        tools: [
+          { name: "Notion", description: "Documentation & project management", icon: "notion" },
+          { name: "Whimsical", description: "Wireframing & user flows", icon: "whimsical" },
+          { name: "Figma", description: "Design & prototyping", icon: "figma" }
+        ]
+      },
+      {
+        category: "Analytics",
+        tools: [
+          { name: "Google Analytics 4", description: "Web analytics & user behavior", icon: "analytics" },
+          { name: "Amplitude", description: "Product analytics & cohort analysis", icon: "amplitude" },
+          { name: "Microsoft Clarity", description: "Heatmaps & session recordings", icon: "clarity" },
+          { name: "PostHog", description: "Product analytics & feature flags", icon: "posthog" }
+        ]
+      },
+      {
+        category: "Ads & Marketing",
+        tools: [
+          { name: "Facebook Ads", description: "Social media advertising", icon: "facebook" },
+          { name: "TikTok Ads", description: "Short-form video advertising", icon: "tiktok" },
+          { name: "Google Ads", description: "Search & display advertising", icon: "google" },
+          { name: "LinkedIn Ads", description: "B2B advertising & lead generation", icon: "linkedin" }
+        ]
+      },
+      {
+        category: "Automation",
+        tools: [
+          { name: "Zapier", description: "Workflow automation", icon: "zapier" },
+          { name: "Make", description: "Advanced automation scenarios", icon: "make" },
+          { name: "Google Sheets", description: "Data analysis & reporting", icon: "sheets" },
+          { name: "Python", description: "Data processing & custom automation", icon: "python" }
+        ]
+      }
+    ]
+  },
+  finalCTA: {
+    display: true,
+    title: "Let's Build Together",
+    description: "I'm always excited to work on meaningful projects that solve real problems. Whether you need help with growth strategy, product development, or just want to brainstorm ideas, I'd love to connect.",
+    buttons: [
+      {
+        label: "Email Me",
+        href: "mailto:m.nadeemramli@gmail.com",
+        variant: "secondary"
+      },
+      {
+        label: "Follow on Twitter",
+        href: "https://x.com/nadeemramli",
+        variant: "secondary"
+      }
+    ],
+    tags: []
+  }
 };
 
 const resources = {
@@ -339,4 +621,284 @@ const resources = {
   ]
 };
 
-export { person, social, newsletter, home, about, projects, resources };
+const now = {
+  title: "🕒 What I'm Working On Now",
+  description: "Let people see where you are right now in your journey. Inspired by Derek Sivers' Now page. This makes it easy to contextualize your work as active, focused, and evolving.",
+  
+  // Section 1: Current Focus
+  currentFocus: {
+    display: true,
+    title: "Current Focus",
+    essay: "Right now, I'm in a phase of deliberate skill building and product development. After years of working in growth marketing, I've realized that sustainable success comes from building deep, interconnected capabilities rather than just tactical execution. I'm currently balancing three major initiatives while systematically developing my foundational skills across multiple layers of expertise.",
+    items: [
+      "Building Dealn, getting the MVP done so we can get those trials and feedback",
+      "Working on my YouTube Channel",
+      "Prototyping a Metrics Management dashboard for Performance Marketer, Auto-reporting, easier growth forecasting."
+    ]
+  },
+
+  // Section 2: Meta Layer
+  metaLayer: {
+    display: true,
+    title: "Meta - How I Learn & Evolve",
+    description: "The philosophical foundation that governs my approach to growth and learning.",
+    approach: "I believe in compound learning - where each skill amplifies the others. My meta-approach focuses on building learning systems rather than just acquiring knowledge. I treat my development like a product, with deliberate experimentation, feedback loops, and systematic iteration.",
+    skills: [
+      {
+        name: "Learning Systems",
+        mastered: 7,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Self-Reflection",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Adaptability",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Pattern Recognition",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Feedback Integration",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      }
+    ]
+  },
+
+  // Section 3: Fundamental Layer
+  fundamentalLayer: {
+    display: true,
+    title: "Fundamental - Timeless Disciplines",
+    description: "Core knowledge areas that shape worldview and thinking patterns.",
+    approach: "I focus on building strong fundamentals because they compound over time and transfer across domains. Each cluster reinforces the others - mental reasoning informs decision theory, which guides quantitative analysis, which shapes systems thinking.",
+    clusters: [
+      {
+        name: "Mental Reasoning",
+        mastered: 0, // calculated from fields
+        developing: 0, // calculated from fields
+        maxValue: 10,
+        fields: [
+          { name: "Psychology", mastered: 6, developing: 8, maxValue: 10 },
+          { name: "Language", mastered: 7, developing: 8, maxValue: 10 },
+          { name: "Philosophy", mastered: 4, developing: 6, maxValue: 10 },
+          { name: "Values", mastered: 8, developing: 9, maxValue: 10 },
+          { name: "Persuasion", mastered: 7, developing: 8, maxValue: 10 }
+        ]
+      },
+      {
+        name: "Quantitative Reasoning",
+        mastered: 0,
+        developing: 0,
+        maxValue: 10,
+        fields: [
+          { name: "Economics (Micro)", mastered: 6, developing: 7, maxValue: 10 },
+          { name: "Economics (Macro)", mastered: 5, developing: 7, maxValue: 10 },
+          { name: "Accounting", mastered: 4, developing: 6, maxValue: 10 },
+          { name: "Statistics", mastered: 7, developing: 8, maxValue: 10 },
+          { name: "Math", mastered: 6, developing: 7, maxValue: 10 },
+          { name: "Analytics", mastered: 8, developing: 9, maxValue: 10 }
+        ]
+      },
+      {
+        name: "Systems & Tech",
+        mastered: 0,
+        developing: 0,
+        maxValue: 10,
+        fields: [
+          { name: "Systems Engineering", mastered: 5, developing: 7, maxValue: 10 },
+          { name: "Project Management", mastered: 7, developing: 8, maxValue: 10 },
+          { name: "Mechatronics", mastered: 3, developing: 5, maxValue: 10 },
+          { name: "LLMs", mastered: 6, developing: 8, maxValue: 10 },
+          { name: "Software Architecture", mastered: 5, developing: 7, maxValue: 10 }
+        ]
+      },
+      {
+        name: "Epistemology",
+        mastered: 0,
+        developing: 0,
+        maxValue: 10,
+        fields: [
+          { name: "Mental Models", mastered: 8, developing: 9, maxValue: 10 },
+          { name: "Sensemaking", mastered: 7, developing: 8, maxValue: 10 },
+          { name: "Critical Thinking", mastered: 8, developing: 9, maxValue: 10 },
+          { name: "Truth Filters", mastered: 6, developing: 8, maxValue: 10 },
+          { name: "Information Processing", mastered: 7, developing: 8, maxValue: 10 }
+        ]
+      },
+      {
+        name: "Decision Theory",
+        mastered: 0,
+        developing: 0,
+        maxValue: 10,
+        fields: [
+          { name: "Game Theory", mastered: 5, developing: 7, maxValue: 10 },
+          { name: "Finance", mastered: 6, developing: 7, maxValue: 10 },
+          { name: "Constraint Management", mastered: 7, developing: 8, maxValue: 10 },
+          { name: "Prioritization", mastered: 8, developing: 9, maxValue: 10 },
+          { name: "Risk Assessment", mastered: 6, developing: 8, maxValue: 10 }
+        ]
+      }
+    ]
+  },
+
+  // Section 4: Strategic Layer
+  strategicalLayer: {
+    display: true,
+    title: "Strategic - Applied Synthesis",
+    description: "Mental maps and frameworks for decision-making across different domains.",
+    approach: "Strategy is where theory meets reality. I develop frameworks that help me navigate complex decisions by synthesizing fundamental knowledge into actionable mental maps. Each strategic skill represents a different lens for analyzing problems.",
+    skills: [
+      {
+        name: "Market Analysis",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Product Strategy",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Growth Strategy",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Business Model Design",
+        mastered: 6,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Competitive Positioning",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Resource Allocation",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Ecosystem Thinking",
+        mastered: 6,
+        developing: 8,
+        maxValue: 10
+      }
+    ]
+  },
+
+  // Section 5: Tactical Layer
+  tacticalLayer: {
+    display: true,
+    title: "Tactical - Execution Systems",
+    description: "Tools, channels, and systems that bring strategy to life through execution.",
+    approach: "Tactics without strategy are chaos, but strategy without tactics is just wishful thinking. I focus on building execution systems that can adapt as strategies evolve. The key is creating repeatable processes that consistently deliver results.",
+    skills: [
+      {
+        name: "Performance Marketing",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Analytics Implementation",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "Content Systems",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Marketing Automation",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "A/B Testing",
+        mastered: 8,
+        developing: 9,
+        maxValue: 10
+      },
+      {
+        name: "CRO Implementation",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Tool Integration",
+        mastered: 6,
+        developing: 8,
+        maxValue: 10
+      },
+      {
+        name: "Process Optimization",
+        mastered: 7,
+        developing: 8,
+        maxValue: 10
+      }
+    ]
+  }
+};
+
+// Operator Console data (design.md §6.1, §6.3) — feeds the home hero console
+// and the /now page.
+const consoleData = {
+  focus: {
+    label: "Current Focus",
+    value: "Order Series",
+    // Gauge semantics: installments DRAFTED ÷ installments PLANNED, as a
+    // percentage. Keep this number honest — update it whenever an
+    // installment is drafted or the plan changes.
+    // TODO(nadeem): set the real ratio; 50 is a placeholder.
+    gaugePercent: 50,
+  },
+  stats: [
+    { label: "YRS EXP", value: "5" },
+    { label: "CURRENT", value: "ORDER SERIES" },
+    { label: "LOCAL", value: null }, // null = rendered as the live clock
+    { label: "STATUS", value: "ONLINE" },
+  ],
+  // Newest first.
+  nowLog: [
+    { date: "2026-06", entry: "ORDER SERIES — writing & polishing" },
+    { date: "2026-06", entry: "2X — marketing operations" },
+    { date: "2026-06", entry: "ACCA — exam prep" },
+    { date: "2026-06", entry: "INDEXA — building the brand" },
+    { date: "2026-06", entry: "FREEDOM FUND — compounding" },
+  ],
+  // M–S; Saturday is ship day.
+  shippingWeek: [
+    { day: "M", mark: "build" },
+    { day: "T", mark: "build" },
+    { day: "W", mark: "build" },
+    { day: "T", mark: "build" },
+    { day: "F", mark: "build" },
+    { day: "S", mark: "ship" },
+  ],
+};
+
+export { person, social, newsletter, home, about, projects, resources, now, consoleData };
