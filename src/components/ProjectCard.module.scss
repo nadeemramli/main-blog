@@ -1,0 +1,78 @@
+.device {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+/* A powered-down unit, not a broken one (archived). */
+.archived {
+  opacity: 0.8;
+
+  .glassImage {
+    filter: brightness(0.55) saturate(0.6);
+  }
+}
+
+.glassImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: calc(var(--console-radius-lcd) - 8px);
+  /* Screenshots read as on-screen content (design.md §6.4). */
+  filter: brightness(0.9);
+}
+
+/* The screen-saver rule: generated idle state, never an empty rectangle. */
+.idle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--console-space-base);
+  aspect-ratio: 16 / 10;
+}
+
+.idleName {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.idleMetric {
+  color: var(--console-lcd-dim);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.ink {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-space-base);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--console-text-primary);
+}
+
+.summary {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--console-gap);
+  flex-wrap: wrap;
+  margin-top: var(--console-space-base);
+}

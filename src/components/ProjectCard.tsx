@@ -1,110 +1,82 @@
-"use client";
+import classNames from "classnames";
 
 import {
-  AvatarGroup,
-  Carousel,
-  Column,
-  Flex,
-  Heading,
-  SmartLink,
-  Text,
-} from "@/once-ui/components";
+  Badge,
+  Key,
+  Panel,
+  Screen,
+  type LedColor,
+  type ScreenStatus,
+} from "@/components/console";
 
-interface Metadata {
+import styles from "./ProjectCard.module.scss";
+
+export type ProjectStatus = "live" | "in-development" | "prototype" | "archived";
+
+export interface ProjectCardProps {
+  slug: string;
   title: string;
-  publishedAt: string;
   summary: string;
   images: string[];
-  team?: { avatar: string }[];
+  status: ProjectStatus;
+  metric?: string;
+  nodeId: string;
 }
 
-interface Project {
-  metadata: Metadata;
-  slug: string;
-  content: string;
-}
+/* Status canon on the rack (design.md §6.4 + §5.6). */
+const SCREEN_STATUS: Record<ProjectStatus, ScreenStatus> = {
+  live: "live",
+  "in-development": "sync",
+  prototype: "idle",
+  archived: "off",
+};
 
-interface ProjectCardProps {
-  href: string;
-  priority?: boolean;
-  images: string[];
-  title: string;
-  content: string;
-  description: string;
-  avatars: { src: string }[];
-  link: string;
-}
+const BADGE: Record<ProjectStatus, { led?: LedColor; label: string }> = {
+  live: { led: "mint", label: "Live" },
+  "in-development": { led: "red", label: "In Development" },
+  prototype: { led: "amber", label: "Prototype" },
+  archived: { label: "Archived" },
+};
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
-  href,
-  images = [],
+export const ProjectCard = ({
+  slug,
   title,
-  content,
-  description,
-  avatars,
-  link,
-}) => {
+  summary,
+  images,
+  status,
+  metric,
+  nodeId,
+}: ProjectCardProps) => {
+  const badge = BADGE[status];
+  const image = images[0];
+
   return (
-    <Column fillWidth gap="m">
-      <Carousel
-        sizes="(max-width: 960px) 100vw, 960px"
-        images={images.map((image) => ({
-          src: image,
-          alt: title,
-        }))}
-      />
-      <Flex
-        mobileDirection="column"
-        fillWidth
-        paddingX="s"
-        paddingTop="12"
-        paddingBottom="24"
-        gap="l"
-      >
-        {title && (
-          <Flex flex={5}>
-            <Heading as="h2" wrap="balance" variant="heading-strong-xl">
-              {title}
-            </Heading>
-          </Flex>
+    <Panel
+      as="article"
+      className={classNames(
+        styles.device,
+        status === "archived" && styles.archived,
+      )}
+    >
+      <Screen nodeId={nodeId} status={SCREEN_STATUS[status]}>
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt={title} className={styles.glassImage} />
+        ) : (
+          <div className={styles.idle}>
+            <div className={styles.idleName}>{title}</div>
+            {metric && <div className={styles.idleMetric}>{metric}</div>}
+          </div>
         )}
-        {(avatars?.length > 0 || description?.trim() || content?.trim()) && (
-          <Column flex={7} gap="16">
-            {avatars?.length > 0 && (
-              <AvatarGroup avatars={avatars} size="m" reverse />
-            )}
-            {description?.trim() && (
-              <Text
-                wrap="balance"
-                variant="body-default-s"
-                onBackground="neutral-weak"
-              >
-                {description}
-              </Text>
-            )}
-            <Flex gap="24" wrap>
-              {content?.trim() && (
-                <SmartLink
-                  suffixIcon="arrowRight"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={href}
-                >
-                  <Text variant="body-default-s">Read case study</Text>
-                </SmartLink>
-              )}
-              {link && (
-                <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
-                  style={{ margin: "0", width: "fit-content" }}
-                  href={link}
-                >
-                  <Text variant="body-default-s">GitHub Repo</Text>
-                </SmartLink>
-              )}
-            </Flex>
-          </Column>
-        )}
-      </Flex>
-    </Column>
+      </Screen>
+      <div className={styles.ink}>
+        <h3 className={styles.name}>{title}</h3>
+        <p className={styles.summary}>{summary}</p>
+        <div className={styles.actions}>
+          <Key href={`/projects/${slug}`}>Read Case Study →</Key>
+          <Badge led={badge.led}>{badge.label}</Badge>
+        </div>
+      </div>
+    </Panel>
   );
 };

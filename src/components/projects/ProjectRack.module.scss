@@ -1,0 +1,33 @@
+.rack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-panel-padding);
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* The device rack: 2-col grid, 1-col on mobile (design.md §6.4). */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--console-panel-padding);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  font-family: var(--console-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  padding: var(--console-panel-padding) 0;
+}
