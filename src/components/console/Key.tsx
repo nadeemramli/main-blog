@@ -8,6 +8,8 @@ type KeyBaseProps = {
   variant?: KeyVariant;
   /** Renders an anchor instead of a button. */
   href?: string;
+  /** Held-down state, e.g. the active nav item (design.md §5.7). */
+  pressed?: boolean;
   className?: string;
   children: React.ReactNode;
 };
@@ -22,6 +24,7 @@ type KeyProps = KeyBaseProps &
 export const Key = ({
   variant = "default",
   href,
+  pressed = false,
   className,
   children,
   ...rest
@@ -30,6 +33,7 @@ export const Key = ({
     styles.key,
     variant === "primary" && styles.primary,
     variant === "icon" && styles.icon,
+    pressed && styles.pressed,
     className,
   );
 

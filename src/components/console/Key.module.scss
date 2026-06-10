@@ -38,6 +38,12 @@
   }
 }
 
+/* Held-down key, e.g. the active nav item. */
+.pressed {
+  box-shadow: var(--console-shadow-pressed);
+  transform: translateY(1px);
+}
+
 /* One mint key per page (design.md §5.5, §9). */
 .primary {
   background: var(--console-mint);
@@ -48,6 +54,21 @@
   width: 40px;
   height: 40px;
   padding: 0;
+}
+
+/* Anchor Keys: outweigh once-ui's global `a:not(.button)` color rule
+   (specificity 0,1,1) without editing the vendored sheet. */
+a.key,
+a.key:hover,
+a.key:visited {
+  color: var(--console-text-primary);
+  text-decoration: none;
+}
+
+a.primary,
+a.primary:hover,
+a.primary:visited {
+  color: var(--console-mint-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

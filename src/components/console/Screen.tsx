@@ -2,7 +2,7 @@ import classNames from "classnames";
 
 import styles from "./Screen.module.scss";
 
-export type ScreenStatus = "sync" | "live" | "idle" | "off";
+export type ScreenStatus = "sync" | "live" | "idle" | "off" | "locked";
 
 interface ScreenProps extends React.HTMLAttributes<HTMLDivElement> {
   nodeId?: string;

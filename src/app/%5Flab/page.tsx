@@ -43,27 +43,34 @@ export default function LabPage() {
                   GROWTH MARKETER · INDIE BUILDER
                 </div>
               </Screen>
-              <span className={styles.note}>sync + scanlines</span>
+              <span className={styles.note}>sync (red, pulsing) + scanlines</span>
             </div>
             <div className={styles.screenCol}>
               <Screen nodeId="NODE-PRJ.04" status="live">
                 <div>DEALN — MVP BUILD</div>
                 <div className={styles.lcdDim}>TRIALS &amp; FEEDBACK LOOP</div>
               </Screen>
-              <span className={styles.note}>live (pulsing dot)</span>
+              <span className={styles.note}>live (mint — healthy/online)</span>
             </div>
             <div className={styles.screenCol}>
               <Screen nodeId="NODE-PRJ.07" status="idle">
                 <div>MAXIMAL</div>
                 <div className={styles.lcdDim}>PRODUCTIVITY TOOL</div>
               </Screen>
-              <span className={styles.note}>idle (mint dot)</span>
+              <span className={styles.note}>idle (amber — standby)</span>
             </div>
             <div className={styles.screenCol}>
               <Screen nodeId="NODE-ARC.02" status="off">
                 <div className={styles.lcdDim}>NO SIGNAL</div>
               </Screen>
               <span className={styles.note}>off (no dot)</span>
+            </div>
+            <div className={styles.screenCol}>
+              <Screen nodeId="NODE-SEC.01" status="locked">
+                <div>ACCESS REQUIRED</div>
+                <div className={styles.lcdDim}>ENTER PASSWORD TO CONTINUE</div>
+              </Screen>
+              <span className={styles.note}>locked (red, steady)</span>
             </div>
           </div>
         </section>
@@ -81,9 +88,10 @@ export default function LabPage() {
           <div className={styles.eyebrow}>LAB.04 — LED</div>
           <div className={styles.row}>
             <Led color="mint" label="Online" />
-            <Led color="red" label="Live" pulse />
+            <Led color="mint" label="Live" pulse />
+            <Led color="red" label="Sync" pulse />
             <Led color="red" label="In Development" />
-            <Led color="amber" label="Pending" />
+            <Led color="amber" label="Idle" />
           </div>
         </section>
 
@@ -103,10 +111,10 @@ export default function LabPage() {
         <section>
           <div className={styles.eyebrow}>LAB.06 — BADGE</div>
           <div className={styles.row}>
-            <Badge>Prototype</Badge>
+            <Badge>Archived</Badge>
             <Badge led="red">In Development</Badge>
             <Badge led="mint">Live</Badge>
-            <Badge led="amber">Pending</Badge>
+            <Badge led="amber">Prototype</Badge>
           </div>
         </section>
 

@@ -65,20 +65,25 @@
   flex-shrink: 0;
 }
 
-/* Red is the live/sync indicator language (design.md §2). */
+/* Canonical status colors (Phase 2 amendment 1):
+   red = activity/attention, mint = healthy/online, amber = standby/pending. */
 .sync .dot,
-.live .dot {
+.locked .dot {
   background: var(--console-led-red);
   box-shadow: 0 0 6px var(--console-led-red-glow);
 }
 
-.live .dot {
+.sync .dot {
   animation: pulse 2s ease-in-out infinite;
 }
 
-.idle .dot {
+.live .dot {
   background: var(--console-lcd-text);
   box-shadow: 0 0 6px var(--console-lcd-glow);
+}
+
+.idle .dot {
+  background: var(--console-led-amber);
 }
 
 .content {

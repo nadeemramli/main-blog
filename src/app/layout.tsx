@@ -105,7 +105,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           // `cz-shortcut-listen` onto <body> before React hydrates, causing a
           // benign hydration mismatch. Suppress it just for this element.
           suppressHydrationWarning
-          style={{ minHeight: "100vh" }}
+          // The Operator Console desk surface (design.md §1).
+          style={{ minHeight: "100vh", background: "var(--console-bg)" }}
           as="body"
           fillWidth
           margin="0"

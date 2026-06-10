@@ -1,59 +1,47 @@
-import { Flex, IconButton, SmartLink, Text } from "@/once-ui/components";
-import { person, social } from "@/app/resources/content";
+import { Icon } from "@/once-ui/components";
+import { Key, Panel } from "@/components/console";
+import { person, social, about } from "@/app/resources/content";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Flex
-      as="footer"
-      position="relative"
-      fillWidth
-      padding="8"
-      horizontal="center"
-      mobileDirection="column"
-    >
-      <Flex
-        className={styles.mobile}
-        maxWidth="m"
-        paddingY="8"
-        paddingX="16"
-        gap="16"
-        horizontal="space-between"
-        vertical="center"
-      >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">
-            {/* Usage of this template requires attribution. Please don't remove the link to Once UI. */}
-            / Proudly built with{" "}
-            <SmartLink
-              style={{ marginLeft: "-0.125rem" }}
-              href="https://once-ui.com/templates/magic-portfolio"
-            >
-              Once UI
-            </SmartLink>
-          </Text>
-        </Text>
-        <Flex gap="16">
+    <footer className={styles.footer}>
+      <Panel as="div" padding="lg" className={styles.shell}>
+        <h2 className={styles.headline}>Let’s Build Together</h2>
+        <p className={styles.sub}>
+          I’m always up for new product ideas, collaborations, or just talking
+          shop.
+        </p>
+        <div className={styles.actions}>
+          {/* The page's one mint key (design.md §9). */}
+          <Key variant="primary" href={about.calendar.link}>
+            Schedule a Call
+          </Key>
           {social.map(
             (item) =>
               item.link && (
-                <IconButton
+                <Key
                   key={item.name}
+                  variant="icon"
                   href={item.link}
-                  icon={item.icon}
-                  tooltip={item.name}
-                  size="s"
-                  variant="ghost"
-                />
-              )
+                  aria-label={item.name}
+                >
+                  <Icon name={item.icon} size="s" />
+                </Key>
+              ),
           )}
-        </Flex>
-      </Flex>
-      <Flex height="80" show="s"></Flex>
-    </Flex>
+        </div>
+      </Panel>
+      <div className={styles.finePrint}>
+        © {currentYear} {person.name} —{" "}
+        {/* Usage of this template requires attribution — keep the Once UI link. */}
+        <a href="https://once-ui.com/templates/magic-portfolio">
+          Built on Once UI
+        </a>{" "}
+        — Kuala Lumpur
+      </div>
+    </footer>
   );
 };

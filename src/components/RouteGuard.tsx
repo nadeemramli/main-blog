@@ -3,14 +3,8 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { routes, protectedRoutes } from "@/app/resources";
-import {
-  Flex,
-  Spinner,
-  Input,
-  Button,
-  Heading,
-  Column,
-} from "@/once-ui/components";
+import { Key, MicroLcd, Panel, Screen } from "@/components/console";
+import styles from "./RouteGuard.module.scss";
 
 interface RouteGuardProps {
   children: React.ReactNode;
@@ -84,38 +78,57 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
 
   if (loading) {
     return (
-      <Flex fillWidth paddingY="128" horizontal="center">
-        <Spinner />
-      </Flex>
+      <div className={styles.center}>
+        <MicroLcd label="SYS">Checking access</MicroLcd>
+      </div>
     );
   }
 
   if (!isRouteEnabled) {
     return (
-      <Flex fillWidth paddingY="128" horizontal="center">
-        <Spinner />
-      </Flex>
+      <div className={styles.center}>
+        <Panel className={styles.devicePanel}>
+          <Screen nodeId="NODE-404" status="off">
+            <div className={styles.readout}>NO SIGNAL — 404</div>
+            <div className={styles.dim}>THIS CHANNEL IS NOT BROADCASTING</div>
+          </Screen>
+          <Key href="/" className={styles.backKey}>
+            Return to Console
+          </Key>
+        </Panel>
+      </div>
     );
   }
 
   if (isPasswordRequired && !isAuthenticated) {
     return (
-      <Column paddingY="128" maxWidth={24} gap="24" center>
-        <Heading align="center" wrap="balance">
-          This page is password protected
-        </Heading>
-        <Column fillWidth gap="8" horizontal="center">
-          <Input
-            id="password"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            errorMessage={error}
-          />
-          <Button onClick={handlePasswordSubmit}>Submit</Button>
-        </Column>
-      </Column>
+      <div className={styles.center}>
+        <Panel className={styles.devicePanel}>
+          <Screen nodeId="NODE-SEC.01" status="locked">
+            <div className={styles.readout}>ACCESS REQUIRED</div>
+            <div className={styles.dim}>ENTER PASSWORD TO CONTINUE</div>
+          </Screen>
+          <form
+            className={styles.form}
+            onSubmit={(event) => {
+              event.preventDefault();
+              handlePasswordSubmit();
+            }}
+          >
+            <input
+              id="password"
+              className={styles.input}
+              type="password"
+              aria-label="Password"
+              placeholder="PASSWORD"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Key type="submit">Unlock</Key>
+          </form>
+          {error && <div className={styles.error}>● {error}</div>}
+        </Panel>
+      </div>
     );
   }
 
