@@ -1,0 +1,92 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-section-gap);
+  width: 100%;
+  max-width: var(--console-page-max-width);
+  padding-top: 32px;
+}
+
+.eyebrow {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  margin-bottom: var(--console-gap);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: var(--console-gap);
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--console-text-primary);
+  margin-right: auto;
+}
+
+.description {
+  margin: var(--console-gap) 0 0;
+  max-width: 60ch;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}
+
+/* Status shell: small gauge + the dominant log screen (design.md §6.3). */
+.statusGrid {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  gap: var(--console-panel-padding);
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .statusGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.log {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.logLine {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 13px;
+  line-height: 1.5;
+
+  & + .logLine {
+    border-top: 1px solid rgba(118, 210, 182, 0.12);
+  }
+}
+
+.logDate {
+  color: var(--console-lcd-dim);
+  flex-shrink: 0;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.logLink {
+  color: var(--console-lcd-text);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

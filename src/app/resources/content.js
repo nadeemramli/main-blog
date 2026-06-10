@@ -872,6 +872,32 @@ const consoleData = {
     { date: "2026-06", entry: "WELLNESS BRAND — building with a partner" },
     { date: "2026-06", entry: "FREEDOM FUND — compounding" },
   ],
+  // /now page (design.md §6.3) — manual freshness date: update whenever the
+  // status content changes. Reports content freshness, NOT deploy freshness.
+  updated: "2026-06-11",
+  // The /now status log — richer than the home now-log. Newest first.
+  statusLog: [
+    { date: "2026-06", entry: "ORDER SERIES — writing & polishing" },
+    { date: "2026-06", entry: "2X — marketing operations" },
+    { date: "2026-06", entry: "ACCA — exam prep" },
+    {
+      date: "2026-06",
+      entry: "28 FFMI — physique goal",
+      link: "https://essays.nadeemramli.com",
+    },
+    { date: "2026-06", entry: "BUILDING WITH AI" },
+    { date: "2026-06", entry: "SIDE-HUSTLE INCOME — active" },
+    { date: "2026-06", entry: "FREEDOM FUND — compounding" },
+  ],
+  // EQUITY layer readouts (design.md §5.10) — qualitative/factual values
+  // only; never invented proficiency scores.
+  equity: [
+    // TODO(nadeem): set the real paper count out of 13.
+    { label: "ACCA", value: "—/13 PAPERS" },
+    { label: "ORDER SERIES", value: null }, // null = computed from focus.gaugePercent
+    { label: "FREEDOM FUND", value: "COMPOUNDING" },
+    { label: "SIDE INCOME", value: "ACTIVE" },
+  ],
   // M–S; Saturday is ship day.
   shippingWeek: [
     { day: "M", mark: "build" },

@@ -195,6 +195,18 @@ icon keys, and a silkscreen fine-print row in `label-sm`:
 Mono `label-sm` in a recessed pill (`well` + `inset`). Status badges get an LED dot:
 `● IN DEVELOPMENT` (red), `● LIVE` (mint), `● PROTOTYPE` (amber), `ARCHIVED` (no dot, ink only).
 
+### 5.10 Attribute Console (`<AttributeConsole>`)
+The /now page's instrument for skill and equity state. A layer-select key row
+[META | FUNDAMENTAL | STRATEGIC | TACTICAL | EQUITY] sits above ONE large Screen;
+the active layer's key is held down (pressed). Default layer: META. Selection swaps
+the attribute set rendered inside the glass: META/STRATEGIC/TACTICAL render the
+mint-on-dark radar chart, FUNDAMENTAL renders the cluster drill-down, EQUITY renders
+MicroLcd readouts only — qualitative/factual values, never invented proficiency
+scores. Long-form layer notes (description/approach) print as ink below the Screen,
+not on the glass (§1 rule). Proper tablist semantics: role="tablist"/"tab"/
+"tabpanel", roving tabindex, ArrowLeft/ArrowRight/Home/End navigation. Client
+component; layer state is client-only (no URL param).
+
 ## 6. Page Treatments
 
 ### 6.1 Home — the Master Console
@@ -232,10 +244,13 @@ Long-form page; prose must breathe. Framing: a printed manual that ships with th
 - Case study cards: small Screens with mono title + tag badges.
 
 ### 6.3 Now — the Live Status Page
-The most literal page: one large Screen dominates. Mono log format, newest first:
-`2026-06-11  ▸ DEALN — MVP build, trials & feedback loop` etc. A small gauge mirrors the
-hero's Current Focus. An `UPDATED` timestamp chip and a `● LIVE` LED. This page should feel
-like ssh-ing into Nadeem.
+The most literal page: a status console. Header row: page title ink, `● LIVE` Led
+(mint), and an `UPDATED` MicroLcd whose date is a manual content field set when the
+content changes — it reports content freshness, not deploy freshness. One shell pairs
+a small Gauge mirroring the hero's Current Focus (same data source — one value, two
+instruments) with the dominant log Screen: mono entries, newest first, e.g.
+`2026-06  ▸ ORDER SERIES — writing & polishing`. Below it, the Attribute Console
+(§5.10). This page should feel like ssh-ing into Nadeem.
 
 ### 6.4 Projects — the Device Rack
 Each project is its own device shell in a 2-col grid (1-col mobile). **The screen-saver rule

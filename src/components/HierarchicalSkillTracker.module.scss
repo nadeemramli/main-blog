@@ -1,0 +1,104 @@
+/* Mint-on-dark cluster drill-down — lives inside a Screen's glass. */
+.tracker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+.navLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-lcd-dim);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--console-space-base);
+}
+
+/* Cluster selectors render as dim phosphor pills; active glows mint. */
+.clusterButton {
+  background: transparent;
+  border: 1px solid var(--console-lcd-dim);
+  border-radius: var(--console-radius-pill);
+  padding: 6px 12px;
+  font-family: var(--console-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--console-lcd-dim);
+  cursor: pointer;
+}
+
+.clusterButtonActive {
+  border-color: var(--console-lcd-text);
+  color: var(--console-lcd-text);
+  text-shadow: 0 0 8px var(--console-lcd-glow);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+.detailHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-lcd-text);
+}
+
+.detailSub {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--console-lcd-dim);
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--console-gap);
+  padding: 8px 0;
+  font-size: 12px;
+  border-top: 1px solid rgba(118, 210, 182, 0.12);
+}
+
+.fieldName {
+  color: var(--console-lcd-text);
+  letter-spacing: 0.04em;
+}
+
+.scores {
+  display: flex;
+  gap: var(--console-gap);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.mastered {
+  color: var(--console-lcd-text);
+}
+
+.developing {
+  color: var(--console-lcd-dim);
+}

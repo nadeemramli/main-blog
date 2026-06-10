@@ -1,0 +1,81 @@
+/* Mint-on-dark LCD chart chrome — lives inside a Screen's glass. */
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-lcd-text);
+}
+
+.description {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--console-lcd-dim);
+}
+
+.canvasWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--console-gap);
+}
+
+.canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--console-gap);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dotMastered,
+.dotDeveloping {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--console-radius-pill);
+}
+
+.dotMastered {
+  background: var(--console-lcd-text);
+  box-shadow: 0 0 6px var(--console-lcd-glow);
+}
+
+.dotDeveloping {
+  background: var(--console-lcd-dim);
+}
+
+.legendMastered {
+  color: var(--console-lcd-text);
+}
+
+.legendDeveloping {
+  color: var(--console-lcd-dim);
+}
