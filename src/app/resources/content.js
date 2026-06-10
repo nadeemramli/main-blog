@@ -887,7 +887,7 @@ const consoleData = {
     { date: "2026-06", entry: "ORDER SERIES — writing & polishing" },
     { date: "2026-06", entry: "2X — marketing operations" },
     { date: "2026-06", entry: "ACCA — exam prep" },
-    { date: "2026-06", entry: "INDEXA — building the brand" },
+    { date: "2026-06", entry: "WELLNESS BRAND — building with a partner" },
     { date: "2026-06", entry: "FREEDOM FUND — compounding" },
   ],
   // M–S; Saturday is ship day.
