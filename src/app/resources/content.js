@@ -113,11 +113,28 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        - A results-driven growth marketer with a passion for building products.
-        <br />
-        - 4 years of experience in performance marketing.
-        <br />
-        - A self-taught product manager and surely a wannabe indie developer.
+        <p>
+          I&apos;m a results-driven growth marketer with five years of experience
+          across e-commerce, SaaS, healthcare, and agency consulting.
+        </p>
+        <p>
+          I build marketing systems end-to-end — from North Star Metrics and
+          Value Architecture down to the martech infrastructure that brings the
+          strategy to life. My approach blends data, creativity, and systems
+          thinking, and I&apos;ve managed ad spend of up to RM2M across Meta and
+          Google.
+        </p>
+        <p>
+          What sets my work apart is an ecosystem-level perspective: I don&apos;t
+          just run campaigns — I architect the channels, tools, and operations
+          around one growth strategy. I&apos;m big on mental models and
+          multidisciplinary thinking.
+        </p>
+        <p>
+          Day-to-day, you&apos;ll find me thinking across channels, tools, and
+          operations — wiring them around a single growth strategy so the whole
+          system works as one.
+        </p>
       </>
     ),
   },
@@ -126,13 +143,25 @@ const about = {
     title: "Work Experience",
     experiences: [
       {
-        company: "Checkpoint.xyz",
-        timeframe: "2025 - Present",
-        role: "Product Manager",
+        company: "2X",
+        timeframe: "Aug 2025 — Present",
+        role: "Marketing Operations Specialist",
+        location: "Hybrid",
         achievements: [
           <>
-            Undefined.
+            Marketing ops across enterprise education clients — analytics, CRO,
+            growth strategy.
           </>,
+        ],
+        images: [],
+      },
+      {
+        company: "Checkpoint.xyz",
+        timeframe: "2025 — Present",
+        role: "Product Manager",
+        badge: "Indie",
+        achievements: [
+          <>Building DayLog and the Mapping of Metrics dashboard.</>,
         ],
         images: [
           {
@@ -150,12 +179,27 @@ const about = {
         ],
       },
       {
-        company: "FAR Capital Sdn. Bhd.",
-        timeframe: "March 2023 - November 2024",
-        role: "Digital Marketing Manager / Technical Marketer",
+        company: "Teroka Digital",
+        timeframe: "Jan 2022 — Dec 2025",
+        role: "Growth / Freelancer",
+        location: "Remote",
         achievements: [
           <>
-            Technical Product Manager, overseeing the whole far.academy ecosystem and 
+            Freelance practice for SMEs: strategy, comms planning, campaign PM,
+            and martech implementation — Notion systems, analytics visibility,
+            workflow.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "FAR Capital",
+        timeframe: "Mar 2023 — Nov 2024",
+        role: "Digital Marketing Manager",
+        location: "KL / Remote",
+        achievements: [
+          <>
+            Technical Product Manager, overseeing the whole far.academy ecosystem and
             lead gen campaign for the event "Sunday Session".
           </>,
           <>
@@ -165,7 +209,7 @@ const about = {
         images: [
           {
             src: "/images/resume/farcapital.png",
-            alt: "FAR Capital Sdn. Bhd.",
+            alt: "FAR Capital",
             width: 16,
             height: 9,
           },
@@ -178,31 +222,31 @@ const about = {
         ],
       },
       {
-        company: "Adasight B.V.",
-        timeframe: "May 2023 - November 2023",
-        role: "Growth/Product Marketer",
+        company: "Adasight",
+        timeframe: "Jun 2023 — Oct 2023",
+        role: "Growth Marketer",
+        location: "Amsterdam / Remote",
         achievements: [
           <>
-             Managing the whole demand generation activities for the startup to find more ICP.  Land 4 big client and reached monthly KPIs.
+            Managing the whole demand generation activities for the startup to find more ICP. Land 4 big client and reached monthly KPIs.
           </>,
           <>
             Improve the website's value proposition, deep dig in keyword semantics for startup positioning.
           </>,
         ],
         images: [
-          // optional: leave the array empty if you don't want to display images
           {
             src: "/images/resume/adasight.png",
-            alt: "Adasight B.V.",
+            alt: "Adasight",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        company: "Group M / WPP",
-        timeframe: "March 2022 - July 2022",
-        role: "Performance Marketer",
+        company: "GroupM",
+        timeframe: "Mar 2022 — Jul 2022",
+        role: "Performance Marketing Executive",
         achievements: [
           <>
             Media Buying, Media Planning, Marketing Analytics, Scaled-Up Marketing Operation,
@@ -215,9 +259,9 @@ const about = {
         images: [],
       },
       {
-        company: "NCIG (M) Sdn. Bhd.",
-        timeframe: "September 2021 - March 2022",
-        role: "Performance Marketer",
+        company: "NCIG (M) Sdn Bhd",
+        timeframe: "Aug 2021 — Jan 2022",
+        role: "Digital Marketing Executive",
         achievements: [
           <>
             DTC Industry, Sales-led Growth, Marketing Analytics, Marketing Automation,
@@ -225,18 +269,17 @@ const about = {
           </>,
         ],
         images: [
-          // optional: leave the array empty if you don't want to display images
           {
             src: "/images/resume/ncig.jpg",
-            alt: "NCIG (M) Sdn. Bhd.",
+            alt: "NCIG (M) Sdn Bhd",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        company: "Monocal Sdn. Bhd",
-        timeframe: "February 2021 - August 2021",
+        company: "Monocal",
+        timeframe: "Feb 2021 — Aug 2021",
         role: "Growth Strategist",
         achievements: [
           <>
@@ -251,7 +294,7 @@ const about = {
         images: [
           {
             src: "/images/resume/monocal.jpg",
-            alt: "Monocal Sdn. Bhd",
+            alt: "Monocal",
             width: 16,
             height: 9,
           },
@@ -334,7 +377,7 @@ const about = {
     ],
   },
   caseStudies: {
-    display: true,
+    display: false, // section removed from /about; copy migrates to /blog MDX in phase 3.6
     title: "Featured Case Studies",
     studies: [
       {
@@ -380,57 +423,24 @@ const about = {
     title: "Side Projects",
     projects: [
       {
-        name: "Dealn",
-        role: "Builder & Marketer",
-        description: "SaaS platform for deal sourcing and management",
+        name: "Consumer Wellness Brand",
+        role: "Builder",
+        description: "Building a consumer wellness brand with a partner.",
         status: "In Development",
-        lessonsLearned: [
-          "MVP validation is crucial before feature expansion",
-          "User feedback drives better product decisions than assumptions",
-          "Focus on one core problem at a time"
-        ],
-        link: "https://dealn.app",
-        image: "/images/projects/dealn.png"
+      },
+      {
+        name: "Book Series",
+        role: "Writer",
+        description: "Writing the Order Series.",
+        status: "Active",
+        link: "https://essays.nadeemramli.com",
       },
       {
         name: "Metrics Management Dashboard",
         role: "Product Developer",
         description: "Auto-reporting dashboard for performance marketers",
         status: "Prototype",
-        lessonsLearned: [
-          "Automation saves 80% of manual reporting time",
-          "Visual data representation improves decision making",
-          "Integration complexity is often underestimated"
-        ],
-        link: "#",
-        image: "/images/projects/metrics-dashboard.png"
       },
-      {
-        name: "Growth Experiment Framework",
-        role: "Systems Thinker",
-        description: "Systematic approach to growth experimentation",
-        status: "Active Use",
-        lessonsLearned: [
-          "Consistent testing beats sporadic big bets",
-          "Document everything for future reference",
-          "Small wins compound into significant growth"
-        ],
-        link: "#",
-        image: "/images/projects/growth-framework.png"
-      },
-      {
-        name: "YouTube Channel",
-        role: "Content Creator",
-        description: "Marketing and product development insights",
-        status: "Active",
-        lessonsLearned: [
-          "Consistency beats perfection in content creation",
-          "Authenticity resonates more than polished content",
-          "Teaching others reinforces your own learning"
-        ],
-        link: "#",
-        image: "/images/projects/youtube.png"
-      }
     ]
   },
   howIWork: {
@@ -496,7 +506,7 @@ const about = {
     ]
   },
   builderPrinciples: {
-    display: true,
+    display: false, // section removed (the essays cover it)
     title: "My Builder Principles",
     subtitle: "The core beliefs that guide my approach to building and marketing",
     principles: [
@@ -529,48 +539,20 @@ const about = {
   },
   toolsStack: {
     display: true,
-    title: "My Tools & Stack",
-    subtitle: "The tools that help me build, analyze, and grow products effectively",
+    title: "Tools & Stack",
+    subtitle: "The switchboard — what's wired in, by function",
     categories: [
-      {
-        category: "Product",
-        tools: [
-          { name: "Notion", description: "Documentation & project management", icon: "notion" },
-          { name: "Whimsical", description: "Wireframing & user flows", icon: "whimsical" },
-          { name: "Figma", description: "Design & prototyping", icon: "figma" }
-        ]
-      },
-      {
-        category: "Analytics",
-        tools: [
-          { name: "Google Analytics 4", description: "Web analytics & user behavior", icon: "analytics" },
-          { name: "Amplitude", description: "Product analytics & cohort analysis", icon: "amplitude" },
-          { name: "Microsoft Clarity", description: "Heatmaps & session recordings", icon: "clarity" },
-          { name: "PostHog", description: "Product analytics & feature flags", icon: "posthog" }
-        ]
-      },
-      {
-        category: "Ads & Marketing",
-        tools: [
-          { name: "Facebook Ads", description: "Social media advertising", icon: "facebook" },
-          { name: "TikTok Ads", description: "Short-form video advertising", icon: "tiktok" },
-          { name: "Google Ads", description: "Search & display advertising", icon: "google" },
-          { name: "LinkedIn Ads", description: "B2B advertising & lead generation", icon: "linkedin" }
-        ]
-      },
-      {
-        category: "Automation",
-        tools: [
-          { name: "Zapier", description: "Workflow automation", icon: "zapier" },
-          { name: "Make", description: "Advanced automation scenarios", icon: "make" },
-          { name: "Google Sheets", description: "Data analysis & reporting", icon: "sheets" },
-          { name: "Python", description: "Data processing & custom automation", icon: "python" }
-        ]
-      }
+      { category: "Paid Acquisition", tools: ["Google Ads", "Meta Ads", "TikTok Ads", "LinkedIn Ads"] },
+      { category: "Retention", tools: ["Klaviyo", "Brevo", "Discord", "AWS SES"] },
+      { category: "Web", tools: ["WordPress", "Shopify", "React"] },
+      { category: "Analytics & Experimentation", tools: ["GTM/GA4", "PostHog", "Mixpanel", "Amplitude", "Optimizely"] },
+      { category: "Behavior & Heatmaps", tools: ["Hotjar", "Clarity", "Mouseflow"] },
+      { category: "CRM & Automation", tools: ["n8n", "HubSpot", "Bouncer", "Make.com"] },
+      { category: "Data Pipeline", tools: ["Airbyte", "MotherDuck"] },
     ]
   },
   finalCTA: {
-    display: true,
+    display: false, // section removed; the global footer carries the CTA
     title: "Let's Build Together",
     description: "I'm always excited to work on meaningful projects that solve real problems. Whether you need help with growth strategy, product development, or just want to brainstorm ideas, I'd love to connect.",
     buttons: [

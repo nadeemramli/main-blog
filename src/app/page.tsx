@@ -132,7 +132,6 @@ export default function Home() {
           <Panel as="div" padding="lg" className={styles.featured}>
             <Screen nodeId="NODE-PRJ.01" status="live">
               {featured.metadata.images[0] && (
-                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={featured.metadata.images[0]}
                   alt={featured.metadata.title}

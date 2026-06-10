@@ -60,7 +60,6 @@ export const ProjectCard = ({
     >
       <Screen nodeId={nodeId} status={SCREEN_STATUS[status]}>
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={image} alt={title} className={styles.glassImage} />
         ) : (
           <div className={styles.idle}>

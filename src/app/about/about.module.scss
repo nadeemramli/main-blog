@@ -1,0 +1,246 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-section-gap);
+  width: 100%;
+  max-width: var(--console-page-max-width);
+  padding-top: 32px;
+}
+
+.eyebrow {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  margin-bottom: var(--console-gap);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--console-gap);
+  font-family: var(--console-font-sans);
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--console-text-primary);
+}
+
+.sectionSub {
+  margin: calc(-1 * var(--console-space-base)) 0 var(--console-gap);
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}
+
+/* ── Identity faceplate (design.md §6.2) ───────────────────── */
+.faceplate {
+  display: flex;
+  gap: var(--console-panel-padding);
+  align-items: flex-start;
+}
+
+.portraitWell {
+  flex-shrink: 0;
+  background: var(--console-well);
+  border-radius: var(--console-radius-panel-inner);
+  box-shadow: var(--console-shadow-inset);
+  padding: var(--console-space-base);
+}
+
+.portrait {
+  display: block;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--console-radius-lcd);
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--console-text-primary);
+}
+
+.roleLine {
+  font-family: var(--console-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-secondary);
+}
+
+.identityMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--console-gap);
+  flex-wrap: wrap;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+  max-width: 68ch;
+  font-family: var(--console-font-sans);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--console-text-secondary);
+
+  p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .faceplate {
+    flex-direction: column;
+  }
+}
+
+/* ── Work experience: the maintenance log (design.md §6.2) ─── */
+.logShell {
+  display: flex;
+  flex-direction: column;
+}
+
+.role {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--console-panel-padding);
+  padding: var(--console-panel-padding) 0;
+
+  /* Hairline seams between rows. */
+  & + .role {
+    border-top: 1px solid var(--console-border);
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.roleMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--console-font-mono);
+}
+
+.timeframe {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.company {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--console-text-primary);
+}
+
+.roleTitle {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--console-text-secondary);
+}
+
+.location {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.roleBadge {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.roleBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+  min-width: 0;
+}
+
+.achievement {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}
+
+.roleImages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--console-gap);
+}
+
+/* Photos sit in inset wells (design.md §6.2). */
+.imageWell {
+  flex: 1 1 240px;
+  max-width: 360px;
+  background: var(--console-well);
+  border-radius: var(--console-radius-lcd);
+  box-shadow: var(--console-shadow-inset);
+  padding: var(--console-space-base);
+}
+
+.roleImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: calc(var(--console-radius-lcd) - 6px);
+}
+
+@media (max-width: 768px) {
+  .role {
+    grid-template-columns: 1fr;
+    gap: var(--console-gap);
+  }
+}
+
+/* ── Side projects grid ────────────────────────────────────── */
+.sideGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--console-gap);
+}
+
+@media (max-width: 1024px) {
+  .sideGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .sideGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -22,7 +22,6 @@ export function ResourceCard({
     <Panel as="article" padding="none" className={styles.handheld}>
       <Screen nodeId={nodeId} status="live">
         {imageSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={imageSrc} alt={title} className={styles.glassImage} />
         ) : (
           <div className={styles.idle}>

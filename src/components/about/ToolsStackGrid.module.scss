@@ -1,0 +1,54 @@
+/* The switchboard (design.md §6.2): category modules as recessed wells
+   containing tool chips as small raised keys. */
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--console-gap);
+}
+
+@media (max-width: 768px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.well {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--console-well);
+  border-radius: var(--console-radius-panel-inner);
+  box-shadow: var(--console-shadow-inset);
+  padding: var(--console-gap);
+}
+
+.label {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--console-space-base);
+}
+
+/* A chip is a small raised key — visual language only, not a control. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--console-panel-high);
+  border-radius: var(--console-radius-control);
+  box-shadow: var(--console-shadow-raised-sm);
+  padding: 6px 10px;
+  font-family: var(--console-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--console-text-primary);
+  white-space: nowrap;
+}
