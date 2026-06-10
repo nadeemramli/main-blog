@@ -1,0 +1,49 @@
+import classNames from "classnames";
+
+import styles from "./Key.module.scss";
+
+export type KeyVariant = "default" | "primary" | "icon";
+
+type KeyBaseProps = {
+  variant?: KeyVariant;
+  /** Renders an anchor instead of a button. */
+  href?: string;
+  className?: string;
+  children: React.ReactNode;
+};
+
+type KeyProps = KeyBaseProps &
+  Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement> &
+      React.AnchorHTMLAttributes<HTMLAnchorElement>,
+    keyof KeyBaseProps
+  >;
+
+export const Key = ({
+  variant = "default",
+  href,
+  className,
+  children,
+  ...rest
+}: KeyProps) => {
+  const classes = classNames(
+    styles.key,
+    variant === "primary" && styles.primary,
+    variant === "icon" && styles.icon,
+    className,
+  );
+
+  if (href) {
+    return (
+      <a href={href} className={classes} {...rest}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <button type="button" className={classes} {...rest}>
+      {children}
+    </button>
+  );
+};

@@ -6,6 +6,7 @@ const routes = {
   "/projects": true,
   "/resources": true,
   "/now": true,
+  "/_lab": true, // TEMP — remove in Phase 5 (console component lab; excluded from sitemap)
 };
 
 // Enable password protection on selected routes

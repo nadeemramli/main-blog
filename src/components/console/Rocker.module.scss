@@ -1,0 +1,52 @@
+.rocker {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--console-well);
+  border: none;
+  border-radius: var(--console-radius-pill);
+  box-shadow: var(--console-shadow-inset);
+  padding: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cap {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background: var(--console-panel-high);
+  border-radius: var(--console-radius-pill);
+  box-shadow: var(--console-shadow-raised-sm);
+  transition: transform 150ms ease;
+}
+
+.capB {
+  transform: translateX(100%);
+}
+
+.option {
+  position: relative;
+  z-index: 1;
+  padding: 8px 16px;
+  font-family: var(--console-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  transition: color 150ms ease;
+}
+
+.active {
+  color: var(--console-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cap,
+  .option {
+    transition: none;
+  }
+}

@@ -1,0 +1,37 @@
+.panel {
+  background: var(--console-panel);
+  border-radius: var(--console-radius-panel);
+  box-shadow: var(--console-shadow-raised);
+  padding: var(--console-panel-padding);
+  color: var(--console-text-primary);
+  font-family: var(--console-font-sans);
+}
+
+.padLg {
+  padding: var(--console-panel-padding-lg);
+}
+
+.padNone {
+  padding: 0;
+}
+
+.interactive {
+  transition:
+    box-shadow 200ms ease-out,
+    transform 200ms ease-out;
+
+  &:hover {
+    box-shadow: var(--console-shadow-hover-lift);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

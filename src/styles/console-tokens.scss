@@ -1,0 +1,69 @@
+// Operator Console design tokens — single source of truth for all console
+// components (design.md frontmatter). Imported in layout.tsx AFTER the Once UI
+// token sheets so these values win the cascade. Console components in
+// src/components/console/ must use these vars exclusively — never the Once UI
+// --scheme-* ramps, never hardcoded colors or shadows.
+:root {
+  /* ── Environment ─────────────────────────────────────────── */
+  --console-bg: #d5d2c6; /* warm cream — the desk */
+  --console-bg-deep: #c9c6ba; /* footer / section separation */
+
+  /* ── Hardware surfaces ───────────────────────────────────── */
+  --console-panel: #e4e1d6; /* raised device faceplate */
+  --console-panel-high: #edeae0; /* topmost raised elements (keys, caps) */
+  --console-well: #cbc8bc; /* recessed wells / inset tracks */
+  --console-border: #a09d94; /* hairline seams only */
+
+  /* ── LCD / screen ────────────────────────────────────────── */
+  --console-lcd-bg: #0e0f0d;
+  --console-lcd-bezel: #1c1d1a;
+  --console-lcd-text: #76d2b6; /* mint phosphor */
+  --console-lcd-dim: #3e6e5e;
+  --console-lcd-glow: rgba(118, 210, 182, 0.35);
+
+  /* ── Ink (print on the device body) ──────────────────────── */
+  --console-text-primary: #111827;
+  --console-text-secondary: #4b5563;
+  --console-text-tertiary: #8a877c;
+
+  /* ── Signals ─────────────────────────────────────────────── */
+  --console-led-red: #ff3333; /* status language ONLY (design.md §2) */
+  --console-led-red-glow: rgba(255, 51, 51, 0.6);
+  --console-led-amber: #e8a33d;
+  --console-mint: #76d2b6; /* canonical mint; one mint CTA per page */
+  --console-mint-ink: #0e2e24;
+  --console-mint-glow: rgba(118, 210, 182, 0.6);
+
+  /* ── Type ────────────────────────────────────────────────── */
+  --console-font-sans: var(--font-primary);
+  --console-font-mono: var(--font-code);
+
+  /* ── Radii ───────────────────────────────────────────────── */
+  --console-radius-panel: 40px;
+  --console-radius-panel-inner: 24px;
+  --console-radius-lcd: 16px;
+  --console-radius-control: 8px;
+  --console-radius-key: 12px;
+  --console-radius-pill: 9999px;
+
+  /* ── Spacing ─────────────────────────────────────────────── */
+  --console-space-base: 8px;
+  --console-gap: 16px;
+  --console-panel-padding: 24px;
+  --console-panel-padding-lg: 32px;
+  --console-section-gap: 96px;
+  --console-page-max-width: 1120px;
+
+  /* ── Shadows (the neumorphic material — design.md §9) ────── */
+  --console-shadow-raised: 8px 8px 20px rgba(123, 119, 105, 0.45),
+    -8px -8px 20px rgba(255, 255, 255, 0.75);
+  --console-shadow-raised-sm: 4px 4px 10px rgba(123, 119, 105, 0.4),
+    -4px -4px 10px rgba(255, 255, 255, 0.7);
+  --console-shadow-inset: inset 4px 4px 10px rgba(123, 119, 105, 0.45),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.6);
+  --console-shadow-pressed: inset 2px 2px 6px rgba(123, 119, 105, 0.5),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.5);
+  --console-shadow-lcd-depth: inset 0 2px 12px rgba(0, 0, 0, 0.85);
+  --console-shadow-hover-lift: 12px 12px 28px rgba(123, 119, 105, 0.5),
+    -10px -10px 24px rgba(255, 255, 255, 0.8);
+}

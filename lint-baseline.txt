@@ -1,0 +1,225 @@
+
+> @once-ui-system/magic-portfolio@1.3.0 lint
+> eslint .
+
+(node:742089) ESLintIgnoreWarning: The ".eslintignore" file is no longer supported. Switch to using the "ignores" property in "eslint.config.js": https://eslint.org/docs/latest/use/configure/migration-guide#ignoring-files
+(Use `node --trace-warnings ...` to show where the warning was created)
+Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/.eslintrc.js
+  1:1  error  'module' is not defined  no-undef
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/postcss.config.js
+  1:1  error  'module' is not defined  no-undef
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/app/layout.tsx
+  142:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  148:44  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  149:46  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  150:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  154:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/app/now/page.tsx
+  49:27  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/app/page.tsx
+  1:8  error  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/app/resources/content.js
+    1:10  error  'InlineCode' is defined but never used                           @typescript-eslint/no-unused-vars
+   17:43  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  154:45  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  154:60  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  184:32  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  207:15  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  243:56  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/Header.tsx
+  12:3  error  'home' is defined but never used           @typescript-eslint/no-unused-vars
+  16:3  error  'now' is defined but never used            @typescript-eslint/no-unused-vars
+  25:3  error  'timeZone' is missing in props validation  react/prop-types
+  26:3  error  'locale' is missing in props validation    react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/Mailchimp.tsx
+    7:39  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+   24:10  error  'touched' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  100:48  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  101:54  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  106:50  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  107:52  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  108:54  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+  112:55  error  Unexpected any. Specify a different type      @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/ProjectCard.tsx
+  21:11  error  'Project' is defined but never used                @typescript-eslint/no-unused-vars
+  39:3   error  'href' is missing in props validation              react/prop-types
+  40:3   error  'images' is missing in props validation            react/prop-types
+  41:3   error  'title' is missing in props validation             react/prop-types
+  42:3   error  'content' is missing in props validation           react/prop-types
+  43:3   error  'description' is missing in props validation       react/prop-types
+  44:3   error  'avatars' is missing in props validation           react/prop-types
+  45:3   error  'link' is missing in props validation              react/prop-types
+  71:20  error  'avatars.length' is missing in props validation    react/prop-types
+  71:47  error  'description.trim' is missing in props validation  react/prop-types
+  71:66  error  'content.trim' is missing in props validation      react/prop-types
+  73:23  error  'avatars.length' is missing in props validation    react/prop-types
+  76:27  error  'description.trim' is missing in props validation  react/prop-types
+  86:25  error  'content.trim' is missing in props validation      react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/ResourceCard.tsx
+  10:3  error  'Icon' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/RouteGuard.tsx
+  19:50  error  'children' is missing in props validation  react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/components/mdx.tsx
+   93:19  error  Unnecessary escape character: \-                                                                                     no-useless-escape
+   94:15  error  Unnecessary escape character: \-                                                                                     no-useless-escape
+   94:17  error  Unnecessary escape character: \-                                                                                     no-useless-escape
+  132:25  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  133:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  134:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  135:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  136:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  137:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  138:27  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  139:23  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  140:20  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  151:5   error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Accordion.tsx
+  14:6   error  'title' is missing in props validation     react/prop-types
+  14:13  error  'children' is missing in props validation  react/prop-types
+  14:23  error  'open' is missing in props validation      react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Arrow.tsx
+  17:3  error  'trigger' is missing in props validation    react/prop-types
+  18:3  error  'scale' is missing in props validation      react/prop-types
+  19:3  error  'color' is missing in props validation      react/prop-types
+  20:3  error  'style' is missing in props validation      react/prop-types
+  21:3  error  'className' is missing in props validation  react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Card.tsx
+  12:16  error  'style' is defined but never used      @typescript-eslint/no-unused-vars
+  12:23  error  'className' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Carousel.tsx
+  20:3  error  'images' is missing in props validation             react/prop-types
+  21:3  error  'indicator' is missing in props validation          react/prop-types
+  22:3  error  'aspectRatio' is missing in props validation        react/prop-types
+  23:3  error  'sizes' is missing in props validation              react/prop-types
+  24:3  error  'revealedByDefault' is missing in props validation  react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/ColorInput.tsx
+  12:46  error  'ref' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/DatePicker.tsx
+   44:7   error  'defaultDate' is defined but never used                                                                              @typescript-eslint/no-unused-vars
+  207:11  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  240:11  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  272:11  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  322:36  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  344:36  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Dialog.tsx
+  75:13  error  'stackedDialogOpen' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Dropdown.tsx
+  14:6   error  'selectedOption' is defined but never used  @typescript-eslint/no-unused-vars
+  14:22  error  'className' is defined but never used       @typescript-eslint/no-unused-vars
+  14:43  error  'onEscape' is defined but never used        @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/ElementType.tsx
+  9:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Grid.tsx
+   3:8  error  'React' is defined but never used        @typescript-eslint/no-unused-vars
+  36:7  error  'textVariant' is defined but never used  @typescript-eslint/no-unused-vars
+  37:7  error  'textSize' is defined but never used     @typescript-eslint/no-unused-vars
+  38:7  error  'textWeight' is defined but never used   @typescript-eslint/no-unused-vars
+  76:7  error  'opacity' is defined but never used      @typescript-eslint/no-unused-vars
+  95:7  error  'overflow' is defined but never used     @typescript-eslint/no-unused-vars
+  96:7  error  'overflowX' is defined but never used    @typescript-eslint/no-unused-vars
+  97:7  error  'overflowY' is defined but never used    @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Heading.tsx
+  3:8  error  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/HoloFx.tsx
+  117:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  132:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  147:35  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/PasswordInput.tsx
+  3:8  error  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Scroller.tsx
+  95:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/SegmentedControl.tsx
+   22:3   error  'buttons' is missing in props validation            react/prop-types
+   23:3   error  'onToggle' is missing in props validation           react/prop-types
+   24:3   error  'defaultSelected' is missing in props validation    react/prop-types
+   25:3   error  'fillWidth' is missing in props validation          react/prop-types
+   26:3   error  'selected' is missing in props validation           react/prop-types
+   27:3   error  'className' is defined but never used               @typescript-eslint/no-unused-vars
+   27:3   error  'className' is missing in props validation          react/prop-types
+   28:3   error  'style' is defined but never used                   @typescript-eslint/no-unused-vars
+   28:3   error  'style' is missing in props validation              react/prop-types
+   34:24  error  'buttons[].value' is missing in props validation    react/prop-types
+   62:9   error  Unexpected lexical declaration in case block        no-case-declarations
+   64:23  error  'buttons.length' is missing in props validation     react/prop-types
+   67:25  error  'buttons.length' is missing in props validation     react/prop-types
+   73:9   error  Unexpected lexical declaration in case block        no-case-declarations
+   76:38  error  'buttons.length' is missing in props validation     react/prop-types
+   84:57  error  'buttons.length' is missing in props validation     react/prop-types
+   86:45  error  'buttons[].value' is missing in props validation    react/prop-types
+   87:34  error  'buttons[].value' is missing in props validation    react/prop-types
+   95:33  error  'buttons.findIndex' is missing in props validation  react/prop-types
+  107:18  error  'buttons.map' is missing in props validation        react/prop-types
+  114:64  error  'buttons.length' is missing in props validation     react/prop-types
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Select.tsx
+  35:7  error  'minWidth' is defined but never used  @typescript-eslint/no-unused-vars
+  36:7  error  'maxWidth' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/SmartImage.tsx
+   96:30  error  Unnecessary escape character: \/  no-useless-escape
+  102:30  error  Unnecessary escape character: \/  no-useless-escape
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/StyleOverlay.tsx
+  7:11  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/StylePanel.tsx
+  165:45  error  'index' is defined but never used  @typescript-eslint/no-unused-vars
+  197:46  error  'index' is defined but never used  @typescript-eslint/no-unused-vars
+  228:47  error  'index' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/TagInput.tsx
+   3:8   error  'React' is defined but never used  @typescript-eslint/no-unused-vars
+  46:62  error  'e' is defined but never used      @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Text.tsx
+  3:8  error  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/Textarea.tsx
+   47:7   error  'error' is assigned a value but never used                                                                           @typescript-eslint/no-unused-vars
+   69:20  error  'setHeight' is assigned a value but never used                                                                       @typescript-eslint/no-unused-vars
+  183:17  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/components/ToggleButton.tsx
+  49:7  error  'truncate' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/hooks/useDebounce.ts
+  3:29  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/icons.ts
+  33:3  error  'HiPresentationChartLine' is defined but never used  @typescript-eslint/no-unused-vars
+
+/home/nadeemramli/workspace/github.com/nadeemramli/main-blog/src/once-ui/modules/code/prismjs.d.ts
+  4:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  6:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 139 problems (139 errors, 0 warnings)
+

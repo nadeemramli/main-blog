@@ -1,0 +1,57 @@
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--console-space-base);
+  background: var(--console-panel-high);
+  color: var(--console-text-primary);
+  border: none;
+  border-radius: var(--console-radius-key);
+  box-shadow: var(--console-shadow-raised-sm);
+  padding: 12px 20px;
+  font-family: var(--console-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    box-shadow 120ms ease,
+    transform 120ms ease;
+
+  /* The key physically depresses (design.md §5.5). */
+  &:active {
+    box-shadow: var(--console-shadow-pressed);
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    color: var(--console-text-tertiary);
+    cursor: not-allowed;
+
+    &:active {
+      box-shadow: var(--console-shadow-raised-sm);
+      transform: none;
+    }
+  }
+}
+
+/* One mint key per page (design.md §5.5, §9). */
+.primary {
+  background: var(--console-mint);
+  color: var(--console-mint-ink);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key {
+    transition: none;
+  }
+}

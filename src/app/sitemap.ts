@@ -12,7 +12,11 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  const activeRoutes = Object.keys(routesConfig).filter((route) => routesConfig[route]);
+  // Underscore-prefixed routes (e.g. /_lab) are internal — keep them out of
+  // the sitemap.
+  const activeRoutes = Object.keys(routesConfig).filter(
+    (route) => routesConfig[route] && !route.startsWith("/_"),
+  );
 
   const routes = activeRoutes.map((route) => ({
     url: `${baseURL}${route !== "/" ? route : ""}`,

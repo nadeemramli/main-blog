@@ -1,0 +1,66 @@
+.gauge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Semicircular recessed well (design.md §5.3). */
+.well {
+  position: relative;
+  width: 200px;
+  height: 104px;
+  background: var(--console-well);
+  border-radius: var(--console-radius-pill) var(--console-radius-pill) 0 0;
+  box-shadow: var(--console-shadow-inset);
+}
+
+.dial {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tick {
+  stroke: var(--console-text-tertiary);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Red needle — permitted status-language use (design.md §2). */
+.needle {
+  stroke: var(--console-led-red);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* Raised knob cap over the needle pivot. */
+.cap {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 40%);
+  width: 28px;
+  height: 28px;
+  background: var(--console-panel-high);
+  border-radius: var(--console-radius-pill);
+  box-shadow: var(--console-shadow-raised-sm);
+}
+
+.caption {
+  margin-top: var(--console-gap);
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.value {
+  margin-top: 4px;
+  font-family: var(--console-font-sans);
+  font-size: 24px;
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--console-text-primary);
+}

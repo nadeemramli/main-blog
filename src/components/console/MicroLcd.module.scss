@@ -1,0 +1,29 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--console-space-base);
+  background: var(--console-lcd-bg);
+  border-radius: var(--console-radius-control);
+  box-shadow: var(--console-shadow-lcd-depth);
+  padding: 4px 10px;
+  font-family: var(--console-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  color: var(--console-lcd-dim);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.value {
+  color: var(--console-lcd-text);
+  text-shadow: 0 0 8px var(--console-lcd-glow);
+}

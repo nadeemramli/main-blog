@@ -1,0 +1,56 @@
+.led {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--console-space-base);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--console-radius-pill);
+  flex-shrink: 0;
+}
+
+.red {
+  background: var(--console-led-red);
+  box-shadow: 0 0 6px var(--console-led-red-glow);
+}
+
+.mint {
+  background: var(--console-mint);
+  box-shadow: 0 0 6px var(--console-mint-glow);
+}
+
+.amber {
+  background: var(--console-led-amber);
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.label {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-secondary);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

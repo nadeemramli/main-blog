@@ -1,0 +1,103 @@
+.bezel {
+  background: var(--console-lcd-bezel);
+  border-radius: calc(var(--console-radius-lcd) + 6px);
+  padding: 6px;
+}
+
+.glass {
+  position: relative;
+  overflow: hidden;
+  background: var(--console-lcd-bg);
+  border-radius: var(--console-radius-lcd);
+  box-shadow: var(--console-shadow-lcd-depth);
+  padding: var(--console-gap);
+  color: var(--console-lcd-text);
+  font-family: var(--console-font-mono);
+  /* Live data glows on glass (design.md §3); tabular nums so readouts
+     don't jitter when ticking. */
+  text-shadow: 0 0 8px var(--console-lcd-glow);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@media (max-width: 768px) {
+  .scanlines {
+    display: none;
+  }
+}
+
+.statusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--console-gap);
+  margin-bottom: var(--console-gap);
+  color: var(--console-lcd-dim);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--console-radius-pill);
+  flex-shrink: 0;
+}
+
+/* Red is the live/sync indicator language (design.md §2). */
+.sync .dot,
+.live .dot {
+  background: var(--console-led-red);
+  box-shadow: 0 0 6px var(--console-led-red-glow);
+}
+
+.live .dot {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.idle .dot {
+  background: var(--console-lcd-text);
+  box-shadow: 0 0 6px var(--console-lcd-glow);
+}
+
+.content {
+  position: relative;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live .dot {
+    animation: none;
+  }
+}

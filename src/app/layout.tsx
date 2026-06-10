@@ -1,5 +1,7 @@
 import "@/once-ui/styles/index.scss";
 import "@/once-ui/tokens/index.scss";
+// Operator Console tokens — must come after the Once UI sheets (cascade).
+import "@/styles/console-tokens.scss";
 
 import classNames from "classnames";
 
@@ -44,6 +46,7 @@ const primary = localFont({
   src: "./fonts/inter.woff2",
   variable: "--font-primary",
   display: "swap",
+  weight: "100 900",
 });
 
 type FontConfig = {
@@ -56,6 +59,7 @@ const secondary = localFont({
   src: "./fonts/inter.woff2",
   variable: "--font-secondary",
   display: "swap",
+  weight: "100 900",
 });
 
 const tertiary: FontConfig | undefined = undefined;
