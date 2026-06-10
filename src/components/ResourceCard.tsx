@@ -1,23 +1,14 @@
-"use client";
+import { Key, Panel, Screen } from "@/components/console";
 
-import {
-  Card,
-  SmartImage,
-  Column,
-  Text,
-  Line,
-  Row,
-  Icon,
-  Button,
-  SmartLink,
-} from "@/once-ui/components";
-import styles from "@/components/projects/Projects.module.scss";
+import styles from "./ResourceCard.module.scss";
 
-interface ResourceCardProps {
+export interface ResourceCardProps {
   title: string;
   description: string;
-  imageSrc: string;
+  /** Pre-verified on disk by the server (null = render the idle state). */
+  imageSrc: string | null;
   link: string;
+  nodeId: string;
 }
 
 export function ResourceCard({
@@ -25,31 +16,33 @@ export function ResourceCard({
   description,
   imageSrc,
   link,
+  nodeId,
 }: ResourceCardProps) {
   return (
-    <Card width={18} radius="l-4" direction="column" className={styles.hover}>
-      <SmartImage
-        sizes="580px"
-        fillWidth
-        aspectRatio="4 / 3"
-        radius="l"
-        src={imageSrc}
-        alt={title}
-      />
-      <Column fillWidth paddingX="20" paddingY="24" gap="8">
-        <Text variant="body-default-xl">{title}</Text>
-        <Text onBackground="neutral-weak" variant="body-default-s">
-          {description}
-        </Text>
-      </Column>
-      <Line background="neutral-alpha-medium" />
-      <Row paddingX="20" paddingY="12" vertical="center" horizontal="end">
-        <SmartLink href={link} target="_blank" unstyled>
-          <Button size="s" variant="secondary">
-            VISIT SITE
-          </Button>
-        </SmartLink>
-      </Row>
-    </Card>
+    <Panel as="article" padding="none" className={styles.handheld}>
+      <Screen nodeId={nodeId} status="live">
+        {imageSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={imageSrc} alt={title} className={styles.glassImage} />
+        ) : (
+          <div className={styles.idle}>
+            <div className={styles.idleName}>{title}</div>
+            <div className={styles.idleDim}>EXTERNAL RESOURCE</div>
+          </div>
+        )}
+      </Screen>
+      <div className={styles.ink}>
+        <h3 className={styles.name}>{title}</h3>
+        <p className={styles.oneLiner}>{description}</p>
+        <Key
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.visitKey}
+        >
+          Visit Site
+        </Key>
+      </div>
+    </Panel>
   );
 }

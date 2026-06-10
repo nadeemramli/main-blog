@@ -2,19 +2,20 @@
 
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { ResourceCard } from "./ResourceCard";
+
+import { Key } from "@/components/console";
+import { ResourceCard, type ResourceCardProps } from "./ResourceCard";
 import styles from "./ResourceCarousel.module.css";
 
 interface ResourceCarouselProps {
-  resources: Array<{
-    title: string;
-    description: string;
-    imageSrc: string;
-    link: string;
-  }>;
+  resources: ResourceCardProps[];
+  contained?: boolean;
 }
 
-export function ResourceCarousel({ resources }: ResourceCarouselProps) {
+export function ResourceCarousel({
+  resources,
+  contained = false,
+}: ResourceCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -51,7 +52,7 @@ export function ResourceCarousel({ resources }: ResourceCarouselProps) {
   }
 
   return (
-    <div className={styles.embla}>
+    <div className={contained ? styles["embla--contained"] : styles.embla}>
       <div className={styles.embla__viewport} ref={emblaRef}>
         <div className={styles.embla__container}>
           {resources.map((resource, index) => (
@@ -70,18 +71,23 @@ export function ResourceCarousel({ resources }: ResourceCarouselProps) {
           ))}
         </div>
       </div>
-      <button
+      {/* Round icon Keys (design.md §6.5). */}
+      <Key
+        variant="icon"
         className={`${styles.embla__button} ${styles.embla__button__prev}`}
         onClick={scrollPrev}
+        aria-label="Previous resources"
       >
         ←
-      </button>
-      <button
+      </Key>
+      <Key
+        variant="icon"
         className={`${styles.embla__button} ${styles.embla__button__next}`}
         onClick={scrollNext}
+        aria-label="Next resources"
       >
         →
-      </button>
+      </Key>
     </div>
   );
 }

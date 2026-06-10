@@ -1,0 +1,67 @@
+/* A palm-sized handheld device (design.md §6.5). */
+.handheld {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+  padding: var(--console-gap);
+  border-radius: var(--console-radius-panel-inner);
+}
+
+.glassImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: calc(var(--console-radius-lcd) - 8px);
+  filter: brightness(0.9);
+}
+
+.idle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--console-space-base);
+  aspect-ratio: 4 / 3;
+}
+
+.idleName {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.idleDim {
+  color: var(--console-lcd-dim);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.ink {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--console-text-primary);
+}
+
+.oneLiner {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--console-text-secondary);
+}
+
+.visitKey {
+  align-self: flex-start;
+  margin-top: var(--console-space-base);
+}

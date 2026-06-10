@@ -4,9 +4,10 @@ import { Badge, Gauge, Key, Led, Panel, Screen } from "@/components/console";
 import TimeDisplay from "@/components/Header";
 import { ResourceCarousel } from "@/components/ResourceCarousel";
 import { getPosts } from "@/app/utils/utils";
+import { getHandheldResources } from "@/app/utils/resources";
 
 import { baseURL, routes } from "@/app/resources";
-import { home, person, resources, consoleData } from "@/app/resources/content";
+import { home, person, consoleData } from "@/app/resources/content";
 
 import styles from "./home.module.scss";
 
@@ -164,7 +165,7 @@ export default function Home() {
       {routes["/resources"] && (
         <section>
           <div className={styles.eyebrow}>SEC.03 — RESOURCES</div>
-          <ResourceCarousel resources={resources.resources} contained={true} />
+          <ResourceCarousel resources={getHandheldResources()} contained={true} />
         </section>
       )}
     </div>

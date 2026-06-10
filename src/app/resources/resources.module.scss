@@ -1,0 +1,36 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-panel-padding);
+  width: 100%;
+  max-width: var(--console-page-max-width);
+  padding-top: 32px;
+}
+
+.eyebrow {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--console-text-primary);
+}
+
+.description {
+  margin: 0;
+  max-width: 60ch;
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-secondary);
+}

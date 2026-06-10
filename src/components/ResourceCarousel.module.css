@@ -7,6 +7,15 @@
   overflow: hidden;
 }
 
+.embla--contained {
+  position: relative;
+  padding: 40px 0;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+}
+
 .embla__viewport {
   overflow: hidden;
   width: 100%;
@@ -14,63 +23,51 @@
 
 .embla__container {
   display: flex;
+  gap: 24px;
+  padding: 0 12px;
   user-select: none;
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-left: calc(10% - 10px);
-  margin-right: calc(10% - 10px);
 }
 
 .embla__slide {
   position: relative;
-  min-width: 45%;
-  padding: 0 10px;
-  transition: all 0.4s ease;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
   transform-origin: center center;
   will-change: transform, opacity;
-  perspective: 1000px;
 }
 
 .embla__slide:not(.is-selected) {
-  transform: scale(0.9) translateX(-5%) rotateY(10deg);
-  opacity: 0.3;
-  filter: blur(2px);
+  transform: scale(0.94);
+  opacity: 0.55;
 }
 
 .embla__slide.is-selected {
-  transform: scale(1.05) rotateY(0);
+  transform: scale(1);
+  opacity: 1;
   z-index: 1;
-  filter: none;
 }
 
-.embla__slide.is-next {
-  transform: scale(0.9) translateX(5%) rotateY(-10deg);
-}
-
+/* Positioning only — the visual material comes from the console Key.
+   Round per design.md §6.5. */
 .embla__button {
   position: absolute;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
-  cursor: pointer;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: white;
-  transition: all 0.2s ease;
+  border-radius: var(--console-radius-pill);
+  font-size: 18px;
 }
 
-.embla__button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-50%) scale(1.1);
+.embla__button:active {
+  /* Keep the key centered while it depresses. */
+  transform: translateY(calc(-50% + 1px));
 }
 
 .embla__button__prev {
@@ -84,12 +81,7 @@
 /* Mobile Responsiveness */
 @media screen and (max-width: 425px) {
   .embla__container {
-    margin-left: calc(10% - 10px);
-    margin-right: calc(10% - 10px);
-  }
-  
-  .embla__slide {
-    min-width: 80%;
+    gap: 16px;
   }
 
   .embla__button {
@@ -107,30 +99,10 @@
   }
 }
 
-@media screen and (max-width: 375px) {
-  .embla__container {
-    margin-left: calc(7.5% - 10px);
-    margin-right: calc(7.5% - 10px);
-  }
-  
-  .embla__slide {
-    min-width: 85%;
-  }
-}
-
 @media screen and (max-width: 320px) {
-  .embla__container {
-    margin-left: calc(5% - 10px);
-    margin-right: calc(5% - 10px);
-  }
-  
-  .embla__slide {
-    min-width: 90%;
-  }
-
   .embla__button {
     width: 32px;
     height: 32px;
     font-size: 16px;
   }
-} 
+}
