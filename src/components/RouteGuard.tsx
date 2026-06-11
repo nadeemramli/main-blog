@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { routes, protectedRoutes } from "@/app/resources";
 import { Key, MicroLcd, Panel, Screen } from "@/components/console";
+import { PageTransition } from "@/components/console/PageTransition";
 import styles from "./RouteGuard.module.scss";
 
 interface RouteGuardProps {
@@ -135,13 +136,10 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     );
   }
 
-  // T4: entry-side phosphor settle — the content brightens into place after
-  // the cut (90ms; disabled under prefers-reduced-motion via CSS).
-  return (
-    <div key={pathname} className={styles.pageEnter}>
-      {children}
-    </div>
-  );
+  // The arrival ritual: boot-flicker + transient ACCESS GRANTED chip on
+  // every client-side navigation (PageTransition skips the first load and
+  // reduced motion).
+  return <PageTransition key={pathname}>{children}</PageTransition>;
 };
 
 export { RouteGuard };

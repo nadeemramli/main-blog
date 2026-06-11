@@ -21,7 +21,6 @@ interface HeroScreenProps {
   stats: Stat[];
 }
 
-const BOOT_KEY = "console-booted";
 const FLICKER_MS = 280;
 const LINE_STAGGER_MS = 60;
 
@@ -43,15 +42,11 @@ export default function HeroScreen({
   const reduced = usePrefersReducedMotion();
   const [booting, setBooting] = useState(false);
 
+  // Boot on every arrival at the hero — the console powers on each time
+  // you land on it (owner decision; was once-per-session).
   useEffect(() => {
     if (reduced !== false) return; // reduced or unknown: never boot
-    try {
-      if (sessionStorage.getItem(BOOT_KEY)) return;
-      sessionStorage.setItem(BOOT_KEY, "1");
-      setBooting(true);
-    } catch {
-      // sessionStorage unavailable — skip the boot, show final state.
-    }
+    setBooting(true);
   }, [reduced]);
 
   const lineDelay = (index: number) =>

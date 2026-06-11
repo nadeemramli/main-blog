@@ -65,27 +65,3 @@
   text-transform: uppercase;
   color: var(--console-led-red);
 }
-
-/* Entry-side phosphor settle on page transitions (90ms). */
-.pageEnter {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  animation: pageEnter 90ms linear;
-}
-
-@keyframes pageEnter {
-  from {
-    opacity: 0.6;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pageEnter {
-    animation: none;
-  }
-}

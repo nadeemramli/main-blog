@@ -305,9 +305,9 @@ treatment — numbers glow, context is printed.
   (#D5D2C6 ↔ #CFCBBE), ~8s period, opacity ≤ 0.5 over the flat color. Three.js or raw WebGL
   fragment shader; ~30fps cap; pause when tab hidden; static PNG grain fallback when WebGL
   unavailable or `prefers-reduced-motion`.
-- **LCD boot sequence (hero, first visit per session):** 600ms — screen flickers on (two
-  opacity stutters), cursor blink, then text lines type/fade in staggered 60ms. Skipped on
-  reduced motion and on subsequent navigations (sessionStorage flag).
+- **LCD boot sequence (hero, every arrival):** ~600ms — screen flickers on (two opacity
+  stutters), then text lines fade in staggered 60ms. Replays each time the hero mounts
+  (revised from once-per-session: the power-on is the point). Skipped on reduced motion.
 - **Gauge needles:** animate from 0 to value on viewport entry, spring easing with ~4°
   overshoot, once per page load.
 - **Numeric tick:** clock ticks live (1s); stat numbers count up over 800ms on entry,
@@ -317,8 +317,10 @@ treatment — numbers glow, context is printed.
 - **Hover:** shells lift (`hover-lift`), keys depress on press, LCD content never animates
   on hover (screens respond to data, not cursors).
 - **Page transitions:** client-side (App Router) — the chrome, desk grain, and clock persist
-  across navigation; never a blank frame or interstitial loading state. The cut lands with a
-  90ms entry-side phosphor settle (content brightens into place). LCDs don't crossfade.
+  across navigation; never a blank frame or blocking loading state. Each navigation lands
+  with the arrival ritual: a ~240ms boot-flicker on the incoming page and a transient
+  `● ACCESS GRANTED` micro-LCD under the header (~700ms). First document load skips the
+  ritual (the hero boot owns it). LCDs don't crossfade.
 - **Hard rule:** `prefers-reduced-motion: reduce` kills the dither drift, boot sequence,
   needle springs, and count-ups. Everything renders in final state. Non-negotiable.
 
