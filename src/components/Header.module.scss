@@ -10,35 +10,69 @@
   padding: 0 16px;
 }
 
+/* Machined faceplate, not a lozenge. */
 .strip {
   display: flex;
   align-items: center;
-  gap: var(--console-gap);
+  gap: 12px;
   width: max-content;
   max-width: 100%;
   background: var(--console-panel);
-  border-radius: var(--console-radius-pill);
+  border-radius: 16px;
   box-shadow: var(--console-shadow-raised-sm);
-  padding: 9px 12px;
+  padding: 8px 12px;
 }
 
-/* The recessed key track. 3px padding + 34px caps = 40px — exactly the
-   chip height, one vertical rhythm. */
+/* Mounting screws — the strip's one decorative detail (a pair reads as
+   hardware, design.md §4). */
+.screw {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: var(--console-radius-pill);
+  background: var(--console-well);
+  box-shadow: var(--console-shadow-pressed);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background: var(--console-border);
+    transform: rotate(45deg);
+  }
+}
+
+/* Hairline segment dividers between the cluster's modules. */
+.divider {
+  width: 1px;
+  height: 24px;
+  flex-shrink: 0;
+  background: var(--console-border);
+  opacity: 0.6;
+}
+
+/* The recessed key track, seamed where the well meets the panel.
+   1px border + 2px padding + 34px caps = 40px — the chip rhythm holds. */
 .track {
   display: flex;
   align-items: center;
   gap: 4px;
   background: var(--console-well);
-  border-radius: var(--console-radius-pill);
+  border: 1px solid var(--console-border);
+  border-radius: 10px;
   box-shadow: var(--console-shadow-inset);
-  padding: 3px;
+  padding: 2px;
 }
 
-/* Text-only mono keycaps; press is the only movement. */
+/* Square machined keycaps; press is the only movement. */
 .navKey {
   height: 34px;
   padding: 0 16px;
-  border-radius: var(--console-radius-pill);
+  border-radius: var(--console-radius-control);
   font-size: 11px;
   letter-spacing: 0.08em;
 }
@@ -52,9 +86,11 @@
   display: none;
 }
 
-/* Micro-LCD chips: 40px, 3px bezel (set on the component), mint glow. */
-.lcdChip {
+/* Micro-LCD chips: 40px, 3px bezel (set on the component), mint glow.
+   Glass squared to match the caps. */
+.strip .lcdChip {
   height: 40px;
+  border-radius: 8px;
 }
 
 /* The location chip's sync dot — 1s pulse, static under reduced motion. */
@@ -111,5 +147,10 @@
   .navKey {
     width: 32px;
     padding: 0;
+  }
+
+  .screw,
+  .divider {
+    display: none;
   }
 }

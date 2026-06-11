@@ -179,22 +179,26 @@ in-development, alerts); mint = healthy/online (live, ok, open); amber = standby
 (idle, prototype); none = off/archived.
 Idle pulse animation (2s, opacity 1 → 0.4) on sync/live states only.
 
-### 5.7 Header / Nav — the instrument cluster
-A slim raised strip, width max-content, centered, sticky 16px. Panel bg, pill radius,
-padding 9px 12px, `raised-sm` (not full `raised` — no halo on a slim strip). Three modules
-in a 16px-gap flex row: [location MicroLcd] [key track] [clock MicroLcd].
-- **Key track:** a recessed well (`well` bg, pill radius, `inset` shadow) the nav keys
-  live inside.
+### 5.7 Header / Nav — the instrument cluster (mechanical revision)
+A slim raised strip, width max-content, centered, sticky 16px. Panel bg, **16px radius —
+a machined faceplate, not a lozenge**, padding 8px 12px, `raised-sm` (no halo on a slim
+strip). Three modules in a 12px-gap flex row, separated by 1px hairline segment dividers:
+[location MicroLcd] | [key track] | [clock MicroLcd]. A slotted mounting-screw dot caps
+each end of the strip — the shell's one decorative detail (the pair reads as hardware).
+- **Key track:** a recessed well (`well` bg, 10px radius, `inset` shadow) with a 1px
+  `border` seam where the well meets the panel. 1px seam + 2px padding + 34px caps = 40px,
+  the chip rhythm.
 - **Keycaps:** text-only mono labels (HOME ABOUT NOW PROJECTS BLOG RESOURCES), 11px
-  tracked, `panel-high` bg, pill radius, 34px tall, 0 16px padding, 4px gaps, `raised-sm`.
-  Active route: pressed shadow + translateY(1px) + `panel` bg — a seated key. Hover does
-  nothing on the cap; press is the only movement. No icons on desktop.
-- **MicroLcd chips:** 40px tall to match the track exactly (one vertical rhythm), 3px
-  `lcd-bezel` ring, `lcd-bg` glass, 9px radius, mono ~11.5px mint with glow. The location
+  tracked, `panel-high` bg, **8px radius — square machined caps**, 34px tall, 0 16px
+  padding, 4px gaps, `raised-sm`. Active route: pressed shadow + translateY(1px) + `panel`
+  bg — a seated key. Hover does nothing on the cap; press is the only movement. No icons
+  on desktop.
+- **MicroLcd chips:** 40px tall to match the track exactly, 3px `lcd-bezel` ring, `lcd-bg`
+  glass, glass squared to 8px to match the caps, mono ~11.5px mint with glow. The location
   chip carries a 5px red sync dot pulsing at 1s (static under reduced motion); the clock
   ticks live.
-- **Mobile (<768px):** location chip hides, clock stays, keycaps go icon-only inside the
-  same track. No horizontal overflow at 360px.
+- **Mobile (<768px):** location chip, screws, and dividers hide; clock stays; keycaps go
+  icon-only inside the same track. No horizontal overflow at 360px.
 
 ### 5.8 Footer — the desk edge
 The `background-deep` zone opens with a 1px `border` hairline (a machined seam, not a bare

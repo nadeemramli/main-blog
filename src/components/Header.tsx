@@ -88,11 +88,18 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.strip}>
+        <span className={styles.screw} aria-hidden="true" />
         {display.location && (
-          <MicroLcd className={`${styles.lcdChip} ${styles.location}`}>
-            <span className={styles.syncDot} aria-hidden="true" />
-            {person.location}
-          </MicroLcd>
+          <>
+            <MicroLcd className={`${styles.lcdChip} ${styles.location}`}>
+              <span className={styles.syncDot} aria-hidden="true" />
+              {person.location}
+            </MicroLcd>
+            <span
+              className={`${styles.divider} ${styles.location}`}
+              aria-hidden="true"
+            />
+          </>
         )}
         <nav className={styles.track} aria-label="Main">
           {NAV_ITEMS.filter((item) => routes[item.href]).map((item) => {
@@ -118,10 +125,14 @@ export const Header = () => {
           })}
         </nav>
         {display.time && (
-          <MicroLcd className={styles.lcdChip}>
-            <TimeDisplay timeZone={person.location} />
-          </MicroLcd>
+          <>
+            <span className={styles.divider} aria-hidden="true" />
+            <MicroLcd className={styles.lcdChip}>
+              <TimeDisplay timeZone={person.location} />
+            </MicroLcd>
+          </>
         )}
+        <span className={styles.screw} aria-hidden="true" />
       </div>
     </header>
   );
