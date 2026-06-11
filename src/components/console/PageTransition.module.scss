@@ -4,33 +4,18 @@
   width: 100%;
 }
 
-/* Incoming page powers on: two-stutter flicker + small rise (~240ms). */
+/* The smooth cut: a 90ms phosphor settle — no stutters, no movement. */
 .enter {
-  animation: pageBoot 240ms ease-out;
+  animation: pageEnter 90ms linear;
 }
 
-@keyframes pageBoot {
-  0% {
-    opacity: 0;
-    transform: translateY(6px);
+@keyframes pageEnter {
+  from {
+    opacity: 0.6;
   }
 
-  35% {
+  to {
     opacity: 1;
-    transform: translateY(0);
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  65% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
