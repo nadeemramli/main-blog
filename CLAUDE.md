@@ -8,16 +8,14 @@ Visual design system is specified in design.md — it overrides any styling conv
 
 Personal portfolio site for **Nadeem Ramli** (Growth Marketer / Indie Builder / Systems Thinker), forked from the Once UI **Magic Portfolio** template (`@once-ui-system/magic-portfolio`, package name still in `package.json`). It is a Next.js **App Router** site that renders mostly static, content-driven pages. There is no backend/database and no test suite.
 
-> **Two things to read before doing significant work:**
-> 1. **`design.md`** — a locked, detailed spec for a full visual redesign ("Operator Console"). The current site does NOT yet look like this. See [Planned redesign](#planned-redesign-designmd) below. If you're asked to restyle anything, that file is the source of truth.
-> 2. The repo has a **large amount of uncommitted work** (see `git status`). Many newer features (skill charts, about-page components, several project MDX files, self-hosted fonts) are untracked or modified but not committed.
+> **Read before doing significant work:** **`design.md`** — the locked "Operator Console" design system. As of June 2026 it is **fully implemented** (branch `redesign/operator-console`, phase-gated commits). It remains the source of truth for any restyle; it is updated in the same commit whenever a design decision changes.
 
 ## Current state (June 2026)
 
 - Recently upgraded to **Next.js 16.2.9** + **React 19.2.7** (from Next 14 / React 18). The async-request-API migration is done (`params` is awaited in `src/app/projects/[slug]/page.tsx`). Build passes with TypeScript type-checking.
 - Builds with **Turbopack** (Next 16 default). `next build` emits a benign Turbopack NFT-tracing warning originating from `getPosts()`'s `fs`/`path` use traced through `sitemap.ts` — safe to ignore.
 - Fonts are **self-hosted** (no build-time network dependency on Google Fonts) — see [Fonts](#fonts).
-- `npm run lint` currently reports **~12.7k problems**. This is pre-existing, NOT caused by the upgrade: most are in the vendored `once-ui/` library, and many are a false-positive `react/react-in-jsx-scope` because the flat `eslint.config.mjs` never disabled that rule (the legacy `.eslintrc.json` did). Do not treat a failing `npm run lint` as something the build broke. The real correctness gate is `next build` (it runs the type-checker).
+- Lint floor: **112 problems**, all pre-existing in vendored `once-ui/` code, recorded in **`lint-baseline.txt`** (tracked). The gate is "no new findings vs the baseline" — compare per-file error *contents*, not just totals. The real correctness gate is `next build` (it runs the type-checker).
 
 ## Commands
 
@@ -114,13 +112,19 @@ Two independent font setups — don't conflate them:
 ### Static export
 `next.config.mjs` enables MDX page extensions and sets `images.unoptimized: true`. The `output: 'export'` line is **commented out** — uncomment it to produce a static `out/` directory (an `out/` from a prior export exists in the tree but is gitignored).
 
-## Planned redesign (`design.md`)
+## The console component system (implemented design)
 
-`design.md` is a **complete, locked design system** for reskinning this site into an **"Operator Console"** aesthetic — warm neumorphic "hardware" panels with dark LCD "screens", **light-mode only**, mint (#76D2B6) + cream palette, red (#FF3333) used strictly as a status-indicator language. It is an implementation target, not yet built. Key points an agent must respect if implementing it:
-- **Override at the token layer first** (map the palette/radius/shadow onto once-ui's CSS custom properties), force `data-theme="light"` site-wide, remove the theme switcher.
-- Keep once-ui layout primitives (`Flex`/`Grid`/`Column`); replace surface components (`Card`/`Button`/`Badge`/nav) with new ones: `Panel`, `Screen`, `Gauge`, `Rocker`, `Led`, `MicroLcd`, `DitherCanvas`.
-- Hard rules: dual-light neumorphic shadows are the material (don't flatten to plain box-shadows); live data glows on LCD glass, permanent info is printed ink; one gauge + one mint CTA per page; never pure white/black; honor `prefers-reduced-motion`.
-- It specifies per-page treatments (home console, about "operator's manual", now "live status", projects "device rack", resources "handhelds") and a full motion budget. Read the file in full before starting any restyle.
+`design.md` is fully implemented. The architecture an agent must know:
+
+- **Tokens:** `src/styles/console-tokens.scss` defines every `--console-*` custom property (colors, type, radii, spacing, the neumorphic shadow pairs). Imported in `layout.tsx` AFTER the Once UI sheets. **Mint discipline:** console components use `--console-*` vars exclusively — never `--scheme-*` ramps, never hardcoded colors/shadows. Canonical mint is `#76D2B6`.
+- **Components:** `src/components/console/` — `Panel` (device shell), `Screen` (LCD; statuses: sync = red pulse, live = mint, idle = amber, locked = red steady, off = dotless), `Gauge`, `Rocker`, `Led`, `MicroLcd`, `Key` (router-aware: internal hrefs render `next/link`), `Badge`, `Reveal` (scroll reveal), `Screws`/`BootIn` (hardware/per-page boot), `PageTransition` (90ms settle), `DitherCanvasMount` (raw-WebGL desk grain). Barrel: `@/components/console`.
+- **Status canon** (everywhere — screens, LEDs, badges): red = activity/attention, mint = healthy/online, amber = standby/pending, none = off/archived. Red is a status language only (≤1% of any viewport).
+- **Motion rules:** every effect checks `usePrefersReducedMotion` (`src/components/hooks/`) and renders final-state when reduced. Blink budget: one focal blinking element per screen (hero cursor, /now tail cursor); microdots exempt; decoration never blinks; nothing animates on archived/off devices. Max one decorative hardware detail per shell.
+- **Guardrails that have teeth:** live data glows on glass, permanent info is printed ink; one gauge + one mint key per page; never pure white/black.
+
+### The gaugePercent ritual
+
+`src/app/resources/content.js` → `consoleData.focus.gaugePercent` = Order Series installments **drafted ÷ planned, as a %**. It renders in three instruments (hero gauge, /now gauge, Equity "% DRAFTED" readout). Update it whenever an installment is drafted or the plan changes — a stale needle is a lying instrument. It is the last remaining `TODO(nadeem)` placeholder outside unflipped blog drafts.
 
 ## Conventions
 
@@ -136,4 +140,4 @@ Two independent font setups — don't conflate them:
 - **Two `params` shapes:** `[slug]` `params` is now a `Promise` — `await` it. The OG route's `url.searchParams` is a normal `Request` API and is unaffected.
 - **Browser-extension hydration warnings:** the `<body>` (`<Column as="body">` in `layout.tsx`) has `suppressHydrationWarning` because extensions (e.g. ColorZilla's `cz-shortcut-listen`) inject attributes pre-hydration. This is intentional; keep it.
 - **`PAGE_PASSWORD` env var** drives the protected-route gate (`.env.example`); deployments must supply it.
-- **Large uncommitted surface area:** confirm `git status` before assuming a feature is committed; much of the skills/about/projects work is untracked.
+- **Blog drafts:** posts in `src/app/blog/posts/` with `draft: true` are excluded from listing, sitemap, and static params (`dynamicParams = false` makes them hard 404s). Flip the flag to publish.
