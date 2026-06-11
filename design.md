@@ -318,9 +318,8 @@ treatment — numbers glow, context is printed.
   on hover (screens respond to data, not cursors).
 - **Page transitions:** client-side (App Router) — the chrome, desk grain, and clock persist
   across navigation; never a blank frame or blocking loading state. Each navigation lands
-  with the arrival ritual: a ~240ms boot-flicker on the incoming page and a transient
-  `● ACCESS GRANTED` micro-LCD under the header (~700ms). First document load skips the
-  ritual (the hero boot owns it). LCDs don't crossfade.
+  with a ~240ms boot-flicker on the incoming page (no unlock chip — tried, too much).
+  First document load skips the flicker (the hero boot owns it). LCDs don't crossfade.
 - **Hard rule:** `prefers-reduced-motion: reduce` kills the dither drift, boot sequence,
   needle springs, and count-ups. Everything renders in final state. Non-negotiable.
 

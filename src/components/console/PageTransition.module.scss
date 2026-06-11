@@ -34,66 +34,8 @@
   }
 }
 
-/* The unlock chip — a transient micro-LCD under the header. */
-.unlockChip {
-  position: fixed;
-  top: 84px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 8;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  pointer-events: none;
-  background: var(--console-lcd-bg);
-  border: 3px solid var(--console-lcd-bezel);
-  border-radius: 8px;
-  padding: 5px 12px;
-  font-family: var(--console-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--console-lcd-text);
-  text-shadow: 0 0 8px var(--console-lcd-glow);
-  animation: unlockFade 700ms ease-out forwards;
-}
-
-.unlockDot {
-  width: 5px;
-  height: 5px;
-  border-radius: var(--console-radius-pill);
-  background: var(--console-mint);
-  box-shadow: 0 0 6px var(--console-mint-glow);
-}
-
-@keyframes unlockFade {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-4px);
-  }
-
-  15% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  70% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .enter,
-  .unlockChip {
+  .enter {
     animation: none;
-  }
-
-  .unlockChip {
-    display: none;
   }
 }

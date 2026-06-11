@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import classNames from "classnames";
 
 import { usePrefersReducedMotion } from "@/components/hooks/usePrefersReducedMotion";
@@ -20,29 +20,15 @@ export function PageTransition({ children }: PageTransitionProps) {
   const reduced = usePrefersReducedMotion();
   // Captured at mount: was this mount caused by a navigation?
   const isNavigation = useRef(hasNavigatedOnce);
-  const [showUnlock, setShowUnlock] = useState(false);
 
   useEffect(() => {
     hasNavigatedOnce = true;
   }, []);
 
-  useEffect(() => {
-    if (!isNavigation.current || reduced !== false) return;
-    setShowUnlock(true);
-    const timer = setTimeout(() => setShowUnlock(false), 750);
-    return () => clearTimeout(timer);
-  }, [reduced]);
-
   const animate = isNavigation.current && reduced === false;
 
   return (
     <div className={classNames(styles.wrap, animate && styles.enter)}>
-      {showUnlock && (
-        <div className={styles.unlockChip} role="status">
-          <span className={styles.unlockDot} aria-hidden="true" />
-          Access granted
-        </div>
-      )}
       {children}
     </div>
   );
