@@ -1,0 +1,68 @@
+/* Console type system for MDX prose (design.md §6.6):
+   Inter at body-lg, printed ink; code is data — mono on dark. */
+.p {
+  margin: var(--console-space-base) 0 12px;
+  font-family: var(--console-font-sans);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--console-text-secondary);
+}
+
+.blockquote {
+  margin: var(--console-gap) 0;
+  padding: var(--console-space-base) var(--console-gap);
+  border-left: 2px solid var(--console-border);
+  font-family: var(--console-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--console-text-tertiary);
+
+  p {
+    margin: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+}
+
+/* Fenced code: a small recessed screen. */
+.pre {
+  margin: var(--console-gap) 0;
+  padding: var(--console-gap);
+  overflow-x: auto;
+  background: var(--console-lcd-bg);
+  border-radius: var(--console-radius-lcd);
+  box-shadow: var(--console-shadow-lcd-depth);
+  color: var(--console-lcd-text);
+  font-family: var(--console-font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  text-shadow: 0 0 8px var(--console-lcd-glow);
+
+  code {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    color: inherit;
+  }
+}
+
+/* Inline code: a recessed chip on the panel. */
+.code {
+  background: var(--console-well);
+  box-shadow: var(--console-shadow-inset);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: var(--console-font-mono);
+  font-size: 0.85em;
+  color: var(--console-text-primary);
+}
+
+.ul,
+.ol {
+  margin: var(--console-space-base) 0 12px;
+  padding-left: 24px;
+  font-family: var(--console-font-sans);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--console-text-secondary);
+}

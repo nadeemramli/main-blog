@@ -69,6 +69,12 @@ const NAV_ITEMS: NavItem[] = [
     match: (p) => p.startsWith("/projects"),
   },
   {
+    href: "/blog",
+    icon: "clipboard",
+    label: "Blog",
+    match: (p) => p.startsWith("/blog"),
+  },
+  {
     href: "/resources",
     icon: "book",
     label: resources.label,

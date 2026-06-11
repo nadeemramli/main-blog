@@ -20,10 +20,15 @@ type Metadata = {
   image?: string;
   images: string[];
   tag?: string;
+  tags?: string[];
   team: Team[];
   link?: string;
   status: ProjectStatus;
   metric?: string;
+  /** Outcome metrics rendered as MicroLcd chips (design.md §6.6). */
+  metrics?: { label: string; value: string }[];
+  /** Drafts are excluded from listings, sitemap, and static params. */
+  draft?: boolean;
 };
 
 import { notFound } from 'next/navigation';
@@ -55,6 +60,9 @@ function readMDXFile(filePath: string) {
     link: data.link || "",
     status: data.status || "prototype",
     metric: data.metric || "",
+    tags: data.tags || [],
+    metrics: data.metrics || [],
+    draft: data.draft || false,
   };
 
   return { metadata, content };

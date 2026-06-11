@@ -2,15 +2,20 @@ import { getPosts } from "@/app/utils/utils";
 import { baseURL, routes as routesConfig } from "@/app/resources";
 
 export default async function sitemap() {
-  const resources = getPosts(["src", "app", "resources", "posts"]).map((post) => ({
-    url: `${baseURL}/resources/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
-  }));
-
+  // (The old src/app/resources/posts lookup pointed at a directory that no
+  // longer exists — removed.)
   const projects = getPosts(["src", "app", "projects", "projects"]).map((post) => ({
     url: `${baseURL}/projects/${post.slug}`,
     lastModified: post.metadata.publishedAt,
   }));
+
+  // Drafts never reach the sitemap.
+  const blogPosts = getPosts(["src", "app", "blog", "posts"])
+    .filter((post) => !post.metadata.draft)
+    .map((post) => ({
+      url: `${baseURL}/blog/${post.slug}`,
+      lastModified: post.metadata.publishedAt,
+    }));
 
   // Underscore-prefixed routes (e.g. /_lab) are internal — keep them out of
   // the sitemap.
@@ -23,5 +28,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...resources, ...projects];
+  return [...routes, ...projects, ...blogPosts];
 }

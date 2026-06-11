@@ -1,12 +1,14 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import React, { ReactNode } from "react";
 
-import { SmartImage, SmartLink, Text } from "@/once-ui/components";
+import { SmartImage, SmartLink } from "@/once-ui/components";
 import { CodeBlock } from "@/once-ui/modules";
 import { HeadingLink } from "@/components";
 
 import { TextProps } from "@/once-ui/interfaces";
 import { SmartImageProps } from "@/once-ui/components/SmartImage";
+
+import styles from "./mdx.module.scss";
 
 type TableProps = {
   data: {
@@ -115,21 +117,39 @@ function createHeading(level: 1 | 2 | 3 | 4 | 5 | 6) {
 }
 
 function createParagraph({ children }: TextProps) {
-  return (
-    <Text
-      style={{ lineHeight: "175%" }}
-      variant="body-default-m"
-      onBackground="neutral-medium"
-      marginTop="8"
-      marginBottom="12"
-    >
-      {children}
-    </Text>
-  );
+  return <p className={styles.p}>{children}</p>;
+}
+
+function createBlockquote({ children }: { children?: ReactNode }) {
+  return <blockquote className={styles.blockquote}>{children}</blockquote>;
+}
+
+function createPre({ children }: { children?: ReactNode }) {
+  return <pre className={styles.pre}>{children}</pre>;
+}
+
+function createInlineCode({ children }: { children?: ReactNode }) {
+  return <code className={styles.code}>{children}</code>;
+}
+
+function createList(ordered: boolean) {
+  const List = ({ children }: { children?: ReactNode }) =>
+    ordered ? (
+      <ol className={styles.ol}>{children}</ol>
+    ) : (
+      <ul className={styles.ul}>{children}</ul>
+    );
+  List.displayName = ordered ? "OrderedList" : "UnorderedList";
+  return List;
 }
 
 const components = {
   p: createParagraph as any,
+  blockquote: createBlockquote,
+  pre: createPre,
+  code: createInlineCode,
+  ul: createList(false),
+  ol: createList(true),
   h1: createHeading(1) as any,
   h2: createHeading(2) as any,
   h3: createHeading(3) as any,

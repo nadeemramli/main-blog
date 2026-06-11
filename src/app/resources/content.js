@@ -376,48 +376,6 @@ const about = {
       },
     ],
   },
-  caseStudies: {
-    display: false, // section removed from /about; copy migrates to /blog MDX in phase 3.6
-    title: "Featured Case Studies",
-    studies: [
-      {
-        title: "FAR Academy Lead Gen Campaign",
-        thumbnail: "/images/case-studies/far-academy-thumb.png",
-        tldr: {
-          problem: "FAR Capital needed to generate quality leads for their Sunday Session investment education events",
-          solution: "Implemented multi-channel lead generation strategy with targeted Facebook ads and conversion optimization",
-          result: "Generated 2,500+ quality leads with 15% conversion rate, resulting in 150+ event attendees per session"
-        },
-        tags: ["Lead Generation", "Facebook Ads", "Conversion Optimization"],
-        fullStory: "Read full case study",
-        link: "#"
-      },
-      {
-        title: "Adasight B.V. ICP Discovery",
-        thumbnail: "/images/case-studies/adasight-thumb.png",
-        tldr: {
-          problem: "B2B startup needed to identify and acquire their ideal customer profile",
-          solution: "Conducted deep market research, refined value proposition, and implemented demand generation campaigns",
-          result: "Landed 4 major clients and consistently hit monthly KPIs within 6 months"
-        },
-        tags: ["B2B Marketing", "ICP Discovery", "Demand Generation"],
-        fullStory: "Read full case study",
-        link: "#"
-      },
-      {
-        title: "DTC Brand Scale-Up Strategy",
-        thumbnail: "/images/case-studies/dtc-scale-thumb.png",
-        tldr: {
-          problem: "DTC health brand needed to scale beyond initial market penetration",
-          solution: "Developed comprehensive marketing automation, expanded demographics, and built community engagement",
-          result: "3x revenue growth through demographic expansion and 45% increase in customer lifetime value"
-        },
-        tags: ["DTC Growth", "Marketing Automation", "Community Building"],
-        fullStory: "Read full case study",
-        link: "#"
-      }
-    ]
-  },
   sideProjects: {
     display: true,
     title: "Side Projects",
@@ -601,6 +559,12 @@ const resources = {
       link: "https://nadeemramli.notion.site/mental-models-library"
     },
   ]
+};
+
+const blog = {
+  label: "Blog",
+  title: "Blog",
+  description: "Long-form case studies and build logs.",
 };
 
 const now = {
@@ -909,4 +873,4 @@ const consoleData = {
   ],
 };
 
-export { person, social, newsletter, home, about, projects, resources, now, consoleData };
+export { person, social, newsletter, home, about, projects, resources, blog, now, consoleData };

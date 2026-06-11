@@ -1,0 +1,90 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-panel-padding);
+  width: 100%;
+  max-width: var(--console-page-max-width);
+  padding-top: 32px;
+}
+
+.eyebrow {
+  font-family: var(--console-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--console-font-sans);
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--console-text-primary);
+}
+
+/* Manual-page layout (design.md §6.6): mono sidebar + prose column. */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--console-panel-padding);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-gap);
+  font-family: var(--console-font-mono);
+}
+
+.sideLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+}
+
+.sideValue {
+  font-size: 13px;
+  color: var(--console-text-primary);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+.sideGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sideTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--console-space-base);
+}
+
+.sideMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--console-space-base);
+  align-items: flex-start;
+}
+
+/* Prose at body-lg, max 68ch (design.md §6.6). */
+.prose {
+  max-width: 68ch;
+  min-width: 0;
+}
