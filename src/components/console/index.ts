@@ -12,3 +12,5 @@ export type { RockerSide } from "./Rocker";
 export { Gauge } from "./Gauge";
 export { Reveal } from "./Reveal";
 export { default as DitherCanvasMount } from "./DitherCanvasMount";
+export { Screws } from "./Screws";
+export { BootIn } from "./BootIn";

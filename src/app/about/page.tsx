@@ -1,5 +1,5 @@
 import { Icon } from "@/once-ui/components";
-import { Badge, Key, MicroLcd, Panel, Reveal } from "@/components/console";
+import { Badge, Key, MicroLcd, Panel, Reveal, Screws } from "@/components/console";
 import SideProjectCard from "@/components/about/SideProjectCard";
 import HowIWorkSteps from "@/components/about/HowIWorkSteps";
 import ToolsStackGrid from "@/components/about/ToolsStackGrid";
@@ -102,6 +102,9 @@ export default function About() {
               </div>
             </div>
           </div>
+          <span className={styles.silkscreen} aria-hidden="true">
+            UNIT NR-01 · KUALA LUMPUR
+          </span>
         </Panel>
       </section>
 
@@ -122,6 +125,7 @@ export default function About() {
           <div className={styles.eyebrow}>SEC.02 — MAINTENANCE LOG</div>
           <h2 className={styles.sectionTitle}>{about.work.title}</h2>
           <Panel as="div" padding="lg" className={styles.logShell}>
+            <Screws />
             {about.work.experiences.map((experience, index) => (
               <div key={`${experience.company}-${index}`} className={styles.role}>
                 <div className={styles.roleMeta}>
@@ -207,6 +211,7 @@ export default function About() {
           <h2 className={styles.sectionTitle}>{about.toolsStack.title}</h2>
           <p className={styles.sectionSub}>{about.toolsStack.subtitle}</p>
           <Panel as="div" padding="lg">
+            <Screws />
             <ToolsStackGrid categories={about.toolsStack.categories} />
           </Panel>
         </section>

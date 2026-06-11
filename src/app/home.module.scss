@@ -10,9 +10,17 @@
 /* ── Hero console (design.md §6.1) ─────────────────────────── */
 .heroGrid {
   display: grid;
-  grid-template-columns: 232px 1fr 216px;
-  gap: var(--console-panel-padding);
+  grid-template-columns: 232px 1px 1fr 1px 216px;
+  gap: var(--console-gap);
   align-items: center;
+}
+
+/* Machined seams between the hero's modules (design.md §2 hairlines). */
+.heroDivider {
+  align-self: stretch;
+  width: 1px;
+  background: var(--console-border);
+  opacity: 0.5;
 }
 
 .gaugeModule {
@@ -232,6 +240,10 @@
 @media (max-width: 1024px) {
   .heroGrid {
     grid-template-columns: 1fr;
+  }
+
+  .heroDivider {
+    display: none;
   }
 
   .reference {

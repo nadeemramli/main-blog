@@ -1,0 +1,30 @@
+/* Slotted mounting screws — a shell's one decorative detail (design.md §4). */
+.screw {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--console-radius-pill);
+  background: var(--console-well);
+  box-shadow: var(--console-shadow-pressed);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 1px;
+    right: 1px;
+    height: 1px;
+    background: var(--console-border);
+    transform: rotate(45deg);
+  }
+}
+
+.tl {
+  top: 14px;
+  left: 14px;
+}
+
+.tr {
+  top: 14px;
+  right: 14px;
+}

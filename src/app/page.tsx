@@ -60,12 +60,14 @@ export default function Home() {
                 value={consoleData.focus.value}
               />
             </div>
+            <span className={styles.heroDivider} aria-hidden="true" />
             <HeroScreen
               name={person.name}
               roleLine="GROWTH MARKETER · INDIE BUILDER · SYSTEMS THINKER"
               timeZone={person.location}
               stats={consoleData.stats}
             />
+            <span className={styles.heroDivider} aria-hidden="true" />
             <div className={styles.reference}>
               <div className={styles.refTitle}>Shipping Week</div>
               <div className={styles.week}>

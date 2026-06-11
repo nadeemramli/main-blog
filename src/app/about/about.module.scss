@@ -244,3 +244,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Embossed silkscreen model number — the faceplate's one decorative
+   detail (design.md §4). */
+.silkscreen {
+  position: absolute;
+  right: var(--console-panel-padding);
+  bottom: 12px;
+  font-family: var(--console-font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--console-text-tertiary);
+  opacity: 0.8;
+}

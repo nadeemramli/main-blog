@@ -1,4 +1,13 @@
-import { Gauge, Led, MicroLcd, Panel, Reveal, Screen } from "@/components/console";
+import {
+  BootIn,
+  Gauge,
+  Led,
+  MicroLcd,
+  Panel,
+  Reveal,
+  Screen,
+  Screws,
+} from "@/components/console";
 import AttributeConsole from "@/components/now/AttributeConsole";
 import { baseURL } from "@/app/resources";
 import { now, consoleData } from "@/app/resources/content";
@@ -49,34 +58,42 @@ export default function NowPage() {
       <section>
         <div className={styles.eyebrow}>SEC.01 — STATUS LOG</div>
         <Panel as="div" padding="lg">
+          <Screws />
           <div className={styles.statusGrid}>
             <Gauge
               percent={consoleData.focus.gaugePercent}
               label={consoleData.focus.label}
               value={consoleData.focus.value}
             />
-            <Screen nodeId="NODE-NOW.01" status="live">
-              <ul className={styles.log}>
-                {consoleData.statusLog.map((line) => (
-                  <li key={line.entry} className={styles.logLine}>
-                    <span className={styles.logDate}>{line.date}</span>
-                    <span aria-hidden="true">▸</span>
-                    {"link" in line && line.link ? (
-                      <a
-                        href={line.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.logLink}
-                      >
-                        {line.entry}
-                      </a>
-                    ) : (
-                      <span>{line.entry}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </Screen>
+            <BootIn>
+              <Screen nodeId="NODE-NOW.01" status="live">
+                <ul className={styles.log}>
+                  {consoleData.statusLog.map((line, index) => (
+                    <li key={line.entry} className={styles.logLine}>
+                      <span className={styles.logDate}>{line.date}</span>
+                      <span aria-hidden="true">▸</span>
+                      {"link" in line && line.link ? (
+                        <a
+                          href={line.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.logLink}
+                        >
+                          {line.entry}
+                        </a>
+                      ) : (
+                        <span>{line.entry}</span>
+                      )}
+                      {index === consoleData.statusLog.length - 1 && (
+                        <span className={styles.tailCursor} aria-hidden="true">
+                          ▮
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </Screen>
+            </BootIn>
           </div>
         </Panel>
       </section>

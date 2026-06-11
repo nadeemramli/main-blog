@@ -1,4 +1,6 @@
 .panel {
+  /* Positioning context for corner hardware (Screws). */
+  position: relative;
   background: var(--console-panel);
   border-radius: var(--console-radius-panel);
   box-shadow: var(--console-shadow-raised);

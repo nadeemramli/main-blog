@@ -90,3 +90,29 @@
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
+
+/* tail -f cursor on the newest... last rendered log line — live data blinks. */
+.tailCursor {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--console-lcd-text);
+  text-shadow: 0 0 8px var(--console-lcd-glow);
+  animation: tailBlink 1.1s steps(1, end) infinite;
+}
+
+@keyframes tailBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tailCursor {
+    animation: none;
+  }
+}

@@ -316,6 +316,11 @@ treatment — numbers glow, context is printed.
   staggered 80ms per shell. Subtle; the desk never moves.
 - **Hover:** shells lift (`hover-lift`), keys depress on press, LCD content never animates
   on hover (screens respond to data, not cursors).
+- **Idle cursors & per-page boot:** live LCDs may carry one blinking block cursor (hero role
+  line; the tail of the /now log — `tail -f`). A page's dominant Screen powers on (~400ms
+  flicker) when you arrive at its page — switching pages is switching devices. Blink budget:
+  at most one focal blinking element per screen; status microdots don't count, decoration
+  never blinks, and nothing animates on archived/off devices.
 - **Page transitions:** client-side (App Router) — the chrome, desk grain, and clock persist
   across navigation; never a blank frame or blocking loading state. Each navigation lands
   with a 90ms phosphor settle on the incoming page — no stutters, no movement (a boot-flicker

@@ -65,6 +65,9 @@ export default function HeroScreen({
         </div>
         <div className={`${styles.roleLine} ${styles.line}`} style={lineDelay(2)}>
           {roleLine}
+          <span className={styles.cursor} aria-hidden="true">
+            ▮
+          </span>
         </div>
         <div className={`${styles.statsGrid} ${styles.line}`} style={lineDelay(3)}>
           {stats.map((stat) => (
