@@ -186,6 +186,8 @@
 .screenImage {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
   border-radius: calc(var(--console-radius-lcd) - 8px);
   filter: brightness(0.9);
 }

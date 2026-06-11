@@ -316,6 +316,9 @@ treatment — numbers glow, context is printed.
   staggered 80ms per shell. Subtle; the desk never moves.
 - **Hover:** shells lift (`hover-lift`), keys depress on press, LCD content never animates
   on hover (screens respond to data, not cursors).
+- **Page transitions:** client-side (App Router) — the chrome, desk grain, and clock persist
+  across navigation; never a blank frame or interstitial loading state. The cut lands with a
+  90ms entry-side phosphor settle (content brightens into place). LCDs don't crossfade.
 - **Hard rule:** `prefers-reduced-motion: reduce` kills the dither drift, boot sequence,
   needle springs, and count-ups. Everything renders in final state. Non-negotiable.
 

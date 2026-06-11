@@ -155,6 +155,8 @@ export default function About() {
                             src={image.src}
                             alt={image.alt}
                             className={styles.roleImage}
+                            loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       ))}

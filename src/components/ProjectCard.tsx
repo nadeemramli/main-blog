@@ -61,7 +61,7 @@ export const ProjectCard = ({
     >
       <Screen nodeId={nodeId} status={SCREEN_STATUS[status]}>
         {image ? (
-          <img src={image} alt={title} className={styles.glassImage} />
+          <img src={image} alt={title} className={styles.glassImage} loading="lazy" decoding="async" />
         ) : (
           <div className={styles.idle}>
             <div className={styles.idleName}>{title}</div>

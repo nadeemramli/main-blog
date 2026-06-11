@@ -22,7 +22,7 @@ export function ResourceCard({
     <Panel as="article" padding="none" interactive className={styles.handheld}>
       <Screen nodeId={nodeId} status="live">
         {imageSrc ? (
-          <img src={imageSrc} alt={title} className={styles.glassImage} />
+          <img src={imageSrc} alt={title} className={styles.glassImage} loading="lazy" decoding="async" />
         ) : (
           <div className={styles.idle}>
             <div className={styles.idleName}>{title}</div>

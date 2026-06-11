@@ -126,6 +126,8 @@ export default function Home() {
                   src={featured.metadata.images[0]}
                   alt={featured.metadata.title}
                   className={styles.screenImage}
+                  loading="lazy"
+                  decoding="async"
                 />
               )}
             </Screen>

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Link from "next/link";
 
 import styles from "./Key.module.scss";
 
@@ -38,6 +39,15 @@ export const Key = ({
   );
 
   if (href) {
+    // Internal routes go through the App Router — client-side transitions,
+    // no full-document reload (and free viewport prefetch).
+    if (href.startsWith("/")) {
+      return (
+        <Link href={href} className={classes} {...rest}>
+          {children}
+        </Link>
+      );
+    }
     return (
       <a href={href} className={classes} {...rest}>
         {children}

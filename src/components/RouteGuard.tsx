@@ -10,56 +10,59 @@ interface RouteGuardProps {
   children: React.ReactNode;
 }
 
+/* Whether a route is enabled is a synchronous lookup against a static
+   object — ordinary navigation must never pass through a loading state. */
+function isRouteEnabled(pathname: string | null): boolean {
+  if (!pathname) return false;
+
+  if (pathname in routes) {
+    return routes[pathname as keyof typeof routes];
+  }
+
+  const dynamicRoutes = ["/resources", "/projects", "/blog"] as const;
+  for (const route of dynamicRoutes) {
+    if (pathname.startsWith(route) && routes[route]) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
   const pathname = usePathname();
-  const [isRouteEnabled, setIsRouteEnabled] = useState(false);
-  const [isPasswordRequired, setIsPasswordRequired] = useState(false);
+  const routeEnabled = isRouteEnabled(pathname);
+  const passwordRequired = Boolean(
+    protectedRoutes[pathname as keyof typeof protectedRoutes],
+  );
+
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
 
+  // Only the protected routes need the async auth check.
   useEffect(() => {
-    const performChecks = async () => {
-      setLoading(true);
-      setIsRouteEnabled(false);
-      setIsPasswordRequired(false);
-      setIsAuthenticated(false);
+    if (!passwordRequired) return;
+    let cancelled = false;
+    setCheckingAuth(true);
+    setIsAuthenticated(false);
 
-      const checkRouteEnabled = () => {
-        if (!pathname) return false;
+    fetch("/api/check-auth")
+      .then((response) => {
+        if (!cancelled) setIsAuthenticated(response.ok);
+      })
+      .catch(() => {
+        if (!cancelled) setIsAuthenticated(false);
+      })
+      .finally(() => {
+        if (!cancelled) setCheckingAuth(false);
+      });
 
-        if (pathname in routes) {
-          return routes[pathname as keyof typeof routes];
-        }
-
-        const dynamicRoutes = ["/resources", "/projects", "/blog"] as const;
-        for (const route of dynamicRoutes) {
-          if (pathname?.startsWith(route) && routes[route]) {
-            return true;
-          }
-        }
-
-        return false;
-      };
-
-      const routeEnabled = checkRouteEnabled();
-      setIsRouteEnabled(routeEnabled);
-
-      if (protectedRoutes[pathname as keyof typeof protectedRoutes]) {
-        setIsPasswordRequired(true);
-
-        const response = await fetch("/api/check-auth");
-        if (response.ok) {
-          setIsAuthenticated(true);
-        }
-      }
-
-      setLoading(false);
+    return () => {
+      cancelled = true;
     };
-
-    performChecks();
-  }, [pathname]);
+  }, [pathname, passwordRequired]);
 
   const handlePasswordSubmit = async () => {
     const response = await fetch("/api/authenticate", {
@@ -76,15 +79,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className={styles.center}>
-        <MicroLcd label="SYS">Checking access</MicroLcd>
-      </div>
-    );
-  }
-
-  if (!isRouteEnabled) {
+  if (!routeEnabled) {
     return (
       <div className={styles.center}>
         <Panel className={styles.devicePanel}>
@@ -100,7 +95,15 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     );
   }
 
-  if (isPasswordRequired && !isAuthenticated) {
+  if (passwordRequired && checkingAuth) {
+    return (
+      <div className={styles.center}>
+        <MicroLcd label="SYS">Checking access</MicroLcd>
+      </div>
+    );
+  }
+
+  if (passwordRequired && !isAuthenticated) {
     return (
       <div className={styles.center}>
         <Panel className={styles.devicePanel}>
@@ -132,7 +135,13 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children }) => {
     );
   }
 
-  return <>{children}</>;
+  // T4: entry-side phosphor settle — the content brightens into place after
+  // the cut (90ms; disabled under prefers-reduced-motion via CSS).
+  return (
+    <div key={pathname} className={styles.pageEnter}>
+      {children}
+    </div>
+  );
 };
 
 export { RouteGuard };
