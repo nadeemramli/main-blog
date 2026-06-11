@@ -58,7 +58,7 @@ Adding a route means flipping it on in `config.js` `routes` AND creating the App
 - `sitemap.ts`, `robots.ts`, `not-found.tsx`
 - `resource/page.jsx` — a **legacy** singular-`/resource` page not listed in `config.js` `routes`; the live route is `/resources`. Treat `resource/page.jsx` as dead/legacy unless told otherwise.
 
-**Pages Router** (`src/pages/api/`) exists ONLY for the two auth endpoints. Don't migrate these without updating `RouteGuard`.
+The site is a pure App Router static export — there is no Pages Router and no API routes (removed with the auth machinery; see below).
 
 ### MDX-driven projects
 Project detail pages are MDX files in `src/app/projects/projects/*.mdx`, rendered by `src/app/projects/[slug]/page.tsx`.
@@ -93,16 +93,11 @@ Custom components layered on top of Once UI. Barrel: `src/components/index.ts` (
 - **`components/about/`:** `CaseStudyCard`, `SideProjectCard`, `HowIWorkSteps`, `ToolsStackGrid` — animated (framer-motion) building blocks for the about page.
 - **`components/projects/Projects.tsx`** and **`components/resource/Posts.tsx`** — list builders that call `getPosts()` / read `resources` and render cards by range.
 
-### Auth / protected routes
-A lightweight cookie gate, NOT real security:
-1. `config.js` `protectedRoutes` maps a path → `true`.
-2. `RouteGuard.tsx` (wraps page content in `layout.tsx`) checks the current path; if protected, calls `GET /api/check-auth`, and if unauthenticated renders a password form that `POST`s to `/api/authenticate`.
-3. `src/pages/api/authenticate.ts` compares against **`process.env.PAGE_PASSWORD`** (see `.env.example`; the gate fails closed when unset) and sets an httpOnly `authToken=authenticated` cookie (1h). `src/pages/api/check-auth.ts` validates that cookie.
-
-⚠️ The cookie value is a constant — this is a lightweight gate, not real security.
+### Route gating (no server auth)
+`RouteGuard.tsx` gates paths against the `routes` registry in `config.js` — unregistered paths render the `NO SIGNAL — 404` device. The old password gate (`/api/authenticate`, `PAGE_PASSWORD`) was deleted when the site adopted `output: 'export'`: static export cannot run API routes, and the lone protected entry pointed at a slug that never existed. For real gating, use Cloudflare Access on the path. The locked-device `Screen` state (`status="locked"`) remains in the component library.
 
 ### OG images
-`src/app/og/route.tsx` (`runtime = "edge"`) renders a 1920×1080 OG image via `next/og` `ImageResponse`, taking `?title=`. It **fetches its font from `public/fonts/Inter.ttf`** — a separate dependency from the self-hosted app fonts below. Pages build their OG URL as `https://${baseURL}/og?title=${encodeURIComponent(title)}`.
+Static: every page's metadata points at **`public/og/default.png`** — a 1920×1080 brand card in the console style (cream field, panel, mint LCD title). The dynamic `/og` edge route was removed for static export. Fast-follow: a prebuild script can render per-page cards with the same satori composition; keep `public/fonts/Inter.ttf` for that.
 
 ### Fonts
 Two independent font setups — don't conflate them:
@@ -110,7 +105,7 @@ Two independent font setups — don't conflate them:
 - **OG image font:** `public/fonts/Inter.ttf`, used only by `og/route.tsx`. Keep it.
 
 ### Static export
-`next.config.mjs` enables MDX page extensions and sets `images.unoptimized: true`. The `output: 'export'` line is **commented out** — uncomment it to produce a static `out/` directory (an `out/` from a prior export exists in the tree but is gitignored).
+`next.config.mjs` enables MDX page extensions, sets `images.unoptimized: true`, and **`output: 'export'` is ON** — `npm run build` emits the static site to `out/`, which is what Cloudflare Pages deploys (build Node pinned to 22 via `.nvmrc`).
 
 ## The console component system (implemented design)
 
@@ -139,5 +134,5 @@ Two independent font setups — don't conflate them:
 - **Don't trust `npm run lint` as a gate** — it's pre-existingly broken/noisy (see Current state). Use `next build` to verify correctness.
 - **Two `params` shapes:** `[slug]` `params` is now a `Promise` — `await` it. The OG route's `url.searchParams` is a normal `Request` API and is unaffected.
 - **Browser-extension hydration warnings:** the `<body>` (`<Column as="body">` in `layout.tsx`) has `suppressHydrationWarning` because extensions (e.g. ColorZilla's `cz-shortcut-listen`) inject attributes pre-hydration. This is intentional; keep it.
-- **`PAGE_PASSWORD` env var** drives the protected-route gate (`.env.example`); deployments must supply it.
+- **No env vars required** — the site is a fully static export.
 - **Blog drafts:** posts in `src/app/blog/posts/` with `draft: true` are excluded from listing, sitemap, and static params (`dynamicParams = false` makes them hard 404s). Flip the flag to publish.

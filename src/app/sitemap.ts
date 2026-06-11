@@ -1,6 +1,9 @@
 import { getPosts } from "@/app/utils/utils";
 import { baseURL, routes as routesConfig } from "@/app/resources";
 
+// Required for output: "export".
+export const dynamic = "force-static";
+
 export default async function sitemap() {
   // (The old src/app/resources/posts lookup pointed at a directory that no
   // longer exists — removed.)

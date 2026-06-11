@@ -13,7 +13,7 @@ import styles from "./projects.module.scss";
 export async function generateMetadata() {
   const title = projects.title;
   const description = projects.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `https://${baseURL}/og/default.png`;
 
   return {
     title,
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
             headline: projects.title,
             description: projects.description,
             url: `https://${baseURL}/projects`,
-            image: `${baseURL}/og?title=${encodeURIComponent(projects.title)}`,
+            image: `https://${baseURL}/og/default.png`,
             author: {
               "@type": "Person",
               name: person.name,

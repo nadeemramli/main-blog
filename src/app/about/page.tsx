@@ -12,7 +12,7 @@ import styles from "./about.module.scss";
 export async function generateMetadata() {
   const title = about.title;
   const description = about.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `https://${baseURL}/og/default.png`;
 
   return {
     title,

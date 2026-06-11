@@ -9,7 +9,7 @@ import styles from "./resources.module.scss";
 export async function generateMetadata() {
   const title = resources.title;
   const description = resources.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `https://${baseURL}/og/default.png`;
 
   return {
     title,

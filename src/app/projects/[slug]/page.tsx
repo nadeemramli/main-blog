@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: ProjectsParams) {
   } = post.metadata;
   const ogImage = image
     ? `https://${baseURL}${image}`
-    : `https://${baseURL}/og?title=${title}`;
+    : `https://${baseURL}/og/default.png`;
 
   return {
     title,
@@ -109,7 +109,7 @@ export default async function Project({ params }: ProjectsParams) {
             description: post.metadata.summary,
             image: post.metadata.image
               ? `https://${baseURL}${post.metadata.image}`
-              : `https://${baseURL}/og?title=${post.metadata.title}`,
+              : `https://${baseURL}/og/default.png`,
             url: `https://${baseURL}/projects/${post.slug}`,
             author: {
               "@type": "Person",

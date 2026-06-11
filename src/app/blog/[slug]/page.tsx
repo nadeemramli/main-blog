@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { CustomMDX } from "@/components/mdx";
 import ScrollToHash from "@/components/ScrollToHash";
-import { Badge, MicroLcd } from "@/components/console";
+import { Badge, MicroLcd, Screen } from "@/components/console";
 import { getPosts } from "@/app/utils/utils";
 import { formatDate } from "@/app/utils/formatDate";
 import { baseURL } from "@/app/resources";
@@ -25,15 +25,29 @@ function readingTime(content: string) {
 // Only pre-rendered (non-draft) slugs exist — everything else is a hard 404.
 export const dynamicParams = false;
 
+// output: "export" refuses an empty params list, so when every post is a
+// draft we emit one sentinel page (an off device, noindex) instead of
+// exposing draft slugs.
+const SENTINEL = "no-transmissions";
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   // Drafts are not rendered anywhere.
-  return getPosts(["src", "app", "blog", "posts"])
+  const published = getPosts(["src", "app", "blog", "posts"])
     .filter((post) => !post.metadata.draft)
     .map((post) => ({ slug: post.slug }));
+  return published.length > 0 ? published : [{ slug: SENTINEL }];
 }
 
 export async function generateMetadata({ params }: BlogParams) {
   const { slug } = await params;
+
+  if (slug === SENTINEL) {
+    return {
+      title: "No transmissions yet",
+      robots: { index: false, follow: false },
+    };
+  }
+
   const post = getPosts(["src", "app", "blog", "posts"]).find(
     (post) => post.slug === slug && !post.metadata.draft,
   );
@@ -44,7 +58,7 @@ export async function generateMetadata({ params }: BlogParams) {
 
   const { title, publishedAt: publishedTime, summary: description } =
     post.metadata;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `https://${baseURL}/og/default.png`;
 
   return {
     title,
@@ -68,6 +82,17 @@ export async function generateMetadata({ params }: BlogParams) {
 
 export default async function BlogPost({ params }: BlogParams) {
   const { slug } = await params;
+
+  if (slug === SENTINEL) {
+    return (
+      <div className={styles.page}>
+        <Screen nodeId="NODE-PUB.00" status="off">
+          <div className={styles.sentinelReadout}>NO TRANSMISSIONS YET</div>
+        </Screen>
+      </div>
+    );
+  }
+
   const post = getPosts(["src", "app", "blog", "posts"]).find(
     (post) => post.slug === slug,
   );

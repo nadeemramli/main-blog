@@ -17,7 +17,7 @@ import styles from "./now.module.scss";
 export async function generateMetadata() {
   const title = "Now — Live Status";
   const description = now.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
+  const ogImage = `https://${baseURL}/og/default.png`;
 
   return {
     title,

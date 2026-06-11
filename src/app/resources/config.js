@@ -9,11 +9,9 @@ const routes = {
   "/blog": true,
 };
 
-// Enable password protection on selected routes
-// Set password in pages/api/authenticate.ts
-const protectedRoutes = {
-  "/projects/automate-design-handovers-with-a-figma-to-code-pipeline": true,
-};
+// Static export has no server auth. The old entry protected a slug that
+// never existed. For real gating, use Cloudflare Access on the path.
+const protectedRoutes = {};
 
 // Operator Console (design.md): light-only, emerald is the nearest enum to
 // mint #76D2B6, red is reserved for the status-indicator language.

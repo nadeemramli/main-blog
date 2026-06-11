@@ -29,39 +29,4 @@
   align-self: center;
 }
 
-.form {
-  display: flex;
-  gap: var(--console-space-base);
-}
 
-.input {
-  flex: 1;
-  min-width: 0;
-  background: var(--console-well);
-  border: none;
-  border-radius: var(--console-radius-control);
-  box-shadow: var(--console-shadow-inset);
-  padding: 10px 12px;
-  font-family: var(--console-font-mono);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  color: var(--console-text-primary);
-  outline: none;
-
-  &::placeholder {
-    color: var(--console-text-tertiary);
-  }
-
-  &:focus-visible {
-    outline: 1px solid var(--console-border);
-  }
-}
-
-.error {
-  font-family: var(--console-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--console-led-red);
-}
