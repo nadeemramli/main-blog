@@ -856,8 +856,8 @@ const consoleData = {
   // EQUITY layer readouts (design.md §5.10) — qualitative/factual values
   // only; never invented proficiency scores.
   equity: [
-    // TODO(nadeem): set the real paper count out of 13.
-    { label: "ACCA", value: "—/13 PAPERS" },
+    // Qualitative by design — the paper count stays private.
+    { label: "ACCA", value: "IN PROGRESS" },
     { label: "ORDER SERIES", value: null }, // null = computed from focus.gaugePercent
     { label: "FREEDOM FUND", value: "COMPOUNDING" },
     { label: "SIDE INCOME", value: "ACTIVE" },
