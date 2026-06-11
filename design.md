@@ -201,8 +201,8 @@ each end of the strip — the shell's one decorative detail (the pair reads as h
   icon-only inside the same track. No horizontal overflow at 360px.
 
 ### 5.8 Footer — the desk edge
-The `background-deep` zone opens with a 1px `border` hairline (a machined seam, not a bare
-color change); vertical padding per `section-gap`. One faceplate panel: max-width 980px,
+Seamless: the faceplate floats on the same continuous desk — no `background-deep` band,
+no seam (revised: the band read as a leak, not a zone). One faceplate panel: max-width 980px,
 28px radius, padding 34px 38px 0 (the fine-print row owns the bottom edge), and a tighter
 dual shadow tuned for the deep bg (`raised-deep`, ~5px/14px, white alpha ~0.5 — no halo).
 - **Top block** (flex space-between, wrap): left — "Follow the build" (~30px Inter 500 ink)
@@ -212,8 +212,8 @@ dual shadow tuned for the deep bg (`raised-deep`, ~5px/14px, white alpha ~0.5 �
   LinkedIn, X, Instagram, Threads, TikTok, Email). Icon keys are NOT circles.
 - **Bottom edge:** a full-width hairline seam inside the panel, then the baseplate row —
   silkscreen fine print left (mono 10px, 0.12em tracking, `text-tertiary`:
-  `© 2026 NADEEM RAMLI — BUILT ON ONCE UI — KUALA LUMPUR`) and the speaker-grille dot grid
-  (~64×22px) right — the shell's one decorative detail.
+  `© 2026 NADEEM RAMLI — KUALA LUMPUR`) and the speaker-grille dot grid (~64×22px) right —
+  the shell's one decorative detail.
 - **Mobile:** the top block stacks; the tray wraps; the fine print drops the location
   suffix below ~400px.
 

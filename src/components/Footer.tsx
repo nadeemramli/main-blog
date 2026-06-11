@@ -46,11 +46,7 @@ export const Footer = () => {
         </div>
         <div className={styles.baseRow}>
           <span className={styles.finePrint}>
-            © {currentYear} {person.name} —{" "}
-            {/* Usage of this template requires attribution — keep the Once UI link. */}
-            <a href="https://once-ui.com/templates/magic-portfolio">
-              Built on Once UI
-            </a>
+            © {currentYear} {person.name}
             <span className={styles.locationSuffix}> — Kuala Lumpur</span>
           </span>
           <div className={styles.grille} aria-hidden="true" />

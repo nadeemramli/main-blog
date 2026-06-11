@@ -1,5 +1,5 @@
-/* The desk edge (design.md §5.8): bg-deep band opens with a machined
-   hairline seam, not a bare color change. */
+/* The desk edge (design.md §5.8): seamless — the faceplate floats on the
+   same continuous desk, no band, no seam. */
 .footer {
   position: relative;
   z-index: 1;
@@ -7,9 +7,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background: var(--console-bg-deep);
-  border-top: 1px solid var(--console-border);
-  padding: var(--console-section-gap) 16px;
+  padding: 0 16px var(--console-section-gap);
   margin-top: var(--console-section-gap);
 }
 
