@@ -67,4 +67,7 @@
   --console-shadow-lcd-depth: inset 0 2px 12px rgba(0, 0, 0, 0.85);
   --console-shadow-hover-lift: 12px 12px 28px rgba(123, 119, 105, 0.5),
     -10px -10px 24px rgba(255, 255, 255, 0.8);
+  /* Tighter pair tuned for surfaces on the deep zone (footer faceplate). */
+  --console-shadow-raised-deep: 5px 5px 14px rgba(123, 119, 105, 0.4),
+    -5px -5px 14px rgba(255, 255, 255, 0.5);
 }

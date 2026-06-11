@@ -179,17 +179,39 @@ in-development, alerts); mint = healthy/online (live, ok, open); amber = standby
 (idle, prototype); none = off/archived.
 Idle pulse animation (2s, opacity 1 → 0.4) on sync/live states only.
 
-### 5.7 Header / Nav
-A slim raised panel strip, floating with 16px top offset. Left: `ASIA/KUALA_LUMPUR` as a
-micro-LCD chip (dark inset, mint mono). Center: nav items as keys in a recessed pill track —
-active item is a pressed key. Right: live clock micro-LCD (`00:43:25`, tabular nums, ticking)
-+ EN/BM rocker. This replaces the current Once UI floating nav one-to-one.
+### 5.7 Header / Nav — the instrument cluster
+A slim raised strip, width max-content, centered, sticky 16px. Panel bg, pill radius,
+padding 9px 12px, `raised-sm` (not full `raised` — no halo on a slim strip). Three modules
+in a 16px-gap flex row: [location MicroLcd] [key track] [clock MicroLcd].
+- **Key track:** a recessed well (`well` bg, pill radius, `inset` shadow) the nav keys
+  live inside.
+- **Keycaps:** text-only mono labels (HOME ABOUT NOW PROJECTS BLOG RESOURCES), 11px
+  tracked, `panel-high` bg, pill radius, 34px tall, 0 16px padding, 4px gaps, `raised-sm`.
+  Active route: pressed shadow + translateY(1px) + `panel` bg — a seated key. Hover does
+  nothing on the cap; press is the only movement. No icons on desktop.
+- **MicroLcd chips:** 40px tall to match the track exactly (one vertical rhythm), 3px
+  `lcd-bezel` ring, `lcd-bg` glass, 9px radius, mono ~11.5px mint with glow. The location
+  chip carries a 5px red sync dot pulsing at 1s (static under reduced motion); the clock
+  ticks live.
+- **Mobile (<768px):** location chip hides, clock stays, keycaps go icon-only inside the
+  same track. No horizontal overflow at 360px.
 
-### 5.8 Footer
-The `background-deep` zone — the desk edge. Contains the "Let's Build Together" shell:
-display-lg Inter headline (printed ink, not LCD), one mint key (Schedule a Call), social
-icon keys, and a silkscreen fine-print row in `label-sm`:
-`© 2026 NADEEM RAMLI — BUILT ON ONCE UI — KUALA LUMPUR`.
+### 5.8 Footer — the desk edge
+The `background-deep` zone opens with a 1px `border` hairline (a machined seam, not a bare
+color change); vertical padding per `section-gap`. One faceplate panel: max-width 980px,
+28px radius, padding 34px 38px 0 (the fine-print row owns the bottom edge), and a tighter
+dual shadow tuned for the deep bg (`raised-deep`, ~5px/14px, white alpha ~0.5 — no halo).
+- **Top block** (flex space-between, wrap): left — "Follow the build" (~30px Inter 500 ink)
+  over "Essays ship every Saturday. Everything else gets logged along the way."; right —
+  the mint READ THE ESSAYS key (40px) beside a recessed icon tray (`well`, 14px radius,
+  `inset`, 5px padding) holding seven square 40×40 icon keys at 11px radius (GitHub,
+  LinkedIn, X, Instagram, Threads, TikTok, Email). Icon keys are NOT circles.
+- **Bottom edge:** a full-width hairline seam inside the panel, then the baseplate row —
+  silkscreen fine print left (mono 10px, 0.12em tracking, `text-tertiary`:
+  `© 2026 NADEEM RAMLI — BUILT ON ONCE UI — KUALA LUMPUR`) and the speaker-grille dot grid
+  (~64×22px) right — the shell's one decorative detail.
+- **Mobile:** the top block stacks; the tray wraps; the fine print drops the location
+  suffix below ~400px.
 
 ### 5.9 Badge
 Mono `label-sm` in a recessed pill (`well` + `inset`). Status badges get an LED dot:

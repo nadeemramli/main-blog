@@ -1,4 +1,5 @@
-/* Slim raised panel strip, floating with a 16px top offset (design.md §5.7). */
+/* Instrument cluster (design.md §5.7): slim raised strip, width
+   max-content, three modules — location chip | key track | clock chip. */
 .header {
   position: sticky;
   top: 16px;
@@ -12,29 +13,17 @@
 .strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--console-gap);
-  width: 100%;
-  max-width: var(--console-page-max-width);
+  width: max-content;
+  max-width: 100%;
   background: var(--console-panel);
   border-radius: var(--console-radius-pill);
   box-shadow: var(--console-shadow-raised-sm);
-  padding: 8px 12px;
+  padding: 9px 12px;
 }
 
-.left,
-.right {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  min-width: 0;
-}
-
-.right {
-  justify-content: flex-end;
-}
-
-/* Nav keys sit in a recessed pill track; the active item is a pressed key. */
+/* The recessed key track. 3px padding + 34px caps = 40px — exactly the
+   chip height, one vertical rhythm. */
 .track {
   display: flex;
   align-items: center;
@@ -42,27 +31,85 @@
   background: var(--console-well);
   border-radius: var(--console-radius-pill);
   box-shadow: var(--console-shadow-inset);
-  padding: 4px;
+  padding: 3px;
 }
 
+/* Text-only mono keycaps; press is the only movement. */
 .navKey {
+  height: 34px;
+  padding: 0 16px;
   border-radius: var(--console-radius-pill);
-  padding: 8px 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+/* The active route is a seated key. */
+.navKeyActive {
+  background: var(--console-panel);
+}
+
+.navIcon {
+  display: none;
+}
+
+/* Micro-LCD chips: 40px, 3px bezel (set on the component), mint glow. */
+.lcdChip {
+  height: 40px;
+}
+
+/* The location chip's sync dot — 1s pulse, static under reduced motion. */
+.syncDot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--console-radius-pill);
+  background: var(--console-led-red);
+  box-shadow: 0 0 5px var(--console-led-red-glow);
+  flex-shrink: 0;
+  animation: syncPulse 1s ease-in-out infinite;
+}
+
+@keyframes syncPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .syncDot {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .left {
+  .location {
     display: none;
   }
 
-  /* Collapse to icon-only keys rather than wrapping. */
+  .strip {
+    gap: var(--console-space-base);
+    padding: 6px 8px;
+  }
+
+  .track {
+    gap: 2px;
+  }
+
+  /* Icon-only keycaps inside the same track (mobile only). */
   .navLabel {
     display: none;
   }
 
+  .navIcon {
+    display: block;
+  }
+
   .navKey {
-    width: 36px;
-    height: 36px;
+    width: 32px;
     padding: 0;
   }
 }

@@ -54,7 +54,7 @@ type NavItem = {
 };
 
 const NAV_ITEMS: NavItem[] = [
-  { href: "/", icon: "home", match: (p) => p === "/" },
+  { href: "/", icon: "home", label: "Home", match: (p) => p === "/" },
   {
     href: "/about",
     icon: "person",
@@ -88,11 +88,12 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.strip}>
-        <div className={styles.left}>
-          {display.location && (
-            <MicroLcd>{person.location}</MicroLcd>
-          )}
-        </div>
+        {display.location && (
+          <MicroLcd className={`${styles.lcdChip} ${styles.location}`}>
+            <span className={styles.syncDot} aria-hidden="true" />
+            {person.location}
+          </MicroLcd>
+        )}
         <nav className={styles.track} aria-label="Main">
           {NAV_ITEMS.filter((item) => routes[item.href]).map((item) => {
             const active = item.match(pathname);
@@ -102,23 +103,25 @@ export const Header = () => {
                 href={item.href}
                 pressed={active}
                 aria-current={active ? "page" : undefined}
-                className={styles.navKey}
+                className={
+                  active
+                    ? `${styles.navKey} ${styles.navKeyActive}`
+                    : styles.navKey
+                }
               >
-                <Icon name={item.icon} size="s" />
-                {item.label && (
-                  <span className={styles.navLabel}>{item.label}</span>
-                )}
+                <span className={styles.navIcon}>
+                  <Icon name={item.icon} size="s" />
+                </span>
+                <span className={styles.navLabel}>{item.label}</span>
               </Key>
             );
           })}
         </nav>
-        <div className={styles.right}>
-          {display.time && (
-            <MicroLcd>
-              <TimeDisplay timeZone={person.location} />
-            </MicroLcd>
-          )}
-        </div>
+        {display.time && (
+          <MicroLcd className={styles.lcdChip}>
+            <TimeDisplay timeZone={person.location} />
+          </MicroLcd>
+        )}
       </div>
     </header>
   );
