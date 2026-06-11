@@ -9,6 +9,11 @@
   padding: 4px;
   cursor: pointer;
   user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--console-mint);
+    outline-offset: 2px;
+  }
 }
 
 .cap {

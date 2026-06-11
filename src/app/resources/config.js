@@ -1,4 +1,4 @@
-const baseURL = "demo.magic-portfolio.com";
+const baseURL = "nadeemramli.com";
 
 const routes = {
   "/": true,
@@ -7,7 +7,6 @@ const routes = {
   "/resources": true,
   "/now": true,
   "/blog": true,
-  "/_lab": true, // TEMP — remove in Phase 5 (console component lab; excluded from sitemap)
 };
 
 // Enable password protection on selected routes
@@ -73,43 +72,4 @@ const display = {
   time: true,
 };
 
-const mailchimp = {
-  action: "https://url/subscribe/post?parameters",
-  effects: {
-    mask: {
-      cursor: false,
-      x: 100,
-      y: 0,
-      radius: 100,
-    },
-    gradient: {
-      display: false,
-      x: 100,
-      y: 50,
-      width: 100,
-      height: 100,
-      tilt: -45,
-      colorStart: "accent-background-strong",
-      colorEnd: "static-transparent",
-      opacity: 100,
-    },
-    dots: {
-      display: false,
-      size: 24,
-      color: "brand-on-background-weak",
-      opacity: 100,
-    },
-    lines: {
-      display: false,
-      color: "neutral-alpha-weak",
-      opacity: 100,
-    },
-    grid: {
-      display: false,
-      color: "neutral-alpha-weak",
-      opacity: 100,
-    },
-  },
-};
-
-export { routes, protectedRoutes, effects, style, display, mailchimp, baseURL };
+export { routes, protectedRoutes, effects, style, display, baseURL };

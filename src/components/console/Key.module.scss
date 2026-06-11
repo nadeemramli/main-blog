@@ -21,6 +21,11 @@
     box-shadow 120ms ease,
     transform 120ms ease;
 
+  &:focus-visible {
+    outline: 2px solid var(--console-mint);
+    outline-offset: 2px;
+  }
+
   /* The key physically depresses (design.md §5.5). */
   &:active {
     box-shadow: var(--console-shadow-pressed);

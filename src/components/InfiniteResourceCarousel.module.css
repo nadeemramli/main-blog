@@ -1,0 +1,62 @@
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Fade the edges so cards glide in/out instead of getting clipped hard. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  padding: 8px 0;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation-name: scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+/* Pause while the user is interacting, so links are easy to click. */
+.marquee:hover .track,
+.marquee:focus-within .track {
+  animation-play-state: paused;
+}
+
+.item {
+  flex: 0 0 auto;
+  /* Trailing gap baked into each item keeps spacing uniform across copies,
+     which is what makes the -33.333% loop seamless. */
+  margin-right: 24px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* One third of the track = exactly one copy of the resource set. */
+    transform: translate3d(-33.3333%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+}

@@ -13,12 +13,12 @@ import styles from "./AttributeConsole.module.scss";
 
 type LayerId = "meta" | "fundamental" | "strategic" | "tactical" | "equity";
 
-const LAYERS: { id: LayerId; label: string }[] = [
-  { id: "meta", label: "Meta" },
-  { id: "fundamental", label: "Fundamental" },
-  { id: "strategic", label: "Strategic" },
-  { id: "tactical", label: "Tactical" },
-  { id: "equity", label: "Equity" },
+const LAYERS: { id: LayerId; label: string; short: string }[] = [
+  { id: "meta", label: "Meta", short: "Meta" },
+  { id: "fundamental", label: "Fundamental", short: "Fund" },
+  { id: "strategic", label: "Strategic", short: "Strat" },
+  { id: "tactical", label: "Tactical", short: "Tact" },
+  { id: "equity", label: "Equity", short: "EQ" },
 ];
 
 const LAYER_INK: Record<
@@ -118,7 +118,10 @@ export default function AttributeConsole() {
               },
             }}
           >
-            {layer.label}
+            <span className={styles.labelFull}>{layer.label}</span>
+            <span className={styles.labelShort} aria-hidden="true">
+              {layer.short}
+            </span>
           </Key>
         ))}
       </div>

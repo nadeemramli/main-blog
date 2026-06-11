@@ -16,6 +16,7 @@ export interface SmartImageProps extends React.ComponentProps<typeof Flex> {
   unoptimized?: boolean;
   sizes?: string;
   priority?: boolean;
+  hideOnError?: boolean;
 }
 
 const SmartImage: React.FC<SmartImageProps> = ({
@@ -29,10 +30,17 @@ const SmartImage: React.FC<SmartImageProps> = ({
   unoptimized = false,
   priority,
   sizes = "100vw",
+  hideOnError = false,
   ...rest
 }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
+
+  // Reset the error state when the source changes (e.g. carousels swapping images).
+  useEffect(() => {
+    setHasError(false);
+  }, [src]);
 
   const handleClick = () => {
     if (enlarge) {
@@ -101,6 +109,12 @@ const SmartImage: React.FC<SmartImageProps> = ({
   const isVideo = src?.endsWith(".mp4");
   const isYouTube = isYouTubeVideo(src);
 
+  // When asked to hide on error, collapse the element entirely instead of
+  // reserving aspect-ratio space (used for text-first cards with optional images).
+  if (hasError && hideOnError) {
+    return null;
+  }
+
   return (
     <>
       <Flex
@@ -149,7 +163,34 @@ const SmartImage: React.FC<SmartImageProps> = ({
             }}
           />
         )}
-        {!isLoading && !isVideo && !isYouTube && (
+        {!isLoading && !isVideo && !isYouTube && hasError && (
+          <Flex
+            fillWidth
+            fillHeight
+            horizontal="center"
+            vertical="center"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(135deg, var(--neutral-background-medium), var(--neutral-background-strong))",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "2rem",
+                fontWeight: 700,
+                color: "var(--neutral-on-background-weak)",
+                opacity: 0.6,
+                userSelect: "none",
+              }}
+            >
+              {(alt || "").trim().charAt(0).toUpperCase() || "•"}
+            </span>
+          </Flex>
+        )}
+        {!isLoading && !isVideo && !isYouTube && !hasError && (
           <Image
             src={src}
             alt={alt}
@@ -157,6 +198,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
             sizes={sizes}
             unoptimized={unoptimized}
             fill
+            onError={() => setHasError(true)}
             style={{
               objectFit: objectFit,
             }}

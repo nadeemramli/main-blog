@@ -75,3 +75,19 @@
   line-height: 1.6;
   color: var(--console-text-secondary);
 }
+
+/* Abbreviated layer labels below 480px — the track never hides its own
+   controls (Phase 5 amendment 6). */
+.labelShort {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .labelFull {
+    display: none;
+  }
+
+  .labelShort {
+    display: inline;
+  }
+}

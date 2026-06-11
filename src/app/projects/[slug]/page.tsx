@@ -16,10 +16,13 @@ import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
 
 interface ProjectsParams {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
+
+// Only pre-rendered slugs exist — everything else is a hard 404.
+export const dynamicParams = false;
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "projects", "projects"]);
@@ -28,7 +31,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   }));
 }
 
-export function generateMetadata({ params: { slug } }: ProjectsParams) {
+export async function generateMetadata({ params }: ProjectsParams) {
+  const { slug } = await params;
   const post = getPosts(["src", "app", "projects", "projects"]).find(
     (post) => post.slug === slug
   );
@@ -75,9 +79,10 @@ export function generateMetadata({ params: { slug } }: ProjectsParams) {
   };
 }
 
-export default function Project({ params }: ProjectsParams) {
+export default async function Project({ params }: ProjectsParams) {
+  const { slug } = await params;
   const post = getPosts(["src", "app", "projects", "projects"]).find(
-    (post) => post.slug === params.slug
+    (post) => post.slug === slug
   );
 
   if (!post) {

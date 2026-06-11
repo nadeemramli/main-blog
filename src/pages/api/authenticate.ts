@@ -4,9 +4,11 @@ import * as cookie from "cookie";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const { password } = req.body;
-    const correctPassword = "password";
+    // Supplied by the deployment environment — never hardcoded.
+    const correctPassword = process.env.PAGE_PASSWORD;
 
-    if (password === correctPassword) {
+    // Fail closed: if the env var is unset, nothing unlocks.
+    if (correctPassword && password === correctPassword) {
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("authToken", "authenticated", {
