@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import { getPosts } from "@/app/utils/utils";
+import { Reveal } from "@/components/console";
 import { ProjectRack } from "@/components/projects/ProjectRack";
 import type { ProjectCardProps } from "@/components/ProjectCard";
 import { baseURL } from "@/app/resources";
@@ -95,7 +96,9 @@ export default function ProjectsPage() {
       <div className={styles.eyebrow}>SEC.01 — DEVICE RACK</div>
       <h1 className={styles.title}>{projects.title}</h1>
       <p className={styles.description}>{projects.description}</p>
-      <ProjectRack projects={rackProjects} />
+      <Reveal index={0}>
+        <ProjectRack projects={rackProjects} />
+      </Reveal>
     </div>
   );
 }

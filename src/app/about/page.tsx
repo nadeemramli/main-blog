@@ -1,5 +1,5 @@
 import { Icon } from "@/once-ui/components";
-import { Badge, Key, MicroLcd, Panel } from "@/components/console";
+import { Badge, Key, MicroLcd, Panel, Reveal } from "@/components/console";
 import SideProjectCard from "@/components/about/SideProjectCard";
 import HowIWorkSteps from "@/components/about/HowIWorkSteps";
 import ToolsStackGrid from "@/components/about/ToolsStackGrid";
@@ -107,14 +107,17 @@ export default function About() {
 
       {/* Introduction — printed manual prose. */}
       {about.intro.display && (
+        <Reveal index={0}>
         <section>
           <div className={styles.eyebrow}>SEC.01 — OPERATOR&apos;S MANUAL</div>
           <div className={styles.bio}>{about.intro.description}</div>
         </section>
+        </Reveal>
       )}
 
       {/* Work experience as a maintenance log (design.md §6.2). */}
       {about.work.display && (
+        <Reveal index={0}>
         <section id="work-experience">
           <div className={styles.eyebrow}>SEC.02 — MAINTENANCE LOG</div>
           <h2 className={styles.sectionTitle}>{about.work.title}</h2>
@@ -162,10 +165,12 @@ export default function About() {
             ))}
           </Panel>
         </section>
+        </Reveal>
       )}
 
       {/* Side projects as small devices. */}
       {about.sideProjects.display && (
+        <Reveal index={0}>
         <section id="side-projects">
           <div className={styles.eyebrow}>SEC.03 — SIDE PROJECTS</div>
           <h2 className={styles.sectionTitle}>{about.sideProjects.title}</h2>
@@ -175,10 +180,12 @@ export default function About() {
             ))}
           </div>
         </section>
+        </Reveal>
       )}
 
       {/* How I Work — numbered keys 01–05 (design.md §6.2). */}
       {about.howIWork.display && (
+        <Reveal index={0}>
         <section id="how-i-work">
           <div className={styles.eyebrow}>SEC.04 — OPERATING SEQUENCE</div>
           <h2 className={styles.sectionTitle}>{about.howIWork.title}</h2>
@@ -187,10 +194,12 @@ export default function About() {
             <HowIWorkSteps steps={about.howIWork.steps} />
           </Panel>
         </section>
+        </Reveal>
       )}
 
       {/* Tools & Stack — the switchboard. */}
       {about.toolsStack.display && (
+        <Reveal index={0}>
         <section id="tools-stack">
           <div className={styles.eyebrow}>SEC.05 — SWITCHBOARD</div>
           <h2 className={styles.sectionTitle}>{about.toolsStack.title}</h2>
@@ -199,6 +208,7 @@ export default function About() {
             <ToolsStackGrid categories={about.toolsStack.categories} />
           </Panel>
         </section>
+        </Reveal>
       )}
     </div>
   );

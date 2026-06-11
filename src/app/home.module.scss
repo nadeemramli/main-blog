@@ -20,55 +20,6 @@
   justify-content: center;
 }
 
-.operatorLabel {
-  color: var(--console-lcd-dim);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--console-space-base);
-}
-
-.readoutXl {
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 500;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.roleLine {
-  margin-top: var(--console-space-base);
-  color: var(--console-lcd-dim);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--console-space-base) var(--console-gap);
-  margin-top: var(--console-gap);
-  padding-top: var(--console-gap);
-  border-top: 1px solid var(--console-lcd-dim);
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.statLabel {
-  color: var(--console-lcd-dim);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-.statValue {
-  font-size: 14px;
-  font-weight: 500;
-}
-
 /* Reference card: the shipping week (design.md §6.1). */
 .reference {
   position: relative;

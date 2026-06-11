@@ -43,7 +43,12 @@ export default function SideProjectCard({
   const nodeId = `NODE-SIDE.${String(index + 1).padStart(2, "0")}`;
 
   return (
-    <Panel as="article" padding="none" className={styles.device}>
+    <Panel
+      as="article"
+      padding="none"
+      interactive={Boolean(project.link)}
+      className={styles.device}
+    >
       <Screen nodeId={nodeId} status={visuals.screen}>
         <div className={styles.idle}>
           <div className={styles.idleName}>{project.name}</div>

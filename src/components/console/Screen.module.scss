@@ -102,7 +102,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .live .dot {
+  .sync .dot {
     animation: none;
   }
 }

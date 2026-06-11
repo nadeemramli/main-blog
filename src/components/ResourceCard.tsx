@@ -19,7 +19,7 @@ export function ResourceCard({
   nodeId,
 }: ResourceCardProps) {
   return (
-    <Panel as="article" padding="none" className={styles.handheld}>
+    <Panel as="article" padding="none" interactive className={styles.handheld}>
       <Screen nodeId={nodeId} status="live">
         {imageSrc ? (
           <img src={imageSrc} alt={title} className={styles.glassImage} />

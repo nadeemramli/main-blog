@@ -6,6 +6,7 @@ import "@/styles/console-tokens.scss";
 import classNames from "classnames";
 
 import { Footer, Header, RouteGuard } from "@/components";
+import { DitherCanvasMount } from "@/components/console";
 import { baseURL, effects, style } from "@/app/resources";
 
 import localFont from "next/font/local";
@@ -112,6 +113,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           margin="0"
           padding="0"
         >
+          <DitherCanvasMount />
           <Background
             mask={{
               cursor: effects.mask.cursor,

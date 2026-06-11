@@ -10,3 +10,5 @@ export { Badge } from "./Badge";
 export { Rocker } from "./Rocker";
 export type { RockerSide } from "./Rocker";
 export { Gauge } from "./Gauge";
+export { Reveal } from "./Reveal";
+export { default as DitherCanvasMount } from "./DitherCanvasMount";

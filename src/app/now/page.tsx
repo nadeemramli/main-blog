@@ -1,4 +1,4 @@
-import { Gauge, Led, MicroLcd, Panel, Screen } from "@/components/console";
+import { Gauge, Led, MicroLcd, Panel, Reveal, Screen } from "@/components/console";
 import AttributeConsole from "@/components/now/AttributeConsole";
 import { baseURL } from "@/app/resources";
 import { now, consoleData } from "@/app/resources/content";
@@ -45,6 +45,7 @@ export default function NowPage() {
       </section>
 
       {/* Status shell: gauge mirrors the hero (one value, two instruments). */}
+      <Reveal index={0}>
       <section>
         <div className={styles.eyebrow}>SEC.01 — STATUS LOG</div>
         <Panel as="div" padding="lg">
@@ -79,12 +80,15 @@ export default function NowPage() {
           </div>
         </Panel>
       </section>
+      </Reveal>
 
       {/* Attribute Console (design.md §5.10). */}
+      <Reveal index={1}>
       <section>
         <div className={styles.eyebrow}>SEC.02 — ATTRIBUTE CONSOLE</div>
         <AttributeConsole />
       </section>
+      </Reveal>
     </div>
   );
 }

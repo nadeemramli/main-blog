@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import { Key, MicroLcd, Screen } from "@/components/console";
 import SkillRadarChart from "@/components/SkillRadarChart";
 import HierarchicalSkillTracker from "@/components/HierarchicalSkillTracker";
+import { useCountUp } from "@/components/hooks/useCountUp";
+import { usePrefersReducedMotion } from "@/components/hooks/usePrefersReducedMotion";
 import { now, consoleData } from "@/app/resources/content";
 
 import styles from "./AttributeConsole.module.scss";
@@ -29,13 +31,41 @@ const LAYER_INK: Record<
   tactical: now.tacticalLayer,
 };
 
+/* Equity readouts count up on mount (Phase 4 amendment 4). */
+function EquityLcd({ label, value }: { label: string; value: string }) {
+  const counted = useCountUp(value, true);
+  return <MicroLcd label={label}>{counted}</MicroLcd>;
+}
+
+const DIM_MS = 60;
+
 export default function AttributeConsole() {
   const [active, setActive] = useState<LayerId>("meta");
+  // `shown` lags `active` by one 60ms phosphor dim — LCDs don't crossfade
+  // (Phase 4 amendment 5). Reduced motion swaps instantly.
+  const [shown, setShown] = useState<LayerId>("meta");
+  const [dimming, setDimming] = useState(false);
+  const reduced = usePrefersReducedMotion();
   const tabRefs = useRef<(HTMLElement | null)[]>([]);
+  const dimTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const choose = (id: LayerId) => {
+    setActive(id);
+    if (dimTimer.current) clearTimeout(dimTimer.current);
+    if (reduced !== false) {
+      setShown(id);
+      return;
+    }
+    setDimming(true);
+    dimTimer.current = setTimeout(() => {
+      setShown(id);
+      setDimming(false);
+    }, DIM_MS);
+  };
 
   const select = (index: number) => {
     const wrapped = (index + LAYERS.length) % LAYERS.length;
-    setActive(LAYERS[wrapped].id);
+    choose(LAYERS[wrapped].id);
     tabRefs.current[wrapped]?.focus();
   };
 
@@ -60,7 +90,7 @@ export default function AttributeConsole() {
     }
   };
 
-  const ink = active !== "equity" ? LAYER_INK[active] : null;
+  const ink = shown !== "equity" ? LAYER_INK[shown] : null;
 
   return (
     <div className={styles.console}>
@@ -79,7 +109,7 @@ export default function AttributeConsole() {
             tabIndex={active === layer.id ? 0 : -1}
             pressed={active === layer.id}
             className={styles.tabKey}
-            onClick={() => setActive(layer.id)}
+            onClick={() => choose(layer.id)}
             onKeyDown={(event: React.KeyboardEvent) => onKeyDown(event, index)}
             // React 19: ref passes through Key's prop spread to the <button>.
             {...{
@@ -98,41 +128,44 @@ export default function AttributeConsole() {
           role="tabpanel"
           id="attr-panel"
           aria-labelledby={`attr-tab-${active}`}
+          className={dimming ? styles.dimming : undefined}
         >
-          {active === "meta" && (
+          {shown === "meta" && (
             <SkillRadarChart
               skills={now.metaLayer.skills}
               title={now.metaLayer.title}
               description="Current skill levels and development targets"
             />
           )}
-          {active === "fundamental" && (
+          {shown === "fundamental" && (
             <HierarchicalSkillTracker
               clusters={now.fundamentalLayer.clusters}
             />
           )}
-          {active === "strategic" && (
+          {shown === "strategic" && (
             <SkillRadarChart
               skills={now.strategicalLayer.skills}
               title={now.strategicalLayer.title}
               description="Current skill levels and development targets"
             />
           )}
-          {active === "tactical" && (
+          {shown === "tactical" && (
             <SkillRadarChart
               skills={now.tacticalLayer.skills}
               title={now.tacticalLayer.title}
               description="Current skill levels and development targets"
             />
           )}
-          {active === "equity" && (
+          {shown === "equity" && (
             <div className={styles.equityGrid}>
               {consoleData.equity.map((item) => (
                 <div key={item.label} className={styles.equityCell}>
-                  <MicroLcd label={item.label}>
-                    {item.value ??
-                      `${consoleData.focus.gaugePercent}% DRAFTED`}
-                  </MicroLcd>
+                  <EquityLcd
+                    label={item.label}
+                    value={
+                      item.value ?? `${consoleData.focus.gaugePercent}% DRAFTED`
+                    }
+                  />
                 </div>
               ))}
             </div>

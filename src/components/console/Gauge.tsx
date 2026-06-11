@@ -1,4 +1,10 @@
+"use client";
+
 import classNames from "classnames";
+import { useEffect, useRef, useState } from "react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
+
+import { usePrefersReducedMotion } from "@/components/hooks/usePrefersReducedMotion";
 
 import styles from "./Gauge.module.scss";
 
@@ -25,6 +31,10 @@ const polar = (radius: number, percent: number) => {
   };
 };
 
+/* Needle spring (design.md §7): rest → value on viewport entry, slight
+   overshoot, once per page load. Reduced motion renders the final angle. */
+const SPRING = { stiffness: 80, damping: 10, mass: 1 };
+
 export const Gauge = ({
   percent,
   label,
@@ -33,7 +43,28 @@ export const Gauge = ({
   ...rest
 }: GaugeProps) => {
   const clamped = Math.max(0, Math.min(100, percent));
-  const needleTip = polar(NEEDLE_R, clamped);
+  const wellRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wellRef, { once: true, amount: 0.4 });
+  const reduced = usePrefersReducedMotion();
+
+  const motionPercent = useMotionValue(0);
+  const sprung = useSpring(motionPercent, SPRING);
+  const [shown, setShown] = useState(0);
+
+  useEffect(() => sprung.on("change", (v) => setShown(v)), [sprung]);
+
+  useEffect(() => {
+    if (reduced === null || !inView) return;
+    if (reduced) {
+      sprung.jump(clamped);
+      setShown(clamped);
+      return;
+    }
+    motionPercent.set(clamped);
+  }, [inView, reduced, clamped, motionPercent, sprung]);
+
+  // Overshoot may briefly leave [0,100]; the dial tolerates ±5.
+  const needleTip = polar(NEEDLE_R, Math.max(-5, Math.min(105, shown)));
 
   return (
     <div
@@ -45,7 +76,7 @@ export const Gauge = ({
       className={classNames(styles.gauge, className)}
       {...rest}
     >
-      <div className={styles.well}>
+      <div ref={wellRef} className={styles.well}>
         <svg
           className={styles.dial}
           viewBox="0 0 200 104"

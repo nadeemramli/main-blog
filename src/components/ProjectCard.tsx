@@ -53,6 +53,7 @@ export const ProjectCard = ({
   return (
     <Panel
       as="article"
+      interactive
       className={classNames(
         styles.device,
         status === "archived" && styles.archived,

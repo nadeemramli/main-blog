@@ -1,5 +1,5 @@
 import { getPosts } from "@/app/utils/utils";
-import { Badge, Key, Panel, Screen } from "@/components/console";
+import { Badge, Key, Panel, Reveal, Screen } from "@/components/console";
 import { formatDate } from "@/app/utils/formatDate";
 import { baseURL } from "@/app/resources";
 import { blog } from "@/app/resources/content";
@@ -54,6 +54,7 @@ export default function BlogPage() {
       <p className={styles.description}>{blog.description}</p>
 
       {posts.length === 0 ? (
+        <Reveal index={0}>
         <div>
           <Screen nodeId="NODE-PUB.00" status="off" className={styles.emptyScreen}>
             <div className={styles.emptyReadout}>NO TRANSMISSIONS YET</div>
@@ -62,10 +63,12 @@ export default function BlogPage() {
             Long-form case studies and build logs land here.
           </p>
         </div>
+        </Reveal>
       ) : (
+        <Reveal index={0}>
         <div className={styles.grid}>
           {posts.map((post, index) => (
-            <Panel as="article" key={post.slug} className={styles.card}>
+            <Panel as="article" key={post.slug} interactive className={styles.card}>
               <Screen
                 nodeId={`NODE-PUB.${String(index + 1).padStart(2, "0")}`}
                 status="idle"
@@ -85,6 +88,7 @@ export default function BlogPage() {
             </Panel>
           ))}
         </div>
+        </Reveal>
       )}
     </div>
   );

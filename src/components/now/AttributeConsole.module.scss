@@ -27,6 +27,12 @@
   min-height: 320px;
 }
 
+/* 60ms phosphor dim on the outgoing layer (Phase 4 amendment 5). */
+.dimming {
+  opacity: 0.35;
+  transition: opacity 60ms linear;
+}
+
 /* EQUITY: MicroLcd readout grid — values, not scores. */
 .equityGrid {
   display: grid;

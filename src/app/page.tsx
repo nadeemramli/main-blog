@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
-import { Badge, Gauge, Key, Led, Panel, Screen } from "@/components/console";
-import TimeDisplay from "@/components/Header";
+import { Badge, Gauge, Key, Led, Panel, Reveal, Screen } from "@/components/console";
+import HeroScreen from "@/components/home/HeroScreen";
 import { ResourceCarousel } from "@/components/ResourceCarousel";
 import { getPosts } from "@/app/utils/utils";
 import { getHandheldResources } from "@/app/utils/resources";
@@ -60,25 +60,12 @@ export default function Home() {
                 value={consoleData.focus.value}
               />
             </div>
-            <Screen nodeId="NODE-NR.01" status="sync" scanlines>
-              <div className={styles.operatorLabel}>OPERATOR</div>
-              <div className={styles.readoutXl}>{person.name}</div>
-              <div className={styles.roleLine}>
-                GROWTH MARKETER · INDIE BUILDER · SYSTEMS THINKER
-              </div>
-              <div className={styles.statsGrid}>
-                {consoleData.stats.map((stat) => (
-                  <div key={stat.label} className={styles.stat}>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                    <span className={styles.statValue}>
-                      {stat.value ?? (
-                        <TimeDisplay timeZone={person.location} />
-                      )}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </Screen>
+            <HeroScreen
+              name={person.name}
+              roleLine="GROWTH MARKETER · INDIE BUILDER · SYSTEMS THINKER"
+              timeZone={person.location}
+              stats={consoleData.stats}
+            />
             <div className={styles.reference}>
               <div className={styles.refTitle}>Shipping Week</div>
               <div className={styles.week}>
@@ -103,6 +90,7 @@ export default function Home() {
       </section>
 
       {/* What I'm Working On Now — log module (design.md §6.1). */}
+      <Reveal index={0}>
       <section>
         <div className={styles.eyebrow}>SEC.01 — NOW LOG</div>
         <Panel as="div" className={styles.nowModule}>
@@ -124,9 +112,11 @@ export default function Home() {
           </Key>
         </Panel>
       </section>
+      </Reveal>
 
       {/* Featured project — large Screen, §6.4 treatment. */}
       {featured && (
+        <Reveal index={1}>
         <section>
           <div className={styles.eyebrow}>SEC.02 — FEATURED PROJECT</div>
           <Panel as="div" padding="lg" className={styles.featured}>
@@ -158,14 +148,17 @@ export default function Home() {
             </div>
           </Panel>
         </section>
+        </Reveal>
       )}
 
-      {/* Resources rail — handheld restyle lands in Phase 3.3. */}
+      {/* Resources rail. */}
       {routes["/resources"] && (
+        <Reveal index={2}>
         <section>
           <div className={styles.eyebrow}>SEC.03 — RESOURCES</div>
           <ResourceCarousel resources={getHandheldResources()} contained={true} />
         </section>
+        </Reveal>
       )}
     </div>
   );
