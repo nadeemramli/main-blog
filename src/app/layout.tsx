@@ -6,6 +6,7 @@ import "@/styles/console-tokens.scss";
 import classNames from "classnames";
 
 import { Footer, Header, RouteGuard } from "@/components";
+import { ChunkReloadGuard } from "@/components/ChunkReloadGuard";
 import { DitherCanvasMount } from "@/components/console";
 import { baseURL, effects, style } from "@/app/resources";
 
@@ -113,6 +114,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           margin="0"
           padding="0"
         >
+          <ChunkReloadGuard />
           <DitherCanvasMount />
           <Background
             mask={{
