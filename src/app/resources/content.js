@@ -553,6 +553,12 @@ const resources = {
       link: "https://build.nadeemramli.com"
     },
     {
+      title: "Projects",
+      description: "A collection of projects and experiments I've worked on.",
+      imageSrc: "/images/resources/projects.png",
+      link: "https://projects.nadeemramli.com"
+    },
+    {
       title: "Library of Mental Models",
       description: "A collection of mental models, distilled from the best books.",
       imageSrc: "/images/resources/mental-models.png",

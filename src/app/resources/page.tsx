@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/console";
-import { InfiniteResourceCarousel } from "@/components/InfiniteResourceCarousel";
+import { ResourceCarousel } from "@/components/ResourceCarousel";
 import { getHandheldResources } from "@/app/utils/resources";
 import { baseURL } from "@/app/resources";
 import { resources } from "@/app/resources/content";
@@ -42,7 +42,7 @@ export default function ResourcesPage() {
       <h1 className={styles.title}>{resources.title}</h1>
       <p className={styles.description}>{resources.description}</p>
       <Reveal index={0}>
-        <InfiniteResourceCarousel resources={getHandheldResources()} />
+        <ResourceCarousel resources={getHandheldResources()} />
       </Reveal>
     </div>
   );
