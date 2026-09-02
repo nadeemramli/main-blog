@@ -59,3 +59,12 @@
     transition: none;
   }
 }
+
+/* Phones and tablets never tilt, so no shell needs a 3D transform there.
+   A perspective() on every panel would promote each one to its own
+   compositing layer — GPU memory and scroll jank on mobile for nothing. */
+@media (hover: none), (max-width: 1024px) {
+  .panel {
+    transform: none;
+  }
+}

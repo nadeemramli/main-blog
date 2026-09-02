@@ -5,6 +5,7 @@ import { MotionConfig } from "framer-motion";
 import { PointerLight } from "@/components/motion/PointerLight";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { ScrollRail } from "@/components/console/ScrollRail";
+import { useMediaQuery } from "@/components/hooks/useMediaQuery";
 import { useEffect } from "react";
 
 interface ProvidersProps {
@@ -17,6 +18,12 @@ interface ProvidersProps {
  *  transitions (e.g. the lamp rocker cap) that would otherwise play on
  *  first paint. */
 export function Providers({ children }: ProvidersProps) {
+  // The rail is desktop hardware: on phones it must not even run its
+  // scroll spring and observers (the CSS only hid it).
+  const railEnabled = useMediaQuery(
+    "(min-width: 1200px) and (hover: hover) and (pointer: fine)",
+  );
+
   useEffect(() => {
     document.documentElement.setAttribute("data-hydrated", "");
   }, []);
@@ -25,7 +32,7 @@ export function Providers({ children }: ProvidersProps) {
     <MotionConfig reducedMotion="user">
       <SmoothScroll>
         <PointerLight />
-        <ScrollRail />
+        {railEnabled && <ScrollRail />}
         {children}
       </SmoothScroll>
     </MotionConfig>

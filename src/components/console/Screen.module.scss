@@ -19,9 +19,12 @@
   text-shadow: 0 0 8px var(--console-lcd-glow);
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
-  /* Keeps the rounded clip crisp when a parent shell tilts in 3D. */
-  backface-visibility: hidden;
-  transform: translateZ(0);
+  /* Keeps the rounded clip crisp when a parent shell tilts in 3D —
+     desktop only; on touch devices no shell tilts, so no layer is spent. */
+  @media (hover: hover) and (min-width: 1025px) {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
 
   /* The glass material (design.md §5.2 v2). Two overlay layers above the
      content: the glass reacts to the lamp; the content never does. */

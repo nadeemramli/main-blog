@@ -206,12 +206,14 @@ export default function DitherCanvas() {
     let raf = 0;
     let last = 0;
     let running = true;
+    // ~30fps on desktop; ~20fps on touch devices, where the GPU is also
+    // scrolling the page and the lamp never runs.
+    const frameMs = window.matchMedia("(pointer: coarse)").matches ? 50 : 33;
 
     const loop = (now: number) => {
       if (!running) return;
       raf = requestAnimationFrame(loop);
-      // ~30fps cap.
-      if (now - last < 33) return;
+      if (now - last < frameMs) return;
       last = now;
       lamp += (lampGoal - lamp) * 0.1;
       render(now);

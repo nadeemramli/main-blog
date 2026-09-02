@@ -17,6 +17,8 @@
   text-decoration: none;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     box-shadow var(--console-dur-press) ease,
     transform var(--console-dur-press) ease;

@@ -184,6 +184,11 @@ information is printed on the body.** When deciding how to render any element, a
   32×36 with the clock showing HH:MM only; footer icon keys 36px so all seven sit in one row.
   Manual-page sidebars stop sticking in single column. The dock shows the printed outline in a
   150px landscape well; the rail, lamp, tilt and 3D unit never load.
+- **Mobile scroll budget (v2):** nothing may be promoted to a compositing layer for an effect a
+  phone never shows. Shells drop their `perspective()` transform and screens their `translateZ`
+  below 1025px / without hover; the condensed header is an opaque faceplate on coarse pointers
+  (no `backdrop-filter`); the rail component does not mount at all off-desktop; the desk grain
+  runs at ~20fps on touch. Keys carry `touch-action: manipulation` and no tap highlight.
 
 ## 5. Component Library
 
@@ -451,8 +456,10 @@ as `CASE STUDY` and `MANUAL`.
 - **Hover:** shells lift (`hover-lift`) and device cards tilt, keys depress on press, LCD *content*
   never animates on hover — only the glass layer (specular) does; screens respond to data, not
   cursors.
-- **Smooth scroll (v2):** Lenis (`SmoothScroll` in `Providers`, `lerp 0.1`) smooths the wheel only —
-  touch stays native (`syncTouch: false`), so iOS keeps its own physics. It rides the shared
+- **Smooth scroll (v2):** Lenis (`SmoothScroll` in `Providers`, `lerp 0.1`) smooths the wheel on
+  fine pointers and, since the mobile pass, **syncs touch on coarse pointers** (`syncTouch`,
+  lerp 0.09, inertia exponent 1.7): a flick decays on the same eased curve as the wheel instead of
+  the browser's stepped momentum. The mode is decided once after hydration. It rides the shared
   ticker, is never instantiated before hydration or under reduced motion (native scroll, nothing
   mounted), resyncs its target on every route change so momentum never carries into the next page,
   and intercepts `a[href^="#"]` with a −96px header offset. `ScrollToHash` and the table of contents

@@ -177,11 +177,15 @@
   box-shadow: var(--console-shadow-raised);
 }
 
+/* Glass is a desktop material: a fixed backdrop-filter repaints every
+   frame while a phone scrolls. Coarse pointers get the opaque faceplate. */
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  @media (hover: hover) and (pointer: fine) {
   [data-scrolled] .strip {
     background: var(--console-panel-glass);
     -webkit-backdrop-filter: blur(14px) saturate(1.15);
     backdrop-filter: blur(14px) saturate(1.15);
+  }
   }
 }
 
