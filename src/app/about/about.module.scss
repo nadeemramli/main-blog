@@ -259,3 +259,11 @@
   color: var(--console-text-tertiary);
   opacity: 0.8;
 }
+
+/* Below-fold shells skip layout/paint until near the viewport (design.md
+   §9 performance floor). On the inner shell, never on a Reveal wrapper —
+   the observer must still see the wrapper. */
+.logShell {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

@@ -1,5 +1,5 @@
 ---
-version: "nadeemramli-console-2026-06-11"
+version: "nadeemramli-console-v2-2026-09-03"
 name: "Operator Console — nadeemramli.com"
 description: "A full-site design system adapting the Atmospheric Data Console aesthetic (warm neumorphic hardware, LCD readouts, instrument-panel hierarchy) to a personal portfolio for a growth marketer / product developer. The site is framed as the operator's control panel: every page is a device, every metric is a readout, every status is an indicator light. Day mode by default; a Night token set is switched by the header lamp. Reskin target: existing Once UI / Next.js codebase."
 mode: "day + night (lamp switch)"
@@ -383,7 +383,7 @@ metrics get the LCD chip treatment — numbers glow, context is printed. Images 
 fade up on a CSS `view()` timeline (static where unsupported). Sections opt into the rack rail
 as `CASE STUDY` and `MANUAL`.
 
-## 7. Motion & Effects (Full budget — locked)
+## 7. Motion & Effects (Full budget — locked; v2 "The Lit Desk" additions marked)
 
 - **Foundation (v2):** durations, eases, stagger steps, depth (perspective, tilt cap, reveal
   hinge) and the z scale are tokens in `console-tokens.scss` — components never carry motion

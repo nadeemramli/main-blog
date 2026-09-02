@@ -251,3 +251,34 @@
     font-size: 10px;
   }
 }
+
+/* 360px budget with the lamp aboard: 6 × 28px caps in a 1px-gap track,
+   the clock chip, and the D/N rocker — no horizontal overflow. */
+@media (max-width: 768px) {
+  .strip {
+    gap: 6px;
+    padding: 5px 6px;
+    flex-wrap: nowrap;
+  }
+
+  .track {
+    gap: 1px;
+  }
+
+  .navKey {
+    width: 28px;
+    height: 32px;
+  }
+
+  .strip .lcdChip {
+    height: 38px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .lamp > span:nth-child(n + 2) {
+    padding: 0 6px;
+    height: 32px;
+    line-height: 32px;
+  }
+}

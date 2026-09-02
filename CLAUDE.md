@@ -8,7 +8,7 @@ Visual design system is specified in design.md — it overrides any styling conv
 
 Personal portfolio site for **Nadeem Ramli** (Growth Marketer / Indie Builder / Systems Thinker), forked from the Once UI **Magic Portfolio** template (`@once-ui-system/magic-portfolio`, package name still in `package.json`). It is a Next.js **App Router** site that renders mostly static, content-driven pages. There is no backend/database and no test suite.
 
-> **Read before doing significant work:** **`design.md`** — the locked "Operator Console" design system. As of June 2026 it is **fully implemented** (branch `redesign/operator-console`, phase-gated commits). It remains the source of truth for any restyle; it is updated in the same commit whenever a design decision changes.
+> **Read before doing significant work:** **`design.md`** — the locked "Operator Console" design system. As of June 2026 it is **fully implemented** (branch `redesign/operator-console`, phase-gated commits); as of September 2026 the **v2 "Lit Desk" layer** is implemented on top (phases 6.1–6.9: light-vector shadows + pointer lamp, tilt, glass, Lenis, scroll choreography + rack rail, condensed header + magnetic keys, night mode, the 3D reference unit, the case-study console). It remains the source of truth for any restyle; it is updated in the same commit whenever a design decision changes.
 
 ## Current state (June 2026)
 
