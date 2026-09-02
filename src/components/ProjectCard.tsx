@@ -24,14 +24,14 @@ export interface ProjectCardProps {
 }
 
 /* Status canon on the rack (design.md §6.4 + §5.6). */
-const SCREEN_STATUS: Record<ProjectStatus, ScreenStatus> = {
+export const SCREEN_STATUS: Record<ProjectStatus, ScreenStatus> = {
   live: "live",
   "in-development": "sync",
   prototype: "idle",
   archived: "off",
 };
 
-const BADGE: Record<ProjectStatus, { led?: LedColor; label: string }> = {
+export const BADGE: Record<ProjectStatus, { led?: LedColor; label: string }> = {
   live: { led: "mint", label: "Live" },
   "in-development": { led: "red", label: "In Development" },
   prototype: { led: "amber", label: "Prototype" },

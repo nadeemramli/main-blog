@@ -61,7 +61,7 @@ Adding a route means flipping it on in `config.js` `routes` AND creating the App
 The site is a pure App Router static export — there is no Pages Router and no API routes (removed with the auth machinery; see below).
 
 ### MDX-driven projects
-Project detail pages are MDX files in `src/app/projects/projects/*.mdx`, rendered by `src/app/projects/[slug]/page.tsx`.
+Project detail pages are MDX files in `src/app/projects/projects/*.mdx`, rendered by `src/app/projects/[slug]/page.tsx` as the **case-study console** (design.md §6.6): hero Screen with the rack's node id (newest-first order, shared with `/projects`), then a mono sidebar (status/stack/team/link/outcome `MicroLcd` chips from `metrics:` frontmatter) beside 68ch prose. `SCREEN_STATUS`/`BADGE` are exported from `ProjectCard.tsx` so both views agree.
 - `src/app/utils/utils.ts` `getPosts([...pathSegments])` reads a directory of `.mdx`, parses frontmatter with `gray-matter`, returns `{ metadata, slug, content }`. The `Metadata` type there defines supported frontmatter: `title`, `publishedAt`, `summary`, `image`, `images`, `tag`, `team`, `link`.
 - `generateStaticParams` enumerates slugs; `params` is a **Promise** (Next 15+) — `await` it.
 - MDX renders via `src/components/mdx.tsx` (`CustomMDX`), which maps HTML elements to Once UI components, auto-slugifies headings into anchored `HeadingLink`s, routes internal/hash/external links, and renders code via `once-ui/modules/code/CodeBlock`.

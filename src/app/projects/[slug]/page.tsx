@@ -1,19 +1,19 @@
+import fs from "fs";
+import path from "path";
+
+import classNames from "classnames";
 import { notFound } from "next/navigation";
-import { CustomMDX } from "@/components/mdx";
-import { getPosts } from "@/app/utils/utils";
-import {
-  AvatarGroup,
-  Button,
-  Column,
-  Flex,
-  Heading,
-  SmartImage,
-  Text,
-} from "@/once-ui/components";
+
 import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
+import { getPosts } from "@/app/utils/utils";
+import { Badge, Key, MicroLcd, Panel, Reveal, Screen } from "@/components/console";
+import { CustomMDX } from "@/components/mdx";
+import { BADGE, SCREEN_STATUS } from "@/components/ProjectCard";
 import ScrollToHash from "@/components/ScrollToHash";
+
+import styles from "./project.module.scss";
 
 interface ProjectsParams {
   params: Promise<{
@@ -24,18 +24,28 @@ interface ProjectsParams {
 // Only pre-rendered slugs exist — everything else is a hard 404.
 export const dynamicParams = false;
 
+/** The rack order (newest first) — node ids must match /projects. */
+function getRack() {
+  return getPosts(["src", "app", "projects", "projects"]).sort(
+    (a, b) =>
+      new Date(b.metadata.publishedAt).getTime() -
+      new Date(a.metadata.publishedAt).getTime(),
+  );
+}
+
+// Screenshots that don't exist on disk never reach the glass (design.md
+// §6.4 screen-saver rule) — the idle state renders instead.
+const onDisk = (image: string) =>
+  image.startsWith("/") &&
+  fs.existsSync(path.join(process.cwd(), "public", image));
+
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = getPosts(["src", "app", "projects", "projects"]);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return getRack().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectsParams) {
   const { slug } = await params;
-  const post = getPosts(["src", "app", "projects", "projects"]).find(
-    (post) => post.slug === slug
-  );
+  const post = getRack().find((post) => post.slug === slug);
 
   if (!post) {
     return;
@@ -45,9 +55,7 @@ export async function generateMetadata({ params }: ProjectsParams) {
     title,
     publishedAt: publishedTime,
     summary: description,
-    images,
     image,
-    team,
   } = post.metadata;
   const ogImage = image
     ? `https://${baseURL}${image}`
@@ -56,8 +64,6 @@ export async function generateMetadata({ params }: ProjectsParams) {
   return {
     title,
     description,
-    images,
-    team,
     openGraph: {
       title,
       description,
@@ -79,23 +85,34 @@ export async function generateMetadata({ params }: ProjectsParams) {
   };
 }
 
+/* The case-study console (design.md §6.6): the project's own device shell
+   (same node id as its rack slot), then the manual page — mono metadata
+   sidebar with LCD outcome chips, Inter prose at 68ch. */
 export default async function Project({ params }: ProjectsParams) {
   const { slug } = await params;
-  const post = getPosts(["src", "app", "projects", "projects"]).find(
-    (post) => post.slug === slug
-  );
+  const rack = getRack();
+  const index = rack.findIndex((post) => post.slug === slug);
+  const post = rack[index];
 
   if (!post) {
     notFound();
   }
 
-  const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
-    })) || [];
+  const nodeId = `NODE-PRJ.${String(index + 1).padStart(2, "0")}`;
+  const status = post.metadata.status;
+  const badge = BADGE[status];
+  const image = post.metadata.images.find(onDisk);
+  const stack =
+    post.metadata.tags && post.metadata.tags.length > 0
+      ? post.metadata.tags
+      : typeof post.metadata.tag === "string" && post.metadata.tag
+        ? [post.metadata.tag]
+        : [];
+  const link = post.metadata.link;
 
   return (
-    <Column as="section" maxWidth="m" horizontal="center" gap="l">
+    <div className={styles.page}>
+      <ScrollToHash />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -118,39 +135,113 @@ export default async function Project({ params }: ProjectsParams) {
           }),
         }}
       />
-      <Column maxWidth="xs" gap="16">
-        <Button
-          href="/projects"
-          variant="tertiary"
-          weight="default"
-          size="s"
-          prefixIcon="chevronLeft"
-        >
-          Projects
-        </Button>
-        <Heading variant="display-strong-s">{post.metadata.title}</Heading>
-      </Column>
-      {post.metadata.images.length > 0 && (
-        <SmartImage
-          priority
-          aspectRatio="16 / 9"
-          radius="m"
-          alt="image"
-          src={post.metadata.images[0]}
-        />
-      )}
-      <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-        <Flex gap="12" marginBottom="24" vertical="center">
-          {post.metadata.team && (
-            <AvatarGroup reverse avatars={avatars} size="m" />
-          )}
-          <Text variant="body-default-s" onBackground="neutral-weak">
-            {formatDate(post.metadata.publishedAt)}
-          </Text>
-        </Flex>
-        <CustomMDX source={post.content} />
-      </Column>
-      <ScrollToHash />
-    </Column>
+
+      <div className={styles.head}>
+        <div className={styles.eyebrow}>{nodeId} — CASE STUDY</div>
+        <h1 className={styles.title}>{post.metadata.title}</h1>
+        <Key href="/projects" className={styles.backKey}>
+          ← Device Rack
+        </Key>
+      </div>
+
+      {/* The project's device (design.md §6.4 screen-saver rule). */}
+      <Reveal>
+        <section data-rail="CASE STUDY">
+          <Panel
+            as="div"
+            padding="lg"
+            className={classNames(styles.hero, status === "archived" && styles.archived)}
+          >
+            <Screen nodeId={nodeId} status={SCREEN_STATUS[status]}>
+              {image ? (
+                <img
+                  src={image}
+                  alt={post.metadata.title}
+                  className={styles.glassImage}
+                  decoding="async"
+                />
+              ) : (
+                <div className={styles.idle}>
+                  <div className={styles.idleName}>{post.metadata.title}</div>
+                  {post.metadata.metric && (
+                    <div className={styles.idleMetric}>{post.metadata.metric}</div>
+                  )}
+                </div>
+              )}
+            </Screen>
+          </Panel>
+        </section>
+      </Reveal>
+
+      {/* The manual page (design.md §6.6). */}
+      <Reveal>
+        <section data-rail="MANUAL" className={styles.layout}>
+          <aside className={styles.sidebar}>
+            <div className={styles.sideGroup}>
+              <span className={styles.sideLabel}>Published</span>
+              <span className={styles.sideValue}>
+                {formatDate(post.metadata.publishedAt)}
+              </span>
+            </div>
+            <div className={styles.sideGroup}>
+              <span className={styles.sideLabel}>Status</span>
+              <div className={styles.sideTags}>
+                <Badge led={badge.led}>{badge.label}</Badge>
+              </div>
+            </div>
+            {stack.length > 0 && (
+              <div className={styles.sideGroup}>
+                <span className={styles.sideLabel}>Stack</span>
+                <div className={styles.sideTags}>
+                  {stack.map((item) => (
+                    <Badge key={item}>{item}</Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+            {post.metadata.team && post.metadata.team.length > 0 && (
+              <div className={styles.sideGroup}>
+                <span className={styles.sideLabel}>Team</span>
+                <ul className={styles.teamList}>
+                  {post.metadata.team.map((member) => (
+                    <li key={member.name} className={styles.sideValue}>
+                      {member.name}
+                      {member.role && (
+                        <span className={styles.teamRole}> · {member.role}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {link && (
+              <div className={styles.sideGroup}>
+                <span className={styles.sideLabel}>Link</span>
+                <div className={styles.sideTags}>
+                  <Key href={link} target="_blank" rel="noopener noreferrer">
+                    Visit →
+                  </Key>
+                </div>
+              </div>
+            )}
+            {post.metadata.metrics && post.metadata.metrics.length > 0 && (
+              <div className={styles.sideGroup}>
+                <span className={styles.sideLabel}>Outcomes</span>
+                <div className={styles.sideMetrics}>
+                  {post.metadata.metrics.map((metric) => (
+                    <MicroLcd key={metric.label} label={metric.label}>
+                      {metric.value}
+                    </MicroLcd>
+                  ))}
+                </div>
+              </div>
+            )}
+          </aside>
+          <article className={styles.prose}>
+            <CustomMDX source={post.content} />
+          </article>
+        </section>
+      </Reveal>
+    </div>
   );
 }

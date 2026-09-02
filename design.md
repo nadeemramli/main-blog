@@ -371,10 +371,17 @@ Horizontal rail (keep the existing carousel interaction) of smaller palm-sized d
 mini shell, mini Screen showing the resource preview, printed name + one-liner, `VISIT SITE`
 key. Arrow controls are round keys with press behavior. Each handheld ~320px wide.
 
-### 6.6 Case Study Template
-Manual-page layout: mono metadata sidebar (client, role, stack, dates, outcome metrics as
-small LCD chips) + Inter prose column at body-lg, max 68ch. Result metrics get the LCD chip
-treatment — numbers glow, context is printed.
+### 6.6 Case Study Template — the case-study console (built, v2)
+Head: eyebrow `NODE-PRJ.NN — CASE STUDY` (the same node id as the project's rack slot: newest
+first, so the rack and the manual agree), display-lg title, a `← DEVICE RACK` key. Then two
+shells in `Reveal`s: **the project's own device** — a Panel holding one Screen with the first
+on-disk screenshot at `brightness(.9)`, or the §6.4 idle state (name + metric) when there is
+none; archived projects dim the whole shell — and **the manual page**: a `220px | 1fr` grid, mono
+sticky sidebar (Published, Status badge, Stack badges, Team names · roles, a Visit key, Outcomes
+as MicroLcd chips from `metrics:` frontmatter) beside Inter prose at body-lg, max 68ch. Result
+metrics get the LCD chip treatment — numbers glow, context is printed. Images inside the prose
+fade up on a CSS `view()` timeline (static where unsupported). Sections opt into the rack rail
+as `CASE STUDY` and `MANUAL`.
 
 ## 7. Motion & Effects (Full budget — locked)
 
