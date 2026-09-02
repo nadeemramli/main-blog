@@ -194,6 +194,11 @@ Buttons are physical keys: `panel-high` bg, 12px radius, `raised-sm` shadow, mon
 text. On press: swap to `pressed` shadow + translateY(1px) — the key physically depresses.
 Primary CTA variant: mint fill, `accent-mint-ink` label, same press behavior. One mint key
 per page. Icon-only keys are square, 40×40.
+**Magnetic (v2):** keys never lift on hover. Under a fine pointer a free-standing cap is magnetic: it
+drifts up to 6px toward the cursor (`--mag-x/--mag-y`, written by `PointerLight` for the one hovered
+`[data-magnetic]` cap) and returns on leave. Press remains the only vertical movement a key makes on
+its own. Track-seated caps (the nav) are not magnetic. Decorative caps (`as="span"`, e.g. the tool
+chips) are real keys in every respect except semantics.
 
 ### 5.6 LED Indicator (`<Led>`)
 6px dot + mono label. Canonical semantics (locked): red = activity/attention (sync, locked,
@@ -213,8 +218,15 @@ each end of the strip — the shell's one decorative detail (the pair reads as h
 - **Keycaps:** text-only mono labels (HOME ABOUT NOW PROJECTS BLOG RESOURCES), 11px
   tracked, `panel-high` bg, **8px radius — square machined caps**, 34px tall, 0 16px
   padding, 4px gaps, `raised-sm`. Active route: pressed shadow + translateY(1px) + `panel`
-  bg — a seated key. Hover does nothing on the cap; press is the only movement. No icons
-  on desktop.
+  bg — a seated key, and it carries the **carriage**: a 2px mint slot near the bottom of the cap
+  (`0 0 6px` mint glow) that slides to the newly seated key on route change (framer `layoutId`,
+  spring 500/40; instant under reduced motion). The carriage is an indicator strip, not a mint key.
+  Nav caps are not magnetic; press is the only movement. No icons on desktop.
+- **Condensed state (v2):** past 120px of scroll (`data-scrolled`, hysteresis: off again below
+  72px) the strip condenses over 220ms — padding 5px 10px, caps 30px, chips 36px, `raised` shadow —
+  and its faceplate turns to glass: `panel-glass` (78% panel) with `backdrop-filter: blur(14px)
+  saturate(1.15)`, so the desk grain shows through. Plain condensed panel where backdrop-filter is
+  unsupported.
 - **MicroLcd chips:** 40px tall to match the track exactly, 3px `lcd-bezel` ring, `lcd-bg`
   glass, glass squared to 8px to match the caps, mono ~11.5px mint with glow. The location
   chip carries a 5px red sync dot pulsing at 1s (static under reduced motion); the clock

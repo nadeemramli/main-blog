@@ -116,8 +116,38 @@ export function PointerLight() {
       html.dataset.lighting = "live";
     };
 
+    // Magnetic caps (design.md §5.5 v2): the hovered [data-magnetic] key
+    // drifts up to MAG px toward the pointer; cleared on leave. One element
+    // at a time, so this is a single cheap write per move.
+    const MAG = 6;
+    let magEl: HTMLElement | null = null;
+    const clearMag = () => {
+      if (!magEl) return;
+      magEl.style.removeProperty("--mag-x");
+      magEl.style.removeProperty("--mag-y");
+      magEl = null;
+    };
+    const magnet = (e: PointerEvent) => {
+      const target = (e.target as Element | null)?.closest?.(
+        "[data-magnetic]",
+      ) as HTMLElement | null;
+      if (target !== magEl) {
+        clearMag();
+        magEl = target;
+      }
+      if (!magEl) return;
+      const r = magEl.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      const mx = clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2), -1, 1);
+      const my = clamp((e.clientY - (r.top + r.height / 2)) / (r.height / 2), -1, 1);
+      magEl.style.setProperty("--mag-x", `${(mx * MAG).toFixed(1)}px`);
+      magEl.style.setProperty("--mag-y", `${(my * MAG).toFixed(1)}px`);
+    };
+
     const onMove = (e: PointerEvent) => {
-      if (!wide || e.pointerType !== "mouse") return;
+      if (e.pointerType !== "mouse") return;
+      magnet(e);
+      if (!wide) return;
       tx = (e.clientX / window.innerWidth) * 2 - 1;
       ty = (e.clientY / window.innerHeight) * 2 - 1;
       active = true;
@@ -126,6 +156,7 @@ export function PointerLight() {
     };
 
     const onLeave = () => {
+      clearMag();
       if (!active) return;
       active = false;
       pointer.set(tx, ty, false);
@@ -148,6 +179,7 @@ export function PointerLight() {
       window.removeEventListener("blur", onLeave);
       window.removeEventListener("resize", onResize);
       unsub?.();
+      clearMag();
       clear();
       pointer.set(0, 0, false);
     };

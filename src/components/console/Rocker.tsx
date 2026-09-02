@@ -13,6 +13,8 @@ interface RockerProps {
   onChange: (side: RockerSide) => void;
   /** Accessible name for the switch, e.g. "Filter projects". */
   ariaLabel?: string;
+  /** "sm" fits the 40px header rhythm (the lamp switch). */
+  size?: "default" | "sm";
   className?: string;
 }
 
@@ -22,6 +24,7 @@ export const Rocker = ({
   value,
   onChange,
   ariaLabel,
+  size = "default",
   className,
 }: RockerProps) => {
   return (
@@ -30,7 +33,7 @@ export const Rocker = ({
       role="switch"
       aria-checked={value === "b"}
       aria-label={ariaLabel}
-      className={classNames(styles.rocker, className)}
+      className={classNames(styles.rocker, size === "sm" && styles.sm, className)}
       onClick={() => onChange(value === "a" ? "b" : "a")}
     >
       <span

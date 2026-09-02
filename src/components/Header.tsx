@@ -1,10 +1,12 @@
 "use client";
 
+import { LayoutGroup, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Icon } from "@/once-ui/components";
 import { Key, MicroLcd } from "@/components/console";
+import { useScrolled } from "@/components/hooks/useScrolled";
 import styles from "@/components/Header.module.scss";
 
 import { routes, display } from "@/app/resources";
@@ -82,11 +84,16 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+/* The instrument cluster (design.md §5.7 v2). Past 120px of scroll the
+   strip condenses into a translucent glass faceplate over the desk grain;
+   the active key carries a mint slot (the carriage) that slides between
+   caps on route change. Track-seated keys are not magnetic. */
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const scrolled = useScrolled();
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-scrolled={scrolled ? "" : undefined}>
       <div className={styles.strip}>
         <span className={styles.screw} aria-hidden="true" />
         {display.location && (
@@ -101,29 +108,40 @@ export const Header = () => {
             />
           </>
         )}
-        <nav className={styles.track} aria-label="Main">
-          {NAV_ITEMS.filter((item) => routes[item.href]).map((item) => {
-            const active = item.match(pathname);
-            return (
-              <Key
-                key={item.href}
-                href={item.href}
-                pressed={active}
-                aria-current={active ? "page" : undefined}
-                className={
-                  active
-                    ? `${styles.navKey} ${styles.navKeyActive}`
-                    : styles.navKey
-                }
-              >
-                <span className={styles.navIcon}>
-                  <Icon name={item.icon} size="s" />
-                </span>
-                <span className={styles.navLabel}>{item.label}</span>
-              </Key>
-            );
-          })}
-        </nav>
+        <LayoutGroup id="nav">
+          <nav className={styles.track} aria-label="Main">
+            {NAV_ITEMS.filter((item) => routes[item.href]).map((item) => {
+              const active = item.match(pathname);
+              return (
+                <Key
+                  key={item.href}
+                  href={item.href}
+                  pressed={active}
+                  magnetic={false}
+                  aria-current={active ? "page" : undefined}
+                  className={
+                    active
+                      ? `${styles.navKey} ${styles.navKeyActive}`
+                      : styles.navKey
+                  }
+                >
+                  <span className={styles.navIcon}>
+                    <Icon name={item.icon} size="s" />
+                  </span>
+                  <span className={styles.navLabel}>{item.label}</span>
+                  {active && (
+                    <motion.span
+                      layoutId="nav-carriage"
+                      className={styles.carriage}
+                      transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                      aria-hidden="true"
+                    />
+                  )}
+                </Key>
+              );
+            })}
+          </nav>
+        </LayoutGroup>
         {display.time && (
           <>
             <span className={styles.divider} aria-hidden="true" />

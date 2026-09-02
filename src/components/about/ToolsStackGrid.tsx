@@ -1,3 +1,5 @@
+import { Key } from "@/components/console";
+
 import styles from "./ToolsStackGrid.module.scss";
 
 interface ToolCategory {
@@ -9,6 +11,9 @@ interface ToolsStackGridProps {
   categories: ToolCategory[];
 }
 
+/* The switchboard (design.md §6.2): recessed category wells holding tool
+   chips that are real (decorative) keys — they drift toward the pointer
+   like every other free-standing cap. */
 export default function ToolsStackGrid({ categories }: ToolsStackGridProps) {
   return (
     <div className={styles.board}>
@@ -17,9 +22,9 @@ export default function ToolsStackGrid({ categories }: ToolsStackGridProps) {
           <span className={styles.label}>{cat.category}</span>
           <div className={styles.chips}>
             {cat.tools.map((tool) => (
-              <span key={tool} className={styles.chip}>
+              <Key key={tool} as="span" className={styles.chip}>
                 {tool}
-              </span>
+              </Key>
             ))}
           </div>
         </div>
