@@ -1,23 +1,28 @@
 "use client";
 
+import { useLenis } from "lenis/react";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
+import { SCROLL_OFFSET } from "@/components/motion/SmoothScroll";
+
+/* Scrolls to the URL hash on arrival. Goes through Lenis when it is
+   mounted (smooth, header offset); native smooth scroll otherwise. */
 export default function ScrollToHash() {
-  const router = useRouter();
+  const lenis = useLenis();
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Get the hash from the URL
     const hash = window.location.hash;
-    if (hash) {
-      // Remove the '#' symbol
-      const id = hash.replace("#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    if (!hash) return;
+    const element = document.getElementById(hash.slice(1));
+    if (!element) return;
+    if (lenis) {
+      lenis.scrollTo(element, { offset: SCROLL_OFFSET });
+    } else {
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }, [router]);
+  }, [pathname, lenis]);
 
   return null;
 }

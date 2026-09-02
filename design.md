@@ -357,6 +357,13 @@ treatment — numbers glow, context is printed.
 - **Hover:** shells lift (`hover-lift`) and device cards tilt, keys depress on press, LCD *content*
   never animates on hover — only the glass layer (specular) does; screens respond to data, not
   cursors.
+- **Smooth scroll (v2):** Lenis (`SmoothScroll` in `Providers`, `lerp 0.1`) smooths the wheel only —
+  touch stays native (`syncTouch: false`), so iOS keeps its own physics. It rides the shared
+  ticker, is never instantiated before hydration or under reduced motion (native scroll, nothing
+  mounted), resyncs its target on every route change so momentum never carries into the next page,
+  and intercepts `a[href^="#"]` with a −96px header offset. `ScrollToHash` and the table of contents
+  scroll through it when present. Sticky chrome and CSS scroll timelines are unaffected: Lenis moves
+  the real scroll position.
 - **Idle cursors & per-page boot:** live LCDs may carry one blinking block cursor (hero role
   line; the tail of the /now log — `tail -f`). A page's dominant Screen powers on (~400ms
   flicker) when you arrive at its page — switching pages is switching devices. Blink budget:

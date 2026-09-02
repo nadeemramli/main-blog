@@ -3,6 +3,7 @@
 import { MotionConfig } from "framer-motion";
 
 import { PointerLight } from "@/components/motion/PointerLight";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { useEffect } from "react";
 
 interface ProvidersProps {
@@ -21,8 +22,10 @@ export function Providers({ children }: ProvidersProps) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <PointerLight />
-      {children}
+      <SmoothScroll>
+        <PointerLight />
+        {children}
+      </SmoothScroll>
     </MotionConfig>
   );
 }

@@ -2,6 +2,8 @@ import "@/once-ui/styles/index.scss";
 import "@/once-ui/tokens/index.scss";
 // Operator Console tokens — must come after the Once UI sheets (cascade).
 import "@/styles/console-tokens.scss";
+// Lenis smooth-scroll base rules (html.lenis, .lenis-stopped, data-lenis-prevent).
+import "lenis/dist/lenis.css";
 
 import classNames from "classnames";
 

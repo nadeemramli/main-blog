@@ -1,6 +1,9 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useEffect, useState } from "react";
+
+import { SCROLL_OFFSET } from "@/components/motion/SmoothScroll";
 import { Column, Flex, Text } from "@/once-ui/components";
 
 interface TOCItem {
@@ -15,6 +18,7 @@ interface TableOfContentsProps {
 
 export default function TableOfContents({ items }: TableOfContentsProps) {
   const [activeSection, setActiveSection] = useState<string>("");
+  const lenis = useLenis();
 
   useEffect(() => {
     const observerOptions = {
@@ -48,11 +52,11 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (!element) return;
+    if (lenis) {
+      lenis.scrollTo(element, { offset: SCROLL_OFFSET });
+    } else {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 

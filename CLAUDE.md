@@ -34,7 +34,7 @@ When the dev server misbehaves with errors like `Cannot read properties of undef
 ## Tech stack
 
 - **next 16**, **react / react-dom 19**, **@next/mdx 16**, **next-mdx-remote 6** (v6 is the React-19-compatible major)
-- **framer-motion 12** (Gauge needle spring, `MotionConfig` in `Providers`, and — as the v2 console lands — the scroll rail and nav carriage), **embla-carousel-react 8** (resource carousels)
+- **lenis 1.3** (smooth wheel scroll; `src/components/motion/SmoothScroll.tsx`, off under reduced motion), **framer-motion 12** (Gauge needle spring, `MotionConfig` in `Providers`, and — as the v2 console lands — the scroll rail and nav carriage), **embla-carousel-react 8** (resource carousels)
 - **sass** (SCSS modules + the once-ui token system), **postcss** + `postcss-preset-env`/`postcss-custom-media`
 - **gray-matter** (MDX frontmatter), **react-icons** (icon registry), **sharp** (image handling)
 - TypeScript is loose: `strict: false` but `strictNullChecks: true`, `allowJs: true` (resource files are `.js`). `tsconfig.json` is partly Next-managed (`jsx: react-jsx`, `.next/dev/types` include were auto-added by Next 16 — leave them).
