@@ -45,3 +45,17 @@
     }
   }
 }
+
+/* Tilting shells smooth the per-frame pointer writes; hover lift keeps
+   its own --console-dur-lift timing above. */
+.panel[data-tilt] {
+  transition:
+    box-shadow var(--console-dur-lift) var(--console-ease-out),
+    transform var(--console-dur-press) var(--console-ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel[data-tilt] {
+    transition: none;
+  }
+}

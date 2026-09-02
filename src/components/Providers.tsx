@@ -1,6 +1,8 @@
 "use client";
 
 import { MotionConfig } from "framer-motion";
+
+import { PointerLight } from "@/components/motion/PointerLight";
 import { useEffect } from "react";
 
 interface ProvidersProps {
@@ -17,5 +19,10 @@ export function Providers({ children }: ProvidersProps) {
     document.documentElement.setAttribute("data-hydrated", "");
   }, []);
 
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return (
+    <MotionConfig reducedMotion="user">
+      <PointerLight />
+      {children}
+    </MotionConfig>
+  );
 }

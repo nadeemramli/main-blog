@@ -1,4 +1,4 @@
-import { Key, Panel, Screen } from "@/components/console";
+import { Key, Screen, TiltPanel } from "@/components/console";
 
 import styles from "./ResourceCard.module.scss";
 
@@ -19,7 +19,7 @@ export function ResourceCard({
   nodeId,
 }: ResourceCardProps) {
   return (
-    <Panel as="article" padding="none" interactive className={styles.handheld}>
+    <TiltPanel as="article" padding="none" interactive className={styles.handheld}>
       <Screen nodeId={nodeId} status="live">
         {imageSrc ? (
           <img src={imageSrc} alt={title} className={styles.glassImage} loading="lazy" decoding="async" />
@@ -42,6 +42,6 @@ export function ResourceCard({
           Visit Site
         </Key>
       </div>
-    </Panel>
+    </TiltPanel>
   );
 }

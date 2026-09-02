@@ -1,4 +1,6 @@
 export { Panel } from "./Panel";
+export type { PanelProps } from "./Panel";
+export { TiltPanel } from "./TiltPanel";
 export { Screen } from "./Screen";
 export type { ScreenStatus } from "./Screen";
 export { MicroLcd } from "./MicroLcd";

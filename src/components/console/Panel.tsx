@@ -2,7 +2,7 @@ import classNames from "classnames";
 
 import styles from "./Panel.module.scss";
 
-interface PanelProps extends React.HTMLAttributes<HTMLElement> {
+export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   interactive?: boolean;
   padding?: "default" | "lg" | "none";

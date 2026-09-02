@@ -3,10 +3,15 @@
 import { useEffect, useRef } from "react";
 
 import { usePrefersReducedMotion } from "@/components/hooks/usePrefersReducedMotion";
+import { pointer } from "@/components/motion/pointer";
 
 /* The ambient desk layer (design.md §7): ordered Bayer dither over a very
    slow warm gradient drift, raw WebGL, ~30fps cap, paused when the tab is
-   hidden. Reduced motion: one static frame. No WebGL: static 2D grain. */
+   hidden. v2: a soft lamp pool follows the pointer (from the shared pointer
+   store — no listener of its own), the grain phase drifts with scroll, and
+   a faint vignette darkens the desk edges. Colours re-read when the lamp
+   switch (data-console) flips. Reduced motion: one static frame, no lamp.
+   No WebGL: static 2D grain. */
 
 const VERTEX = `
 attribute vec2 a_pos;
@@ -19,6 +24,9 @@ const FRAGMENT = `
 precision mediump float;
 uniform vec2 u_res;
 uniform float u_time;
+uniform float u_scroll;
+uniform vec2 u_pointer;
+uniform float u_lamp;
 uniform vec3 u_colorA;
 uniform vec3 u_colorB;
 
@@ -33,11 +41,22 @@ float bayer4(vec2 a) {
 
 void main() {
   vec2 uv = gl_FragCoord.xy / u_res;
-  /* ~8s drift period, slight spatial tilt so the field breathes. */
-  float t = 0.5 + 0.5 * sin(u_time * 0.785 + uv.x * 1.7 + uv.y * 1.1);
+  /* ~8s drift period, slight spatial tilt so the field breathes; the phase
+     slides with scroll so the grain moves against the devices. */
+  float t = 0.5 + 0.5 * sin(u_time * 0.785 + uv.x * 1.7 + uv.y * 1.1 + u_scroll);
   float threshold = bayer4(gl_FragCoord.xy);
   float q = step(threshold, t);
-  gl_FragColor = vec4(mix(u_colorA, u_colorB, q), 1.0);
+  vec3 col = mix(u_colorA, u_colorB, q);
+
+  /* Lamp pool: a wide, soft brightening under the pointer. */
+  float pool = 1.0 - smoothstep(0.0, 640.0, distance(gl_FragCoord.xy, u_pointer));
+  col += pool * pool * u_lamp * 0.07;
+
+  /* Desk-edge vignette. */
+  float edge = smoothstep(0.55, 1.15, distance(uv, vec2(0.5)) * 1.25);
+  col -= edge * 0.045;
+
+  gl_FragColor = vec4(col, 1.0);
 }
 `;
 
@@ -71,6 +90,16 @@ function drawStaticGrain(canvas: HTMLCanvasElement) {
   ctx.putImageData(image, 0, 0);
 }
 
+/** Re-runs a colour upload whenever the lamp switch flips the palette. */
+function observeLamp(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-console"],
+  });
+  return () => observer.disconnect();
+}
+
 export default function DitherCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const reduced = usePrefersReducedMotion();
@@ -96,7 +125,7 @@ export default function DitherCanvas() {
 
     if (!gl) {
       drawStaticGrain(canvas);
-      return;
+      return observeLamp(() => drawStaticGrain(canvas));
     }
 
     const compile = (type: number, source: string) => {
@@ -112,7 +141,7 @@ export default function DitherCanvas() {
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       drawStaticGrain(canvas);
-      return;
+      return observeLamp(() => drawStaticGrain(canvas));
     }
     gl.useProgram(program);
 
@@ -129,24 +158,50 @@ export default function DitherCanvas() {
 
     const uRes = gl.getUniformLocation(program, "u_res");
     const uTime = gl.getUniformLocation(program, "u_time");
+    const uScroll = gl.getUniformLocation(program, "u_scroll");
+    const uPointer = gl.getUniformLocation(program, "u_pointer");
+    const uLamp = gl.getUniformLocation(program, "u_lamp");
     const uColorA = gl.getUniformLocation(program, "u_colorA");
     const uColorB = gl.getUniformLocation(program, "u_colorB");
 
-    gl.uniform3fv(uColorA, cssColorToRgb("--console-bg"));
-    gl.uniform3fv(uColorB, cssColorToRgb("--console-bg-drift"));
+    const applyColors = () => {
+      gl.uniform3fv(uColorA, cssColorToRgb("--console-bg"));
+      gl.uniform3fv(uColorB, cssColorToRgb("--console-bg-drift"));
+    };
+    applyColors();
+
+    // Lamp state, eased per frame from the shared pointer store.
+    let px = -4000;
+    let py = -4000;
+    let lampGoal = 0;
+    let lamp = 0;
 
     const render = (timeMs: number) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform1f(uTime, timeMs / 1000);
+      gl.uniform1f(uScroll, window.scrollY * 0.0004);
+      gl.uniform2f(uPointer, px, py);
+      gl.uniform1f(uLamp, lamp);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
     if (reduced) {
-      // Final state: one static frame, no drift.
+      // Final state: one static frame, no drift, no lamp.
       render(0);
-      return;
+      return observeLamp(() => {
+        applyColors();
+        render(0);
+      });
     }
+
+    const unsubPointer = pointer.subscribe((p) => {
+      lampGoal = p.active ? 1 : 0;
+      if (p.active) {
+        px = ((p.nx + 1) / 2) * canvas.width;
+        py = canvas.height - ((p.ny + 1) / 2) * canvas.height;
+      }
+    });
 
     let raf = 0;
     let last = 0;
@@ -158,6 +213,7 @@ export default function DitherCanvas() {
       // ~30fps cap.
       if (now - last < 33) return;
       last = now;
+      lamp += (lampGoal - lamp) * 0.1;
       render(now);
     };
 
@@ -175,6 +231,8 @@ export default function DitherCanvas() {
       render(performance.now());
     };
 
+    const unobserve = observeLamp(applyColors);
+
     raf = requestAnimationFrame(loop);
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("resize", onResize);
@@ -182,6 +240,8 @@ export default function DitherCanvas() {
     return () => {
       running = false;
       cancelAnimationFrame(raf);
+      unsubPointer();
+      unobserve();
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", onResize);
     };
@@ -191,6 +251,7 @@ export default function DitherCanvas() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
+      data-desk=""
       style={{
         position: "fixed",
         inset: 0,

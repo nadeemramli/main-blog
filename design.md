@@ -158,7 +158,11 @@ information is printed on the body.** When deciding how to render any element, a
 
 ### 5.1 Device Shell (`<Panel>`)
 Replaces Once UI cards/sections. `panel` bg, 40px radius, `raised` shadow, 24–32px padding.
-Hover (when interactive): `hover-lift` shadow + translateY(-2px), 200ms ease-out.
+Hover (when interactive): `hover-lift` shadow + translateY(-2px), 200ms ease-out. Device cards
+(projects, resources, side projects, the featured shell) are `TiltPanel`s: under a fine pointer
+they also tilt up to 4° toward the cursor (`--tilt-x/--tilt-y` into the composed transform),
+snapping back to exactly 0° on leave. Text-heavy shells (manual prose, maintenance log, footer,
+hero) never tilt. No tilt under reduced motion or coarse pointers.
 
 ### 5.2 LCD Screen (`<Screen>`)
 A `lcd-bezel` frame (4–8px) around `lcd-bg` glass at 16px radius with `lcd-depth` inset shadow.
@@ -167,6 +171,11 @@ mobile. Top row convention: `label-sm` in `lcd-dim`, left = node ID, right = sta
 Example: `NODE-NR.01    ● SYNC`. All text mint phosphor with glow.
 Canonical statuses (locked): `sync` = red, pulsing; `live` = mint; `idle` = amber;
 `locked` = red, steady; `off` = dotless.
+**The glass material (v2):** two overlay layers above the content — a curved-glass vignette with a
+thin top-edge sheen, and a specular reflection positioned by the lamp vector (it follows the
+pointer lamp; canonical top-left with no JS). Powered screens (`live`, `sync`) bloom: an inset mint
+glow on top of `lcd-depth`. A booting screen (`data-boot="on"`) gets one 700ms reflection sweep.
+**The glass reacts; the content never does.**
 
 ### 5.3 Gauge Dial (`<Gauge>`)
 The signature element (one per page max, hero gets the primary one). Semicircular recessed
@@ -322,8 +331,17 @@ treatment — numbers glow, context is printed.
   another. Screens expose `data-status`; a booting screen's wrapper exposes `data-boot="on"`.
   One shared rAF ticker (`components/motion/ticker.ts`) drives every runtime effect.
 
+- **The pointer lamp (v2):** one document-level tracker (`PointerLight`, mounted in `Providers`)
+  writes the light vector `--light-dx/--light-dy` and `--pointer-x/--pointer-y` on `<html>`, so
+  every shadow pair and every glass specular is lit from where the cursor is. The lamp swings on a
+  short arm inside the top-left quadrant (`-1 … -0.45` per axis) — the pair never flattens or
+  flips. Eased (lerp 0.12), quantized to 0.04, written at 30Hz and only on change; on pointer leave it eases
+  back and the properties are removed so the CSS fallbacks resume. Fine pointers on ≥1024px only;
+  never under reduced motion. `html[data-lighting="static"]` is the kill switch.
 - **WebGL dither desk (the ambient layer):** full-viewport canvas behind everything.
-  Ordered-dither / Bayer grain over a very slow warm gradient drift in the cream family
+  Ordered-dither / Bayer grain over a very slow warm gradient drift in the cream family, plus (v2)
+  a soft lamp pool that follows the pointer (read from the shared pointer store, ~640px radius),
+  a grain phase that slides with scroll, and a faint desk-edge vignette — the desk is lit, not flat.
   (#D5D2C6 ↔ #CFCBBE), ~8s period, opacity ≤ 0.5 over the flat color. Three.js or raw WebGL
   fragment shader; ~30fps cap; pause when tab hidden; static PNG grain fallback when WebGL
   unavailable or `prefers-reduced-motion`.
@@ -336,8 +354,9 @@ treatment — numbers glow, context is printed.
   tabular nums mandatory.
 - **Shell reveals:** scroll-triggered — shells rise 16px + fade over 400ms ease-out,
   staggered 80ms per shell. Subtle; the desk never moves.
-- **Hover:** shells lift (`hover-lift`), keys depress on press, LCD content never animates
-  on hover (screens respond to data, not cursors).
+- **Hover:** shells lift (`hover-lift`) and device cards tilt, keys depress on press, LCD *content*
+  never animates on hover — only the glass layer (specular) does; screens respond to data, not
+  cursors.
 - **Idle cursors & per-page boot:** live LCDs may carry one blinking block cursor (hero role
   line; the tail of the /now log — `tail -f`). A page's dominant Screen powers on (~400ms
   flicker) when you arrive at its page — switching pages is switching devices. Blink budget:

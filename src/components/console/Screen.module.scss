@@ -7,6 +7,7 @@
 .glass {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   background: var(--console-lcd-bg);
   border-radius: var(--console-radius-lcd);
   box-shadow: var(--console-shadow-lcd-depth);
@@ -18,11 +19,97 @@
   text-shadow: 0 0 8px var(--console-lcd-glow);
   font-feature-settings: "tnum";
   font-variant-numeric: tabular-nums;
+  /* Keeps the rounded clip crisp when a parent shell tilts in 3D. */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
+  /* The glass material (design.md §5.2 v2). Two overlay layers above the
+     content: the glass reacts to the lamp; the content never does. */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Specular: a soft reflection that sits where the lamp is. Reads the
+     global light vector, so it moves with the pointer lamp and stays at
+     the canonical top-left with no JS. */
+  &::before {
+    background: radial-gradient(
+      60% 45% at calc(50% + var(--light-dx, -1) * 38%)
+        calc(50% + var(--light-dy, -1) * 42%),
+      var(--console-glass-specular) 0,
+      transparent 70%
+    );
+  }
+
+  /* Curved-glass vignette + a thin top-edge sheen. */
+  &::after {
+    background:
+      radial-gradient(
+        120% 95% at 50% 45%,
+        transparent 62%,
+        var(--console-glass-vignette) 100%
+      ),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0, transparent 22%);
+  }
+}
+
+/* Phosphor bloom: powered screens glow from inside the glass. */
+.bezel[data-status="live"] .glass,
+.bezel[data-status="sync"] .glass {
+  box-shadow:
+    var(--console-shadow-lcd-depth),
+    inset 0 0 48px var(--console-lcd-bloom);
+}
+
+/* Boot-only reflection sweep: one bright bar crosses the glass as the
+   screen powers on. Decoration that moves once, never loops. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-boot="on"] .glass::before {
+    background-image:
+      linear-gradient(
+        105deg,
+        transparent 42%,
+        rgba(255, 255, 255, 0.09) 50%,
+        transparent 58%
+      ),
+      radial-gradient(
+        60% 45% at calc(50% + var(--light-dx, -1) * 38%)
+          calc(50% + var(--light-dy, -1) * 42%),
+        var(--console-glass-specular) 0,
+        transparent 70%
+      );
+    background-size:
+      220% 100%,
+      100% 100%;
+    background-repeat: no-repeat;
+    animation: sweep 700ms var(--console-ease-out) 120ms 1 both;
+  }
+}
+
+@keyframes sweep {
+  from {
+    background-position:
+      120% 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      -120% 0,
+      0 0;
+  }
 }
 
 .scanlines {
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
@@ -40,6 +127,8 @@
 }
 
 .statusRow {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -88,6 +177,7 @@
 
 .content {
   position: relative;
+  z-index: 2;
 }
 
 @keyframes pulse {

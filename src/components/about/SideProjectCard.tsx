@@ -1,7 +1,7 @@
 import {
   Badge,
   Key,
-  Panel,
+  TiltPanel,
   Screen,
   type LedColor,
   type ScreenStatus,
@@ -43,7 +43,7 @@ export default function SideProjectCard({
   const nodeId = `NODE-SIDE.${String(index + 1).padStart(2, "0")}`;
 
   return (
-    <Panel
+    <TiltPanel
       as="article"
       padding="none"
       interactive={Boolean(project.link)}
@@ -68,6 +68,6 @@ export default function SideProjectCard({
           <Badge led={visuals.led}>{project.status}</Badge>
         </div>
       </div>
-    </Panel>
+    </TiltPanel>
   );
 }

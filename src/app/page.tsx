@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import { Badge, Gauge, Key, Led, Panel, Reveal, Screen } from "@/components/console";
+import { Badge, Gauge, Key, Led, Panel, Reveal, Screen, TiltPanel } from "@/components/console";
 import HeroScreen from "@/components/home/HeroScreen";
 import { ResourceCarousel } from "@/components/ResourceCarousel";
 import { getPosts } from "@/app/utils/utils";
@@ -121,7 +121,7 @@ export default function Home() {
         <Reveal index={1}>
         <section>
           <div className={styles.eyebrow}>SEC.02 — FEATURED PROJECT</div>
-          <Panel as="div" padding="lg" className={styles.featured}>
+          <TiltPanel as="div" padding="lg" interactive className={styles.featured}>
             <Screen nodeId="NODE-PRJ.01" status="live">
               {featured.metadata.images[0] && (
                 <img
@@ -150,7 +150,7 @@ export default function Home() {
                 Read Case Study →
               </Key>
             </div>
-          </Panel>
+          </TiltPanel>
         </section>
         </Reveal>
       )}

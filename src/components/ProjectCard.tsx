@@ -3,7 +3,7 @@ import classNames from "classnames";
 import {
   Badge,
   Key,
-  Panel,
+  TiltPanel,
   Screen,
   type LedColor,
   type ScreenStatus,
@@ -51,7 +51,7 @@ export const ProjectCard = ({
   const image = images[0];
 
   return (
-    <Panel
+    <TiltPanel
       as="article"
       interactive
       className={classNames(
@@ -77,6 +77,6 @@ export const ProjectCard = ({
           <Badge led={badge.led}>{badge.label}</Badge>
         </div>
       </div>
-    </Panel>
+    </TiltPanel>
   );
 };
