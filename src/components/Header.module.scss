@@ -73,8 +73,8 @@
   height: 34px;
   padding: 0 16px;
   border-radius: var(--console-radius-control);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-label-md);
+  letter-spacing: var(--console-track-label-md);
 }
 
 /* The active route is a seated key. */
@@ -248,7 +248,7 @@
   }
 
   .lamp > span:nth-child(n + 2)::first-letter {
-    font-size: 10px;
+    font-size: var(--console-fs-label-sm);
   }
 }
 

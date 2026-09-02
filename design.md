@@ -31,18 +31,22 @@ colors:
   accent-mint-ink: "#0E2E24"   # text on mint surfaces
 
 typography:
-  display-xl:   { fontFamily: "Inter", fontSize: "clamp(44px, 6vw, 72px)", fontWeight: 500, lineHeight: "1.02", letterSpacing: "-0.02em" }
-  display-lg:   { fontFamily: "Inter", fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500, lineHeight: "1.06", letterSpacing: "-0.015em" }
-  heading-md:   { fontFamily: "Inter", fontSize: "24px", fontWeight: 550, lineHeight: "1.2" }
-  heading-sm:   { fontFamily: "Inter", fontSize: "18px", fontWeight: 600, lineHeight: "1.3" }
-  body-lg:      { fontFamily: "Inter", fontSize: "18px", fontWeight: 400, lineHeight: "1.65" }  # long-form prose (About, case studies)
-  body-md:      { fontFamily: "Inter", fontSize: "16px", fontWeight: 400, lineHeight: "1.6" }
+  # Faces (v2): Space Grotesk (ink) + Geist Mono (chrome). Sizes are the --console-fs-* tokens.
+  display-xl:   { fontFamily: "Space Grotesk", fontSize: "clamp(44px, 6vw, 72px)", fontWeight: 500, lineHeight: "1.02", letterSpacing: "-0.02em" }
+  display-lg:   { fontFamily: "Space Grotesk", fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500, lineHeight: "1.06", letterSpacing: "-0.015em" }
+  heading-lg:   { fontFamily: "Space Grotesk", fontSize: "30px", fontWeight: 500, lineHeight: "1.2" }
+  heading-md:   { fontFamily: "Space Grotesk", fontSize: "24px", fontWeight: 550, lineHeight: "1.2" }
+  heading-sm:   { fontFamily: "Space Grotesk", fontSize: "18px", fontWeight: 600, lineHeight: "1.3" }
+  body-lg:      { fontFamily: "Space Grotesk", fontSize: "18px", fontWeight: 400, lineHeight: "1.65" }  # long-form prose (About, case studies)
+  body-md:      { fontFamily: "Space Grotesk", fontSize: "16px", fontWeight: 400, lineHeight: "1.6" }
   # Mono is CHROME ONLY: labels, readouts, metadata, nav, timestamps, badges, table data
-  label-md:     { fontFamily: "JetBrains Mono", fontSize: "12px", fontWeight: 600, lineHeight: "1.2", letterSpacing: "0.08em", textTransform: "uppercase" }
-  label-sm:     { fontFamily: "JetBrains Mono", fontSize: "10px", fontWeight: 600, lineHeight: "1.2", letterSpacing: "0.1em", textTransform: "uppercase" }
-  readout-xl:   { fontFamily: "JetBrains Mono", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 500, lineHeight: "1.0" }  # big LCD numbers
-  readout-md:   { fontFamily: "JetBrains Mono", fontSize: "16px", fontWeight: 500, lineHeight: "1.4" }
-  data-sm:      { fontFamily: "JetBrains Mono", fontSize: "13px", fontWeight: 400, lineHeight: "1.5" }  # tables, logs, metadata rows
+  label-md:     { fontFamily: "Geist Mono", fontSize: "12px", fontWeight: 600, lineHeight: "1.2", letterSpacing: "0.08em", textTransform: "uppercase" }
+  label-sm:     { fontFamily: "Geist Mono", fontSize: "10px", fontWeight: 600, lineHeight: "1.2", letterSpacing: "0.1em", textTransform: "uppercase" }
+  readout-xl:   { fontFamily: "Geist Mono", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 500, lineHeight: "1.0" }  # big LCD numbers
+  readout-lg:   { fontFamily: "Geist Mono", fontSize: "22px", fontWeight: 500, lineHeight: "1.2" }
+  readout-md:   { fontFamily: "Geist Mono", fontSize: "16px", fontWeight: 500, lineHeight: "1.4" }
+  data-sm:      { fontFamily: "Geist Mono", fontSize: "13px", fontWeight: 400, lineHeight: "1.5" }  # tables, logs, metadata rows
+  body-sm:      { fontFamily: "Space Grotesk", fontSize: "14px", fontWeight: 400, lineHeight: "1.6" }
 
 spacing:
   base: "8px"
@@ -122,9 +126,10 @@ information is printed on the body.** When deciding how to render any element, a
 - Mint #76D2B6 has two jobs: phosphor text on LCD surfaces, and the fill of the single primary
   CTA per page (e.g., "Schedule a Call"). On mint surfaces, text is `accent-mint-ink`.
 - **Night palette (v2) — the lamp is off.** Switched by the header rocker; `data-console="night"` on
-  `<html>`, applied before first paint from `localStorage["console.lamp"]` (default is day; the
-  switch is the only input — never `prefers-color-scheme`, so the rocker and the page always
-  agree). Desk `#1A1B19` (drift `#1F201D`, deep `#141513`, grain at 35%); panel `#242522`,
+  `<html>`. **Night is the default** (v2 revision): the SSR document carries the attribute; a
+  visitor's "day" choice is stored in `localStorage["console.lamp"]` and applied before first
+  paint (the switch is the only input — never `prefers-color-scheme`, so the rocker and the page
+  always agree). Desk `#1A1B19` (drift `#1F201D`, deep `#141513`, grain at 35%); panel `#242522`,
   panel-high `#2C2D2A`, well `#161715`, border `#3A3B37`; glass `#0B0C0A` in a `#151613` bezel,
   phosphor `#7FE0C1` / dim `#4A8672` with a stronger glow and bloom; ink `#E8E4D8` / `#ACA89B`
   (≈7.4:1 on panel) / `#6F6C62`; mint-ink `#0A241C`. Shadow inks: shade `rgba(0,0,0,.45–.65)`, and
@@ -135,12 +140,21 @@ information is printed on the body.** When deciding how to render any element, a
 
 ## 3. Typography
 
-- **Inter carries all reading and all display.** Headlines, prose, case studies, About page,
-  essays-adjacent copy. Display weights at 500 (not 700 — the source uses medium-weight
-  large type; keep that restraint).
-- **JetBrains Mono is chrome only**: nav items, the clock, timezone, section eyebrows,
-  metric labels, table data, timestamps, badges, button labels on "keys", LCD readouts.
-  If a sentence is longer than ~8 words, it should not be mono.
+- **Space Grotesk carries all reading and all display** (v2 brand revision; was Inter). Its
+  geometric, slightly wide letterforms give headings the instrument-panel character Inter
+  lacked while staying readable at body sizes. Display weights at 500 (not 700 — the source
+  uses medium-weight large type; keep that restraint); section headings at 550.
+- **Geist Mono is chrome only** (v2; was JetBrains Mono): nav items, the clock, timezone,
+  section eyebrows, metric labels, table data, timestamps, badges, button labels on "keys",
+  LCD readouts. If a sentence is longer than ~8 words, it should not be mono.
+- **The type scale is tokens** (`--console-fs-*`, `--console-lh-*`, `--console-track-*`,
+  `--console-fw-*` in `console-tokens.scss`) and every font-size in console code is one of
+  them — never a pixel literal. Ink: display-xl/lg, heading-lg (30) / md (24) / sm (18),
+  body-lg (18) / md (16) / sm (14). Chrome: readout-xl / lg (22) / md (16), data (13),
+  label-md (12), label-sm (10). Line heights: tight 1.06, heading 1.2, snug 1.3, data 1.5,
+  body 1.6, prose 1.65. Tracking: display −0.015em, label-md 0.08em, label-sm 0.1em, data
+  0.04em. Weights: medium 500, heading 550, label 600. Both faces are self-hosted variable
+  fonts (`src/app/fonts/space-grotesk.woff2` 300–700, `geist-mono.woff2` 100–900; OFL).
 - Eyebrow pattern above every section: `label-sm` mono, uppercase, tracked, `text-tertiary`,
   e.g. `SEC.03 — SIDE PROJECTS`. Section numbers are justified here: the pages genuinely
   read top-to-bottom as a panel layout with numbered modules.
@@ -472,7 +486,8 @@ as `CASE STUDY` and `MANUAL`.
 - The red ambient gradient and the old red CTA styles are removed entirely. The only dark
   palette is the console's Night set (§2); once-ui's dark theme is never enabled. The dev-overlay "1 Issue" badges visible in current
   screenshots are tooling artifacts, not design elements; ignore.
-- Fonts: self-host Inter (variable) + JetBrains Mono (400/500/600) via next/font.
+- Fonts: self-host Space Grotesk (variable 300–700) + Geist Mono (variable 100–900) via
+  next/font/local (v2; Inter + JetBrains Mono before).
 
 ## 9. Guardrails
 

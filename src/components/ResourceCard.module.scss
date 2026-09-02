@@ -26,16 +26,16 @@
 }
 
 .idleName {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-body-md);
+  font-weight: var(--console-fw-medium);
+  letter-spacing: var(--console-track-data);
   text-transform: uppercase;
 }
 
 .idleDim {
   color: var(--console-lcd-dim);
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-size: var(--console-fs-data);
+  letter-spacing: var(--console-track-label-md);
 }
 
 .ink {
@@ -47,17 +47,17 @@
 .name {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: var(--console-fs-body-lg);
+  font-weight: var(--console-fw-label);
+  line-height: var(--console-lh-snug);
   color: var(--console-text-primary);
 }
 
 .oneLiner {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--console-fs-body-sm);
+  line-height: var(--console-lh-data);
   color: var(--console-text-secondary);
 }
 

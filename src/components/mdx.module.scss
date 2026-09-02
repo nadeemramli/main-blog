@@ -3,8 +3,8 @@
 .p {
   margin: var(--console-space-base) 0 12px;
   font-family: var(--console-font-sans);
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: var(--console-fs-body-lg);
+  line-height: var(--console-lh-prose);
   color: var(--console-text-secondary);
 }
 
@@ -13,8 +13,8 @@
   padding: var(--console-space-base) var(--console-gap);
   border-left: 2px solid var(--console-border);
   font-family: var(--console-font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-tertiary);
 
   p {
@@ -34,8 +34,8 @@
   box-shadow: var(--console-shadow-lcd-depth);
   color: var(--console-lcd-text);
   font-family: var(--console-font-mono);
-  font-size: 13px;
-  line-height: 1.6;
+  font-size: var(--console-fs-data);
+  line-height: var(--console-lh-body);
   text-shadow: 0 0 8px var(--console-lcd-glow);
 
   code {
@@ -62,8 +62,8 @@
   margin: var(--console-space-base) 0 12px;
   padding-left: 24px;
   font-family: var(--console-font-sans);
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: var(--console-fs-body-lg);
+  line-height: var(--console-lh-prose);
   color: var(--console-text-secondary);
 }
 

@@ -47,9 +47,47 @@
   --console-mint-ink: #0e2e24;
   --console-mint-glow: rgba(118, 210, 182, 0.6);
 
-  /* ── Type ────────────────────────────────────────────────── */
+  /* ── Type (design.md §3): Space Grotesk carries reading + display;
+     Geist Mono is chrome only. ─────────────────────────────────── */
   --console-font-sans: var(--font-primary);
   --console-font-mono: var(--font-code);
+
+  /* The type scale — every font-size in console code is one of these.
+     Ink (sans): display-xl/lg, heading-lg/md/sm, body-lg/md/sm.
+     Chrome (mono): readout-xl/lg/md, data, label-md/sm. */
+  --console-fs-display-xl: clamp(44px, 6vw, 72px);
+  --console-fs-display-lg: clamp(32px, 4.5vw, 48px);
+  --console-fs-heading-lg: 30px;
+  --console-fs-heading-md: 24px;
+  --console-fs-heading-sm: 18px;
+  --console-fs-body-lg: 18px;
+  --console-fs-body-md: 16px;
+  --console-fs-body-sm: 14px;
+  --console-fs-readout-xl: clamp(36px, 5vw, 56px);
+  --console-fs-readout-lg: 22px;
+  --console-fs-readout-md: 16px;
+  --console-fs-data: 13px;
+  --console-fs-label-md: 12px;
+  --console-fs-label-sm: 10px;
+
+  /* Line heights. */
+  --console-lh-tight: 1.06; /* display */
+  --console-lh-heading: 1.2;
+  --console-lh-snug: 1.3; /* heading-sm */
+  --console-lh-data: 1.5; /* mono lines, logs, tables */
+  --console-lh-body: 1.6;
+  --console-lh-prose: 1.65; /* long-form */
+
+  /* Tracking. */
+  --console-track-display: -0.015em;
+  --console-track-label-md: 0.08em;
+  --console-track-label-sm: 0.1em;
+  --console-track-data: 0.04em;
+
+  /* Weights (variable axes: Space Grotesk 300–700, Geist Mono 100–900). */
+  --console-fw-medium: 500; /* display + readouts */
+  --console-fw-heading: 550;
+  --console-fw-label: 600; /* mono chrome */
 
   /* ── Radii ───────────────────────────────────────────────── */
   --console-radius-panel: 40px;

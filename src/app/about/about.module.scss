@@ -9,9 +9,9 @@
 
 .eyebrow {
   font-family: var(--console-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   margin-bottom: var(--console-gap);
@@ -20,17 +20,17 @@
 .sectionTitle {
   margin: 0 0 var(--console-gap);
   font-family: var(--console-font-sans);
-  font-size: 24px;
-  font-weight: 550;
-  line-height: 1.2;
+  font-size: var(--console-fs-heading-md);
+  font-weight: var(--console-fw-heading);
+  line-height: var(--console-lh-heading);
   color: var(--console-text-primary);
 }
 
 .sectionSub {
   margin: calc(-1 * var(--console-space-base)) 0 var(--console-gap);
   font-family: var(--console-font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 
@@ -67,18 +67,18 @@
 .name {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.015em;
+  font-size: var(--console-fs-display-lg);
+  font-weight: var(--console-fw-medium);
+  line-height: var(--console-lh-tight);
+  letter-spacing: var(--console-track-display);
   color: var(--console-text-primary);
 }
 
 .roleLine {
   font-family: var(--console-font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-label-md);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-text-secondary);
 }
@@ -96,8 +96,8 @@
   gap: var(--console-gap);
   max-width: 68ch;
   font-family: var(--console-font-sans);
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: var(--console-fs-body-lg);
+  line-height: var(--console-lh-prose);
   color: var(--console-text-secondary);
 
   p {
@@ -145,9 +145,9 @@
 }
 
 .timeframe {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-label-md);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   font-feature-settings: "tnum";
@@ -155,22 +155,22 @@
 }
 
 .company {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-body-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-data);
   color: var(--console-text-primary);
 }
 
 .roleTitle {
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: var(--console-fs-label-md);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-text-secondary);
 }
 
 .location {
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-label-sm);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
 }
@@ -190,8 +190,8 @@
 .achievement {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 
@@ -252,9 +252,9 @@
   right: var(--console-panel-padding);
   bottom: 12px;
   font-family: var(--console-font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   opacity: 0.8;

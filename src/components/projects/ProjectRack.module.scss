@@ -25,8 +25,8 @@
 
 .empty {
   font-family: var(--console-font-mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-label-md);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   padding: var(--console-panel-padding) 0;

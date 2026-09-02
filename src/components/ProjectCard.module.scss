@@ -33,16 +33,16 @@
 }
 
 .idleName {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-body-md);
+  font-weight: var(--console-fw-medium);
+  letter-spacing: var(--console-track-data);
   text-transform: uppercase;
 }
 
 .idleMetric {
   color: var(--console-lcd-dim);
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-data);
+  letter-spacing: var(--console-track-data);
 }
 
 .ink {
@@ -54,17 +54,17 @@
 .name {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 24px;
-  font-weight: 550;
-  line-height: 1.2;
+  font-size: var(--console-fs-heading-md);
+  font-weight: var(--console-fw-heading);
+  line-height: var(--console-lh-heading);
   color: var(--console-text-primary);
 }
 
 .summary {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 

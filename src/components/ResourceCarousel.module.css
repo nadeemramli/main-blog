@@ -62,7 +62,7 @@
   width: 48px;
   height: 48px;
   border-radius: var(--console-radius-pill);
-  font-size: 18px;
+  font-size: var(--console-fs-body-lg);
 }
 
 .embla__button:active {
@@ -87,7 +87,7 @@
   .embla__button {
     width: 36px;
     height: 36px;
-    font-size: 18px;
+    font-size: var(--console-fs-body-lg);
   }
 
   .embla__button__prev {
@@ -103,6 +103,6 @@
   .embla__button {
     width: 32px;
     height: 32px;
-    font-size: 16px;
+    font-size: var(--console-fs-body-md);
   }
 }

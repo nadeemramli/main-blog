@@ -62,17 +62,17 @@
 .inkTitle {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: var(--console-fs-body-lg);
+  font-weight: var(--console-fw-label);
+  line-height: var(--console-lh-snug);
   color: var(--console-text-primary);
 }
 
 .inkBody {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-sm);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 

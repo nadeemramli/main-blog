@@ -40,10 +40,10 @@
 .headline {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: 30px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: var(--console-fs-heading-lg);
+  font-weight: var(--console-fw-medium);
+  line-height: var(--console-lh-tight);
+  letter-spacing: var(--console-track-display);
   color: var(--console-text-primary);
 }
 
@@ -51,8 +51,8 @@
   margin: 0;
   max-width: 40ch;
   font-family: var(--console-font-sans);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 
@@ -96,9 +96,9 @@
 
 .finePrint {
   font-family: var(--console-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   white-space: nowrap;

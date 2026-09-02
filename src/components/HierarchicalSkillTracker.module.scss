@@ -6,9 +6,9 @@
 }
 
 .navLabel {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   color: var(--console-lcd-dim);
 }
@@ -26,9 +26,9 @@
   border-radius: var(--console-radius-pill);
   padding: 6px 12px;
   font-family: var(--console-font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: var(--console-fs-label-md);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-lcd-dim);
   cursor: pointer;
@@ -59,17 +59,17 @@
 
 .detailTitle {
   margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-data);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-lcd-text);
 }
 
 .detailSub {
   margin: 0;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-data);
+  letter-spacing: var(--console-track-data);
   color: var(--console-lcd-dim);
 }
 
@@ -84,13 +84,13 @@
   justify-content: space-between;
   gap: var(--console-gap);
   padding: 8px 0;
-  font-size: 12px;
+  font-size: var(--console-fs-label-md);
   border-top: 1px solid rgba(118, 210, 182, 0.12);
 }
 
 .fieldName {
   color: var(--console-lcd-text);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--console-track-data);
 }
 
 .scores {

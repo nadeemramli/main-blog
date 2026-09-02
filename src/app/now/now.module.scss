@@ -9,9 +9,9 @@
 
 .eyebrow {
   font-family: var(--console-font-mono);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   color: var(--console-text-tertiary);
   margin-bottom: var(--console-gap);
@@ -27,10 +27,10 @@
 .title {
   margin: 0;
   font-family: var(--console-font-sans);
-  font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.015em;
+  font-size: var(--console-fs-display-lg);
+  font-weight: var(--console-fw-medium);
+  line-height: var(--console-lh-tight);
+  letter-spacing: var(--console-track-display);
   color: var(--console-text-primary);
   margin-right: auto;
 }
@@ -39,8 +39,8 @@
   margin: var(--console-gap) 0 0;
   max-width: 60ch;
   font-family: var(--console-font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--console-fs-body-md);
+  line-height: var(--console-lh-body);
   color: var(--console-text-secondary);
 }
 
@@ -70,8 +70,8 @@
   display: flex;
   gap: 12px;
   padding: 8px 0;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: var(--console-fs-data);
+  line-height: var(--console-lh-data);
 
   & + .logLine {
     border-top: 1px solid rgba(118, 210, 182, 0.12);

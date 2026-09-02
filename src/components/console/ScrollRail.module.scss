@@ -81,9 +81,9 @@
 }
 
 .label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
   white-space: nowrap;
   opacity: 0;

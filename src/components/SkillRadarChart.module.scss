@@ -13,17 +13,17 @@
 
 .title {
   margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: var(--console-fs-data);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-md);
   text-transform: uppercase;
   color: var(--console-lcd-text);
 }
 
 .description {
   margin: 0;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-data);
+  letter-spacing: var(--console-track-data);
   color: var(--console-lcd-dim);
 }
 
@@ -44,9 +44,9 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--console-gap);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   text-transform: uppercase;
 }
 

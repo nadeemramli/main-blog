@@ -82,7 +82,7 @@ Vendored design-system library — treat as a dependency you happen to be able t
 3. `once-ui/tokens/theme.scss` targets those selectors (`[data-theme="dark"]`, `[data-brand=...]`, etc.) to set CSS custom properties.
 4. Components reference tokens via props like `background="neutral-weak"` / `onBackground="brand-strong"`, which resolve to `var(--…)`.
 
-The live once-ui theme is **light** (`style.theme = "light"`, sand neutral) and must stay so. The console's own **night mode** is a separate `data-console="night"` attribute on `<html>`: tokens in the `[data-console="night"]` block of `console-tokens.scss`, state in `src/components/console/lamp.ts` (`useLamp`/`setLamp`, `localStorage["console.lamp"]`), the header `LampSwitch` rocker, and an inline script at the top of `<body>` in `layout.tsx` that applies the stored value before first paint (hence `suppressHydrationWarning` on `<html>`). Default is day; never follow `prefers-color-scheme`. **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
+The live once-ui theme is **light** (`style.theme = "light"`, sand neutral) and must stay so. The console's own **night mode** is a separate `data-console="night"` attribute on `<html>`: tokens in the `[data-console="night"]` block of `console-tokens.scss`, state in `src/components/console/lamp.ts` (`useLamp`/`setLamp`, `localStorage["console.lamp"]`), the header `LampSwitch` rocker, and an inline script at the top of `<body>` in `layout.tsx` that applies the stored value before first paint (hence `suppressHydrationWarning` on `<html>`). **Night is the default** (the SSR `<html>` carries `data-console="night"`; the inline script removes it for visitors who stored "day"); never follow `prefers-color-scheme`. **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
 
 ### App-specific components (`src/components/`)
 Custom components layered on top of Once UI. Barrel: `src/components/index.ts` (exports a subset: `Header`, `Footer`, `Mailchimp`, `ProjectCard`, `HeadingLink`, `RouteGuard`).
@@ -101,7 +101,7 @@ Static: every page's metadata points at **`public/og/default.png`** — a 1920×
 
 ### Fonts
 Two independent font setups — don't conflate them:
-- **App UI fonts:** self-hosted via `next/font/local` in `layout.tsx`, files in **`src/app/fonts/`** (`inter.woff2`, `jetbrains-mono.woff2`). These map to `--font-primary`, `--font-secondary`, `--font-code`. They were converted from `next/font/google` so the build needs no network access. Commit these `.woff2` files.
+- **App UI fonts:** self-hosted via `next/font/local` in `layout.tsx`, files in **`src/app/fonts/`**: `space-grotesk.woff2` (variable 300–700; `--font-primary` and `--font-secondary`) and `geist-mono.woff2` (variable 100–900; `--font-code`). Both are the latin `wght` subsets from the `@fontsource-variable/*` packages (OFL); the old `inter.woff2`/`jetbrains-mono.woff2` are gone. The build needs no network access. Commit the `.woff2` files. **Type scale:** every font-size/line-height/tracking/weight in console code is a `--console-fs-*` / `--console-lh-*` / `--console-track-*` / `--console-fw-*` token (see design.md §3) — never a pixel literal.
 - **OG image font:** `public/fonts/Inter.ttf`, used only by `og/route.tsx`. Keep it.
 
 ### Static export

@@ -14,15 +14,15 @@
 }
 
 .readout {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: var(--console-fs-readout-lg);
+  font-weight: var(--console-fw-medium);
+  letter-spacing: var(--console-track-data);
 }
 
 .dim {
   margin-top: var(--console-space-base);
   color: var(--console-lcd-dim);
-  font-size: 13px;
+  font-size: var(--console-fs-data);
 }
 
 .backKey {

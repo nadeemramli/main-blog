@@ -4,8 +4,9 @@ import { useSyncExternalStore } from "react";
 
 /* The desk lamp switch (design.md §5.12): day or night. The console's own
    palette attribute (`data-console="night"` on <html>), separate from
-   once-ui's `data-theme`. Persisted per visitor; applied before first paint
-   by the inline script in layout.tsx so a night visitor never sees day. */
+   once-ui's `data-theme`. Night is the default; a visitor's "day" choice is
+   persisted and applied before first paint by the inline script in
+   layout.tsx, so nobody sees the wrong lamp. */
 
 export type Lamp = "day" | "night";
 
@@ -42,9 +43,10 @@ export function subscribeLamp(fn: () => void): () => void {
   };
 }
 
-const getServerSnapshot = (): Lamp => "day";
+const getServerSnapshot = (): Lamp => "night";
 
-/** Current lamp state; re-renders on switch. Server snapshot is "day". */
+/** Current lamp state; re-renders on switch. Server snapshot is "night"
+ *  (the default; the SSR html carries data-console="night"). */
 export function useLamp(): Lamp {
   return useSyncExternalStore(subscribeLamp, getLamp, getServerSnapshot);
 }

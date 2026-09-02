@@ -1,14 +1,14 @@
 .operatorLabel {
   color: var(--console-lcd-dim);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
   margin-bottom: var(--console-space-base);
 }
 
 .readoutXl {
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 500;
+  font-size: var(--console-fs-readout-xl);
+  font-weight: var(--console-fw-medium);
   line-height: 1;
   text-transform: uppercase;
 }
@@ -16,8 +16,8 @@
 .roleLine {
   margin-top: var(--console-space-base);
   color: var(--console-lcd-dim);
-  font-size: 13px;
-  letter-spacing: 0.06em;
+  font-size: var(--console-fs-data);
+  letter-spacing: var(--console-track-label-md);
 }
 
 .statsGrid {
@@ -37,14 +37,14 @@
 
 .statLabel {
   color: var(--console-lcd-dim);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: var(--console-fs-label-sm);
+  font-weight: var(--console-fw-label);
+  letter-spacing: var(--console-track-label-sm);
 }
 
 .statValue {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--console-fs-body-sm);
+  font-weight: var(--console-fw-medium);
 }
 
 /* Idle terminal cursor — live data blinks (design.md §1/§7). */

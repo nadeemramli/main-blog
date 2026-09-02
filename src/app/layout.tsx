@@ -19,7 +19,7 @@ import { person, home } from "@/app/resources/content";
 import { Column, Flex, ToastProvider } from "@/once-ui/components";
 
 export const viewport = {
-  themeColor: "#d5d2c6",
+  themeColor: "#1a1b19",
 };
 
 export async function generateMetadata() {
@@ -50,36 +50,36 @@ export async function generateMetadata() {
 }
 
 // Self-hosted fonts (next/font/local) so the build does not depend on
-// network access to fonts.googleapis.com. Files live in ./fonts.
+// network access. Files live in ./fonts (variable, latin subset).
+// design.md §3: Space Grotesk carries all reading and display type.
 const primary = localFont({
-  src: "./fonts/inter.woff2",
+  src: "./fonts/space-grotesk.woff2",
   variable: "--font-primary",
   display: "swap",
-  weight: "100 900",
+  weight: "300 700",
 });
 
 type FontConfig = {
   variable: string;
 };
 
-// design.md: Inter carries all reading and display type, so the secondary
-// (heading) slot maps to Inter as well.
+// The secondary (heading) slot maps to the same face.
 const secondary = localFont({
-  src: "./fonts/inter.woff2",
+  src: "./fonts/space-grotesk.woff2",
   variable: "--font-secondary",
   display: "swap",
-  weight: "100 900",
+  weight: "300 700",
 });
 
 const tertiary: FontConfig | undefined = undefined;
 
-// JetBrains Mono variable (wght 400–600) — the console "chrome" mono:
-// labels, readouts, nav, timestamps, badges (design.md §3).
+// Geist Mono variable — the console "chrome" mono: labels, readouts,
+// nav, timestamps, badges, LCD type (design.md §3).
 const code = localFont({
-  src: "./fonts/jetbrains-mono.woff2",
+  src: "./fonts/geist-mono.woff2",
   variable: "--font-code",
   display: "swap",
-  weight: "400 600",
+  weight: "100 900",
 });
 
 interface RootLayoutProps {
@@ -101,7 +101,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       data-border={style.border}
       data-surface={style.surface}
       data-transition={style.transition}
-      // The lamp script below may set data-console before React hydrates.
+      // Night is the default console state (design.md §2 v2). The lamp script
+      // below removes it before first paint for visitors who chose day.
+      data-console="night"
       suppressHydrationWarning
       className={classNames(
         primary.variable,
@@ -127,7 +129,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
               before anything in <body> paints (design.md §2 v2). */}
           <script
             dangerouslySetInnerHTML={{
-              __html: `try{var l=localStorage.getItem("console.lamp");if(l==="night"){document.documentElement.setAttribute("data-console","night");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#1a1b19")}}catch(e){}`,
+              __html: `try{var l=localStorage.getItem("console.lamp");if(l==="day"){document.documentElement.removeAttribute("data-console");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#d5d2c6")}}catch(e){}`,
             }}
           />
           <ChunkReloadGuard />
