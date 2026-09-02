@@ -3,7 +3,6 @@ import { Badge, Key, MicroLcd, Panel, Reveal, Screws } from "@/components/consol
 import SideProjectCard from "@/components/about/SideProjectCard";
 import HowIWorkSteps from "@/components/about/HowIWorkSteps";
 import ToolsStackGrid from "@/components/about/ToolsStackGrid";
-import TableOfContents from "@/components/TableOfContents";
 import { baseURL } from "@/app/resources";
 import { person, about, social } from "@/app/resources/content";
 
@@ -39,13 +38,6 @@ export async function generateMetadata() {
 }
 
 export default function About() {
-  const tocItems = [
-    { id: "introduction", title: "Introduction" },
-    { id: "work-experience", title: "Work Experience" },
-    { id: "side-projects", title: "Side Projects" },
-    { id: "how-i-work", title: "How I Work" },
-    { id: "tools-stack", title: "Tools & Stack" },
-  ];
 
   return (
     <div className={styles.page}>
@@ -68,10 +60,9 @@ export default function About() {
         }}
       />
 
-      {about.tableOfContent.display && <TableOfContents items={tocItems} />}
 
       {/* Identity faceplate (design.md §6.2). */}
-      <section id="introduction">
+      <section id="introduction" data-rail="IDENTITY">
         <Panel as="div" padding="lg">
           <div className={styles.faceplate}>
             <div className={styles.portraitWell}>
@@ -110,8 +101,8 @@ export default function About() {
 
       {/* Introduction — printed manual prose. */}
       {about.intro.display && (
-        <Reveal index={0}>
-        <section>
+        <Reveal>
+        <section data-rail="MANUAL">
           <div className={styles.eyebrow}>SEC.01 — OPERATOR&apos;S MANUAL</div>
           <div className={styles.bio}>{about.intro.description}</div>
         </section>
@@ -120,8 +111,8 @@ export default function About() {
 
       {/* Work experience as a maintenance log (design.md §6.2). */}
       {about.work.display && (
-        <Reveal index={0}>
-        <section id="work-experience">
+        <Reveal>
+        <section id="work-experience" data-rail="WORK">
           <div className={styles.eyebrow}>SEC.02 — MAINTENANCE LOG</div>
           <h2 className={styles.sectionTitle}>{about.work.title}</h2>
           <Panel as="div" padding="lg" className={styles.logShell}>
@@ -176,8 +167,8 @@ export default function About() {
 
       {/* Side projects as small devices. */}
       {about.sideProjects.display && (
-        <Reveal index={0}>
-        <section id="side-projects">
+        <Reveal>
+        <section id="side-projects" data-rail="SIDE PROJECTS">
           <div className={styles.eyebrow}>SEC.03 — SIDE PROJECTS</div>
           <h2 className={styles.sectionTitle}>{about.sideProjects.title}</h2>
           <div className={styles.sideGrid}>
@@ -191,8 +182,8 @@ export default function About() {
 
       {/* How I Work — numbered keys 01–05 (design.md §6.2). */}
       {about.howIWork.display && (
-        <Reveal index={0}>
-        <section id="how-i-work">
+        <Reveal>
+        <section id="how-i-work" data-rail="HOW I WORK">
           <div className={styles.eyebrow}>SEC.04 — OPERATING SEQUENCE</div>
           <h2 className={styles.sectionTitle}>{about.howIWork.title}</h2>
           <p className={styles.sectionSub}>{about.howIWork.subtitle}</p>
@@ -205,8 +196,8 @@ export default function About() {
 
       {/* Tools & Stack — the switchboard. */}
       {about.toolsStack.display && (
-        <Reveal index={0}>
-        <section id="tools-stack">
+        <Reveal>
+        <section id="tools-stack" data-rail="TOOLS & STACK">
           <div className={styles.eyebrow}>SEC.05 — SWITCHBOARD</div>
           <h2 className={styles.sectionTitle}>{about.toolsStack.title}</h2>
           <p className={styles.sectionSub}>{about.toolsStack.subtitle}</p>

@@ -255,6 +255,16 @@ not on the glass (§1 rule). Proper tablist semantics: role="tablist"/"tab"/
 "tabpanel", roving tabindex, ArrowLeft/ArrowRight/Home/End navigation. Client
 component; layer state is client-only (no URL param).
 
+### 5.11 Scroll Rail (`<ScrollRail>`) — the rack rail
+A fixed instrument on the left edge (≥1200px, fine pointers only): a 4px recessed track
+(`well` + `inset`, 240px tall, vertically centred) with a 10×18px `panel-high` carriage
+(`raised-sm`, hairline slot) that rides scroll progress on a spring (stiffness 120, damping 24;
+no spring under reduced motion). One tick per section — sections opt in with
+`data-rail="LABEL"` — placed in progress space so the carriage lines up with them. The active
+section's mark seats (ink) and its mono `label-sm` prints; all labels print on rail hover. Ticks
+are buttons: click scrolls there through Lenis with the header offset. Hidden when a page has
+fewer than two sections. On /about it replaces the old table of contents.
+
 ## 6. Page Treatments
 
 ### 6.1 Home — the Master Console
@@ -352,8 +362,17 @@ treatment — numbers glow, context is printed.
   overshoot, once per page load.
 - **Numeric tick:** clock ticks live (1s); stat numbers count up over 800ms on entry,
   tabular nums mandatory.
-- **Shell reveals:** scroll-triggered — shells rise 16px + fade over 400ms ease-out,
-  staggered 80ms per shell. Subtle; the desk never moves.
+- **Shell reveals (v2):** scroll-triggered — shells lift off the desk: hinged at the bottom edge,
+  from 8° and 24px below, fading in over 400ms ease-out. Shells entering the viewport in the same
+  ~120ms window auto-stagger 80ms apart (`index` remains an explicit override); a shell entering
+  alone starts at once. One-shot; anything already in view at hydration is never hidden. The
+  revealed shell carries `data-revealed`, which log lines and LEDs key their entry motion off.
+  Subtle; the desk never moves.
+- **Scroll choreography (v2):** the hero console recedes as you scroll past it (scale .965,
+  −18px, 55% opacity over the first 520px — a CSS `scroll()` timeline, compositor-only, static
+  where unsupported; ≥1024px). Log lines type in after their shell reveals (or after the /now
+  screen boots): a 420ms clip reveal with a 70ms stagger — not a blink. An LED inside a freshly
+  revealed shell flares once (600ms, one-shot, exempt from the blink budget).
 - **Hover:** shells lift (`hover-lift`) and device cards tilt, keys depress on press, LCD *content*
   never animates on hover — only the glass layer (specular) does; screens respond to data, not
   cursors.

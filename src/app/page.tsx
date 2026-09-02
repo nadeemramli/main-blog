@@ -50,8 +50,8 @@ export default function Home() {
   return (
     <div className={styles.page}>
       {/* Hero IS a console (design.md §6.1, locked). */}
-      <section>
-        <Panel as="div" padding="lg">
+      <section data-rail="CONSOLE">
+        <Panel as="div" padding="lg" className={styles.heroShell}>
           <div className={styles.heroGrid}>
             <div className={styles.gaugeModule}>
               <Gauge
@@ -92,8 +92,8 @@ export default function Home() {
       </section>
 
       {/* What I'm Working On Now — log module (design.md §6.1). */}
-      <Reveal index={0}>
-      <section>
+      <Reveal>
+      <section data-rail="NOW LOG">
         <div className={styles.eyebrow}>SEC.01 — NOW LOG</div>
         <Panel as="div" className={styles.nowModule}>
           <div className={styles.nowHeader}>
@@ -101,8 +101,12 @@ export default function Home() {
             <Led color="red" pulse label="REC" />
           </div>
           <ul className={styles.log}>
-            {consoleData.nowLog.map((line) => (
-              <li key={line.entry} className={styles.logLine}>
+            {consoleData.nowLog.map((line, index) => (
+              <li
+                key={line.entry}
+                className={styles.logLine}
+                style={{ "--i": index } as React.CSSProperties}
+              >
                 <span className={styles.logDate}>{line.date}</span>
                 <span aria-hidden="true">▸</span>
                 <span>{line.entry}</span>
@@ -118,8 +122,8 @@ export default function Home() {
 
       {/* Featured project — large Screen, §6.4 treatment. */}
       {featured && (
-        <Reveal index={1}>
-        <section>
+        <Reveal>
+        <section data-rail="FEATURED">
           <div className={styles.eyebrow}>SEC.02 — FEATURED PROJECT</div>
           <TiltPanel as="div" padding="lg" interactive className={styles.featured}>
             <Screen nodeId="NODE-PRJ.01" status="live">
@@ -157,8 +161,8 @@ export default function Home() {
 
       {/* Resources rail. */}
       {routes["/resources"] && (
-        <Reveal index={2}>
-        <section>
+        <Reveal>
+        <section data-rail="RESOURCES">
           <div className={styles.eyebrow}>SEC.03 — RESOURCES</div>
           <ResourceCarousel resources={getHandheldResources()} contained={true} />
         </section>

@@ -54,7 +54,7 @@ export default function BlogPage() {
       <p className={styles.description}>{blog.description}</p>
 
       {posts.length === 0 ? (
-        <Reveal index={0}>
+        <Reveal>
         <div>
           <Screen nodeId="NODE-PUB.00" status="off" className={styles.emptyScreen}>
             <div className={styles.emptyReadout}>NO TRANSMISSIONS YET</div>
@@ -65,7 +65,7 @@ export default function BlogPage() {
         </div>
         </Reveal>
       ) : (
-        <Reveal index={0}>
+        <Reveal>
         <div className={styles.grid}>
           {posts.map((post, index) => (
             <Panel as="article" key={post.slug} interactive className={styles.card}>

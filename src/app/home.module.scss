@@ -250,3 +250,47 @@
     min-height: 0;
   }
 }
+
+/* ── v2 scroll choreography ─────────────────────────────────── */
+
+/* Hero recede: as the reader scrolls past, the master console settles
+   back into the desk (scrubbed by the scroll timeline, compositor-only).
+   Static where scroll timelines are unsupported. */
+.heroShell {
+  transform-origin: 50% 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .heroShell {
+      animation: heroRecede linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 520px;
+    }
+  }
+}
+
+@keyframes heroRecede {
+  to {
+    transform: scale(0.965) translateY(-18px);
+    opacity: 0.55;
+  }
+}
+
+/* Log lines type in once their shell has revealed (a clip reveal, not a
+   blink — the blink budget is untouched). */
+@media (prefers-reduced-motion: no-preference) {
+  [data-revealed] .logLine {
+    clip-path: inset(0 100% 0 0);
+    animation: typeIn var(--console-dur-type) steps(28, end) forwards;
+    animation-delay: calc(
+      var(--boot-offset, 0ms) + var(--i, 0) * var(--console-stagger-log)
+    );
+  }
+}
+
+@keyframes typeIn {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

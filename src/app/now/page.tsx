@@ -54,8 +54,8 @@ export default function NowPage() {
       </section>
 
       {/* Status shell: gauge mirrors the hero (one value, two instruments). */}
-      <Reveal index={0}>
-      <section>
+      <Reveal>
+      <section data-rail="STATUS LOG">
         <div className={styles.eyebrow}>SEC.01 — STATUS LOG</div>
         <Panel as="div" padding="lg">
           <Screws />
@@ -67,9 +67,16 @@ export default function NowPage() {
             />
             <BootIn>
               <Screen nodeId="NODE-NOW.01" status="live">
-                <ul className={styles.log}>
+                <ul
+                  className={styles.log}
+                  style={{ "--boot-offset": "400ms" } as React.CSSProperties}
+                >
                   {consoleData.statusLog.map((line, index) => (
-                    <li key={line.entry} className={styles.logLine}>
+                    <li
+                      key={line.entry}
+                      className={styles.logLine}
+                      style={{ "--i": index } as React.CSSProperties}
+                    >
                       <span className={styles.logDate}>{line.date}</span>
                       <span aria-hidden="true">▸</span>
                       {"link" in line && line.link ? (
@@ -100,8 +107,8 @@ export default function NowPage() {
       </Reveal>
 
       {/* Attribute Console (design.md §5.10). */}
-      <Reveal index={1}>
-      <section>
+      <Reveal>
+      <section data-rail="ATTRIBUTES">
         <div className={styles.eyebrow}>SEC.02 — ATTRIBUTE CONSOLE</div>
         <AttributeConsole />
       </section>

@@ -41,7 +41,7 @@ export default function ResourcesPage() {
       <div className={styles.eyebrow}>SEC.01 — HANDHELDS</div>
       <h1 className={styles.title}>{resources.title}</h1>
       <p className={styles.description}>{resources.description}</p>
-      <Reveal index={0}>
+      <Reveal>
         <ResourceCarousel resources={getHandheldResources()} />
       </Reveal>
     </div>

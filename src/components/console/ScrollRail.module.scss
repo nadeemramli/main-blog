@@ -1,0 +1,118 @@
+/* The rack rail (design.md §5.12): hardware, not a scrollbar. */
+.rail {
+  display: none;
+  position: fixed;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--console-z-rail);
+  font-family: var(--console-font-mono);
+}
+
+/* Fine pointers on wide viewports only. */
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .rail {
+    display: block;
+  }
+}
+
+/* Recessed track: a 4px well with the inset pair. */
+.track {
+  position: relative;
+  width: 4px;
+  margin-left: 4px;
+  background: var(--console-well);
+  border-radius: var(--console-radius-pill);
+  box-shadow: var(--console-shadow-inset);
+}
+
+/* The carriage rides the track; framer drives `y`. */
+.carriage {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 10px;
+  background: var(--console-panel-high);
+  border-radius: 3px;
+  box-shadow: var(--console-shadow-raised-sm);
+  will-change: transform;
+
+  /* Hairline slot across the cap. */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 50%;
+    height: 1px;
+    background: var(--console-border);
+    transform: translateY(-50%);
+  }
+}
+
+.tick {
+  position: absolute;
+  left: -6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--console-text-tertiary);
+
+  &:focus-visible {
+    outline: 2px solid var(--console-mint);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.mark {
+  width: 16px;
+  height: 1px;
+  background: var(--console-border);
+  flex-shrink: 0;
+  transition: background var(--console-dur-cap) ease;
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--console-dur-cap) ease,
+    transform var(--console-dur-cap) var(--console-ease-out),
+    color var(--console-dur-cap) ease;
+}
+
+/* Active section: seated mark, printed label. All labels show on rail hover. */
+.active .mark {
+  background: var(--console-text-primary);
+}
+
+.active .label,
+.rail:hover .label,
+.tick:focus-visible .label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.active .label {
+  color: var(--console-text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark,
+  .label {
+    transition: none;
+  }
+}

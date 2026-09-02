@@ -54,3 +54,34 @@
     animation: none;
   }
 }
+
+/* Entry flare: an LED inside a shell that has just revealed flashes once
+   (one-shot; exempt from the blink budget, never loops). */
+@media (prefers-reduced-motion: no-preference) {
+  [data-revealed] .dot {
+    animation: ledFlare var(--console-dur-flare) var(--console-ease-out) 1;
+  }
+
+  [data-revealed] .pulse {
+    animation:
+      ledFlare var(--console-dur-flare) var(--console-ease-out) 1,
+      pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes ledFlare {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  30% {
+    transform: scale(1.7);
+    filter: brightness(1.8);
+  }
+
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}

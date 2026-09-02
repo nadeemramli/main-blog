@@ -1,13 +1,17 @@
-/* Shell reveal (design.md §7): rise + fade, 400ms ease-out.
-   Hidden state only ever applies on the client after the reduced-motion
-   preference is known — SSR output is always visible (LCP safety). */
+/* Shell reveal (design.md §7 v2): lift off the desk — hinge at the bottom
+   edge, from 8° and 24px below, fade over 400ms. Hidden state only ever
+   applies on the client after the reduced-motion preference is known —
+   SSR output is always visible (LCP safety). */
 .hidden {
   opacity: 0;
-  transform: translateY(16px);
+  transform: perspective(var(--console-perspective))
+    rotateX(var(--console-reveal-rx)) translateY(var(--console-reveal-y));
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
 }
 
 .reveal {
   transition:
-    opacity var(--console-dur-reveal) ease-out,
-    transform var(--console-dur-reveal) ease-out;
+    opacity var(--console-dur-reveal) var(--console-ease-out),
+    transform var(--console-dur-reveal) var(--console-ease-out);
 }

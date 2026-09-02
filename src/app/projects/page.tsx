@@ -96,7 +96,7 @@ export default function ProjectsPage() {
       <div className={styles.eyebrow}>SEC.01 — DEVICE RACK</div>
       <h1 className={styles.title}>{projects.title}</h1>
       <p className={styles.description}>{projects.description}</p>
-      <Reveal index={0}>
+      <Reveal>
         <ProjectRack projects={rackProjects} />
       </Reveal>
     </div>

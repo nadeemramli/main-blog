@@ -13,6 +13,7 @@ export { Rocker } from "./Rocker";
 export type { RockerSide } from "./Rocker";
 export { Gauge } from "./Gauge";
 export { Reveal } from "./Reveal";
+export { ScrollRail } from "./ScrollRail";
 export { default as DitherCanvasMount } from "./DitherCanvasMount";
 export { Screws } from "./Screws";
 export { BootIn } from "./BootIn";

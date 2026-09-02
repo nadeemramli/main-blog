@@ -116,3 +116,22 @@
     animation: none;
   }
 }
+
+/* Log lines type in after the screen powers on (tail -f arriving). A clip
+   reveal, not a blink — the tail cursor stays the screen's one blink. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-boot="on"] .logLine,
+  [data-revealed] .logLine {
+    clip-path: inset(0 100% 0 0);
+    animation: typeIn var(--console-dur-type) steps(28, end) forwards;
+    animation-delay: calc(
+      var(--boot-offset, 0ms) + var(--i, 0) * var(--console-stagger-log)
+    );
+  }
+}
+
+@keyframes typeIn {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

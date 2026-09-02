@@ -8,17 +8,42 @@ import { usePrefersReducedMotion } from "@/components/hooks/usePrefersReducedMot
 import styles from "./Reveal.module.scss";
 
 interface RevealProps {
-  /** Stagger slot — 80ms per shell (design.md §7). */
+  /** Explicit stagger slot (80ms each). Omit to auto-batch: shells that
+   *  enter the viewport in the same ~120ms window stagger after each
+   *  other; a shell entering alone starts at once. */
   index?: number;
   className?: string;
   children: React.ReactNode;
 }
 
-export const Reveal = ({ index = 0, className, children }: RevealProps) => {
+const STAGGER_MS = 80;
+const BATCH_WINDOW_MS = 120;
+
+let batchAt = 0;
+let batchCount = 0;
+
+function nextBatchDelay(): number {
+  const now = performance.now();
+  if (now - batchAt < BATCH_WINDOW_MS) {
+    batchCount += 1;
+  } else {
+    batchAt = now;
+    batchCount = 0;
+  }
+  return batchCount * STAGGER_MS;
+}
+
+/* Shell reveal (design.md §7 v2): the shell lifts off the desk — hinged at
+   its bottom edge, from 8° and 24px below, fading in over 400ms. One-shot.
+   SSR output is always visible; anything already in view at hydration is
+   never hidden (LCP safety). `data-revealed` marks the visible state so
+   log lines and LEDs can key their own entry motion off it. */
+export const Reveal = ({ index, className, children }: RevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
   // null = pre-hydration: render visible (SSR-safe), no animation.
   const [state, setState] = useState<"ssr" | "hidden" | "visible">("ssr");
+  const [delay, setDelay] = useState(0);
 
   useEffect(() => {
     if (reduced === null) return;
@@ -41,6 +66,7 @@ export const Reveal = ({ index = 0, className, children }: RevealProps) => {
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          setDelay(index !== undefined ? index * STAGGER_MS : nextBatchDelay());
           setState("visible");
           io.disconnect();
         }
@@ -49,7 +75,7 @@ export const Reveal = ({ index = 0, className, children }: RevealProps) => {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [reduced]);
+  }, [reduced, index]);
 
   return (
     <div
@@ -59,9 +85,8 @@ export const Reveal = ({ index = 0, className, children }: RevealProps) => {
         state === "hidden" && styles.hidden,
         className,
       )}
-      style={
-        state !== "ssr" ? { transitionDelay: `${index * 80}ms` } : undefined
-      }
+      data-revealed={state === "visible" ? "" : undefined}
+      style={state !== "ssr" ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </div>
