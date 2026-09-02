@@ -18,6 +18,10 @@ import localFont from "next/font/local";
 import { person, home } from "@/app/resources/content";
 import { Column, Flex, ToastProvider } from "@/once-ui/components";
 
+export const viewport = {
+  themeColor: "#d5d2c6",
+};
+
 export async function generateMetadata() {
   return {
     metadataBase: new URL(`https://${baseURL}`),
@@ -97,6 +101,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       data-border={style.border}
       data-surface={style.surface}
       data-transition={style.transition}
+      // The lamp script below may set data-console before React hydrates.
+      suppressHydrationWarning
       className={classNames(
         primary.variable,
         secondary ? secondary.variable : "",
@@ -117,6 +123,13 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           margin="0"
           padding="0"
         >
+          {/* Night visitors must never see day: apply the stored lamp state
+              before anything in <body> paints (design.md §2 v2). */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `try{var l=localStorage.getItem("console.lamp");if(l==="night"){document.documentElement.setAttribute("data-console","night");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#1a1b19")}}catch(e){}`,
+            }}
+          />
           <ChunkReloadGuard />
           <DitherCanvasMount />
           <Flex fillWidth minHeight="16"></Flex>

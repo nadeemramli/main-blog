@@ -140,3 +140,46 @@
   /* Glass depth is not directional — the lamp never moves it. */
   --console-shadow-lcd-depth: inset 0 2px 12px rgba(0, 0, 0, 0.85);
 }
+
+/* ── Night (design.md §2 v2): the lamp is off ─────────────────── */
+/* Switched by the header rocker (`data-console="night"` on <html>), applied
+   before first paint from localStorage. Once-ui's data-theme stays "light";
+   the console owns its own second palette. Red/amber signals and canonical
+   mint are unchanged; the "highlight" ink becomes a faint warm rim — no
+   white at night. */
+[data-console="night"] {
+  color-scheme: dark;
+
+  --console-bg: #1a1b19;
+  --console-bg-drift: #1f201d;
+  --console-bg-deep: #141513;
+  --console-desk-opacity: 0.35;
+
+  --console-panel: #242522;
+  --console-panel-high: #2c2d2a;
+  --console-well: #161715;
+  --console-border: #3a3b37;
+  --console-panel-glass: color-mix(in srgb, var(--console-panel) 70%, transparent);
+
+  --console-lcd-bg: #0b0c0a;
+  --console-lcd-bezel: #151613;
+  --console-lcd-text: #7fe0c1;
+  --console-lcd-dim: #4a8672;
+  --console-lcd-glow: rgba(127, 224, 193, 0.55);
+  --console-lcd-bloom: rgba(127, 224, 193, 0.22);
+  --console-glass-specular: rgba(255, 255, 255, 0.05);
+
+  --console-text-primary: #e8e4d8;
+  --console-text-secondary: #aca89b;
+  --console-text-tertiary: #6f6c62;
+  --console-mint-ink: #0a241c;
+
+  --console-shade: rgba(0, 0, 0, 0.55);
+  --console-shade-soft: rgba(0, 0, 0, 0.45);
+  --console-shade-hard: rgba(0, 0, 0, 0.65);
+  --console-highlight: rgba(255, 244, 224, 0.07);
+  --console-highlight-soft: rgba(255, 244, 224, 0.05);
+  --console-highlight-hard: rgba(255, 244, 224, 0.09);
+  --console-highlight-press: rgba(255, 244, 224, 0.05);
+  --console-highlight-deep: rgba(255, 244, 224, 0.05);
+}

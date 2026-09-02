@@ -1,8 +1,8 @@
 ---
 version: "nadeemramli-console-2026-06-11"
 name: "Operator Console — nadeemramli.com"
-description: "A full-site design system adapting the Atmospheric Data Console aesthetic (warm neumorphic hardware, LCD readouts, instrument-panel hierarchy) to a personal portfolio for a growth marketer / product developer. The site is framed as the operator's control panel: every page is a device, every metric is a readout, every status is an indicator light. Light mode only. Reskin target: existing Once UI / Next.js codebase."
-mode: "light-only"
+description: "A full-site design system adapting the Atmospheric Data Console aesthetic (warm neumorphic hardware, LCD readouts, instrument-panel hierarchy) to a personal portfolio for a growth marketer / product developer. The site is framed as the operator's control panel: every page is a device, every metric is a readout, every status is an indicator light. Day mode by default; a Night token set is switched by the header lamp. Reskin target: existing Once UI / Next.js codebase."
+mode: "day + night (lamp switch)"
 implementation-target: "Once UI / Next.js reskin (override theme tokens + component styles; preserve routing, content model, and layout primitives where possible)"
 
 colors:
@@ -121,6 +121,15 @@ information is printed on the body.** When deciding how to render any element, a
   hover states, gradients. If red covers more than ~1% of any viewport, it's wrong.
 - Mint #76D2B6 has two jobs: phosphor text on LCD surfaces, and the fill of the single primary
   CTA per page (e.g., "Schedule a Call"). On mint surfaces, text is `accent-mint-ink`.
+- **Night palette (v2) — the lamp is off.** Switched by the header rocker; `data-console="night"` on
+  `<html>`, applied before first paint from `localStorage["console.lamp"]` (default is day; the
+  switch is the only input — never `prefers-color-scheme`, so the rocker and the page always
+  agree). Desk `#1A1B19` (drift `#1F201D`, deep `#141513`, grain at 35%); panel `#242522`,
+  panel-high `#2C2D2A`, well `#161715`, border `#3A3B37`; glass `#0B0C0A` in a `#151613` bezel,
+  phosphor `#7FE0C1` / dim `#4A8672` with a stronger glow and bloom; ink `#E8E4D8` / `#ACA89B`
+  (≈7.4:1 on panel) / `#6F6C62`; mint-ink `#0A241C`. Shadow inks: shade `rgba(0,0,0,.45–.65)`, and
+  the highlight becomes a faint warm rim `rgba(255,244,224,.05–.09)` — there is no white at
+  night. Red, amber and canonical mint are unchanged. Switching is instant, no crossfade.
 - Contrast notes: `text-secondary` #4B5563 on `panel` passes AA for body sizes. `lcd-dim`
   is for secondary LCD data ≥13px only. `text-tertiary` is decoration-grade fine print only.
 
@@ -277,6 +286,14 @@ section's mark seats (ink) and its mono `label-sm` prints; all labels print on r
 are buttons: click scrolls there through Lenis with the header offset. Hidden when a page has
 fewer than two sections. On /about it replaces the old table of contents.
 
+### 5.12 Lamp Switch (`<LampSwitch>`)
+The header's fourth module, after the clock: a small Rocker (`size="sm"`, 40px) labelled
+DAY / NIGHT (`D` / `N` below 768px). `role="switch"`, `aria-checked` when night. Flips
+`data-console` on `<html>`, persists to `localStorage`, swaps the `theme-color` meta, and
+notifies the desk canvas and the 3D unit. The cap never slides on first paint: a returning night
+visitor finds the rocker already seated (`html:not([data-hydrated]) .cap { transition: none }`).
+The module list is now `[location] | [key track] | [clock] | [lamp]`.
+
 ## 6. Page Treatments
 
 ### 6.1 Home — the Master Console
@@ -405,6 +422,9 @@ treatment — numbers glow, context is printed.
   with a 90ms phosphor settle on the incoming page — no stutters, no movement (a boot-flicker
   and an unlock chip were both tried and cut as too much). First document load skips the
   settle (the hero boot owns it). LCDs don't crossfade.
+- **Night mode (v2):** switching the lamp is instant — no crossfade, no transition on colours
+  (switching a lamp is instant). The desk canvas re-reads its colours on the attribute flip and
+  drops to 35% grain; the lamp pool still follows the pointer.
 - **Hard rule:** `prefers-reduced-motion: reduce` kills the dither drift, boot sequence,
   needle springs, and count-ups. Everything renders in final state. Non-negotiable.
 
@@ -412,14 +432,16 @@ treatment — numbers glow, context is printed.
 
 - Override at the token layer first: map this palette/type/radius/shadow set onto Once UI's
   CSS custom properties (`--neutral-*`, `--brand-*`, radius and shadow vars) in the theme
-  config; force `data-theme="light"` site-wide and remove the theme switcher.
+  config. Once-ui stays pinned to `data-theme="light"` site-wide (its dark ramp is unaudited
+  and off-palette); the console's own night set is `data-console="night"` on `<html>`, applied
+  pre-hydration from `localStorage["console.lamp"]` by an inline script at the top of `<body>`.
 - Keep Once UI layout primitives (Flex, Grid, Column) — they're structure, not skin. Replace
   surface-level components (Card, Button, Badge, Navbar) with the components in §5, or
   wrap them with the new classes if rebuild cost is high.
 - New components to build: `Panel`, `Screen`, `Gauge`, `Rocker`, `Led`, `MicroLcd` (clock/
   location chips), `DitherCanvas`. All client components except Panel.
-- The red ambient gradient, dark theme tokens, and current red CTA styles are removed
-  entirely — no dark-mode remnants. The dev-overlay "1 Issue" badges visible in current
+- The red ambient gradient and the old red CTA styles are removed entirely. The only dark
+  palette is the console's Night set (§2); once-ui's dark theme is never enabled. The dev-overlay "1 Issue" badges visible in current
   screenshots are tooling artifacts, not design elements; ignore.
 - Fonts: self-host Inter (variable) + JetBrains Mono (400/500/600) via next/font.
 

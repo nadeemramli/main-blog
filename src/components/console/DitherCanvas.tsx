@@ -259,7 +259,7 @@ export default function DitherCanvas() {
         height: "100%",
         zIndex: 0,
         pointerEvents: "none",
-        opacity: 0.45,
+        opacity: "var(--console-desk-opacity, 0.45)",
       }}
     />
   );

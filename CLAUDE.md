@@ -82,7 +82,7 @@ Vendored design-system library — treat as a dependency you happen to be able t
 3. `once-ui/tokens/theme.scss` targets those selectors (`[data-theme="dark"]`, `[data-brand=...]`, etc.) to set CSS custom properties.
 4. Components reference tokens via props like `background="neutral-weak"` / `onBackground="brand-strong"`, which resolve to `var(--…)`.
 
-The live theme is **light** (`style.theme = "light"`, sand neutral); the console's own day/night palette is a separate `data-console` attribute (see design.md). **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
+The live once-ui theme is **light** (`style.theme = "light"`, sand neutral) and must stay so. The console's own **night mode** is a separate `data-console="night"` attribute on `<html>`: tokens in the `[data-console="night"]` block of `console-tokens.scss`, state in `src/components/console/lamp.ts` (`useLamp`/`setLamp`, `localStorage["console.lamp"]`), the header `LampSwitch` rocker, and an inline script at the top of `<body>` in `layout.tsx` that applies the stored value before first paint (hence `suppressHydrationWarning` on `<html>`). Default is day; never follow `prefers-color-scheme`. **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
 
 ### App-specific components (`src/components/`)
 Custom components layered on top of Once UI. Barrel: `src/components/index.ts` (exports a subset: `Header`, `Footer`, `Mailchimp`, `ProjectCard`, `HeadingLink`, `RouteGuard`).

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { Icon } from "@/once-ui/components";
 import { Key, MicroLcd } from "@/components/console";
+import { LampSwitch } from "@/components/console/LampSwitch";
 import { useScrolled } from "@/components/hooks/useScrolled";
 import styles from "@/components/Header.module.scss";
 
@@ -150,6 +151,8 @@ export const Header = () => {
             </MicroLcd>
           </>
         )}
+        <span className={styles.divider} aria-hidden="true" />
+        <LampSwitch className={styles.lamp} />
         <span className={styles.screw} aria-hidden="true" />
       </div>
     </header>

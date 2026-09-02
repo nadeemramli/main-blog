@@ -226,3 +226,28 @@
     bottom: 3px;
   }
 }
+
+/* The lamp rocker: the one control that must stay reachable on mobile. */
+.lamp {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .lamp {
+    display: inline-grid;
+  }
+}
+
+/* Mobile: the lamp rocker keeps only the first letter of each label
+   (D / N) so the cluster fits 360px. The cap is the rocker's first span;
+   the two option labels follow it. */
+@media (max-width: 768px) {
+  .lamp > span:nth-child(n + 2) {
+    font-size: 0;
+    padding: 0 8px;
+  }
+
+  .lamp > span:nth-child(n + 2)::first-letter {
+    font-size: 10px;
+  }
+}
