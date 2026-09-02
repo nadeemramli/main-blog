@@ -294,6 +294,20 @@ notifies the desk canvas and the 3D unit. The cap never slides on first paint: a
 visitor finds the rocker already seated (`html:not([data-hydrated]) .cap { transition: none }`).
 The module list is now `[location] | [key track] | [clock] | [lamp]`.
 
+### 5.13 Device Dock (`<DeviceDockMount>`) — the reference unit
+The hero's third module: a recessed well (`well` + `inset`, `panel-inner` radius, ~1:1.05)
+holding a **3D handheld console** built from primitives (vanilla three.js on the shared ticker, no
+model file): a sand `RoundedBox` body, a dark bezel, a glass plane with mint emissive readouts
+and an additive phosphor halo, three `panel-high` keycaps and one knob. Lit by the same lamp as
+the CSS shadows — the key light tracks `--light-dx/--light-dy` — with a warm fill; colours read
+from the console tokens and re-read when the lamp switch flips (night: dimmer key light, cool
+fill, brighter phosphor). A radial contact shadow on the well floor keeps it resting above the
+desk. **Fallback and placeholder:** a printed-ink SVG outline of the same silhouette occupies the
+well first and stays wherever the scene never loads (below 1024px, low-tier machines —
+≤4 cores, <4GB, no WebGL2 — or reduced motion, where the scene holds a static three-quarter
+pose if it does load). The scene is one lazy chunk loaded on idle; it is never the LCP element
+and never appears before the LCD has painted; the outline reserves the box so nothing shifts.
+
 ## 6. Page Treatments
 
 ### 6.1 Home — the Master Console
@@ -305,10 +319,13 @@ The module list is now `[location] | [key track] | [clock] | [lamp]`.
   `NODE-NR.01  ● SYNC` / `OPERATOR` / readout-xl `NADEEM RAMLI` / `lcd-dim` line
   `GROWTH MARKETER · INDIE BUILDER · SYSTEMS THINKER` / bottom 2×2 mini-grid of live stats
   (e.g. `YRS EXP 5+`, `CURRENT dealn.app`, `LOCAL 00:43`, `STATUS OPEN`).
-- **Right — Reference card:** the source's weekly forecast strip, repurposed as a
-  **shipping week**: `M T W T F` columns with tiny icons/marks for what shipped or is
-  scheduled, fed manually or from the Now data. Below it, the EN/BM rocker echo or a
-  speaker grille.
+- **Right — the Dock (v2):** the 3D reference unit (§5.13), a handheld twin of this console
+  floating in a recessed well. The grid is `232px | 1fr | 260px`.
+- **Below the tri-panel — Shipping week strip (v2):** the source's weekly forecast strip,
+  repurposed as a **shipping week** and laid out as one recessed rail under the three modules:
+  `SHIPPING WEEK  M○ T○ W○ T○ F○ S●  ● ship · ○ build`, fed manually or from the Now data, with
+  the speaker grille riding its right end (still the shell's one decorative detail). As the reader
+  scrolls past, the whole console recedes (§7).
 
 Below the hero, as separate shells: "What I'm Working On Now" (a log module: red record LED,
 mono timestamped lines, key linking to /now) → Featured project (large Screen, see 6.4
@@ -422,6 +439,11 @@ treatment — numbers glow, context is printed.
   with a 90ms phosphor settle on the incoming page — no stutters, no movement (a boot-flicker
   and an unlock chip were both tried and cut as too much). First document load skips the
   settle (the hero boot owns it). LCDs don't crossfade.
+- **The reference unit (v2):** the 3D handheld in the hero dock idles on a slow float
+  (±0.06 units, ~8s) and a ±0.02rad roll, turns toward the pointer (±0.22/±0.32rad from the
+  shared pointer store), and yaws up to 0.6rad with scroll, all critically damped. Renders only
+  while the dock is in view; static three-quarter pose under reduced motion; ≥1024px, capable
+  machines only; lazy chunk on idle, never on the LCP path.
 - **Night mode (v2):** switching the lamp is instant — no crossfade, no transition on colours
   (switching a lamp is instant). The desk canvas re-reads its colours on the attribute flip and
   drops to 35% grain; the lamp pool still follows the pointer.
@@ -458,4 +480,8 @@ treatment — numbers glow, context is printed.
 - Keep Manglish-friendly copy tone where copy is rewritten: plain, direct, a bit playful in
   microcopy (`STATUS: OPEN FOR COLLABS`), never corporate.
 - Performance floor: dither canvas + boot sequence must not push LCP past 2.5s on mid-tier
-  mobile; the canvas mounts after first paint.
+  mobile; the canvas mounts after first paint. three.js ships in one lazy chunk
+  (≈170KB gz) loaded on idle, ≥1024px only, never on the LCP path; the pointer lamp writes at
+  30Hz and only on change. Every runtime effect has a static `var()` fallback.
+- Preserve the first-viewport signal (v2 addendum): the reference unit is an instrument beside the
+  LCD, never a hero image; it must never appear before the LCD has painted.

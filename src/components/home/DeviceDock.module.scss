@@ -1,0 +1,76 @@
+/* The dock (design.md §5.13): a recessed well holding the reference unit. */
+.dock {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  background: var(--console-well);
+  border-radius: var(--console-radius-panel-inner);
+  box-shadow: var(--console-shadow-inset);
+  overflow: hidden;
+  color: var(--console-border);
+}
+
+/* Printed outline: the fallback and the placeholder. */
+.outline {
+  width: 52%;
+  height: auto;
+  opacity: 0.85;
+  transition: opacity 300ms ease;
+}
+
+/* Contact shadow on the well floor, so the unit reads as resting above it. */
+.contact {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  width: 56%;
+  height: 9%;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, var(--console-shade) 0, transparent 70%);
+  opacity: 0;
+  filter: blur(4px);
+  transition: opacity 300ms ease;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+/* Once the scene has painted its first frame the outline yields to it. */
+.dock[data-painted] {
+  .canvas,
+  .contact {
+    opacity: 1;
+  }
+
+  .outline {
+    opacity: 0;
+  }
+}
+
+/* Stacked hero: a short landscape well with the outline centred. */
+@media (max-width: 1024px) {
+  .dock {
+    aspect-ratio: 2.4 / 1;
+    max-height: 220px;
+  }
+
+  .outline {
+    width: auto;
+    height: 78%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outline,
+  .contact,
+  .canvas {
+    transition: none;
+  }
+}

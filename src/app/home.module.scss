@@ -10,7 +10,7 @@
 /* ── Hero console (design.md §6.1) ─────────────────────────── */
 .heroGrid {
   display: grid;
-  grid-template-columns: 232px 1px 1fr 1px 216px;
+  grid-template-columns: 232px 1px 1fr 1px 260px;
   gap: var(--console-gap);
   align-items: center;
 }
@@ -28,17 +28,20 @@
   justify-content: center;
 }
 
-/* Reference card: the shipping week (design.md §6.1). */
-.reference {
+/* Shipping week strip under the tri-panel (design.md §6.1 v2): a recessed
+   rail with the week laid out horizontally; the grille rides its right end. */
+.shippingStrip {
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: var(--console-gap);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: var(--console-gap);
+  min-height: 36px;
+  padding: 8px 72px 8px 16px;
   background: var(--console-well);
-  border-radius: var(--console-radius-panel-inner);
+  border-radius: 12px;
   box-shadow: var(--console-shadow-inset);
-  padding: var(--console-gap);
-  min-height: 180px;
 }
 
 .refTitle {
@@ -51,16 +54,14 @@
 }
 
 .week {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
+  display: flex;
+  gap: 14px;
 }
 
 .dayCol {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .dayLabel {
@@ -94,10 +95,11 @@
 /* One decorative hardware detail per shell (design.md §4). */
 .grille {
   position: absolute;
-  right: var(--console-gap);
-  bottom: var(--console-gap);
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 44px;
-  height: 28px;
+  height: 21px;
   background-image: radial-gradient(var(--console-border) 1px, transparent 1.5px);
   background-size: 7px 7px;
   opacity: 0.7;
@@ -244,10 +246,6 @@
 
   .heroDivider {
     display: none;
-  }
-
-  .reference {
-    min-height: 0;
   }
 }
 

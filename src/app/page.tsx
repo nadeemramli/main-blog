@@ -1,6 +1,7 @@
 import classNames from "classnames";
 
 import { Badge, Gauge, Key, Led, Panel, Reveal, Screen, TiltPanel } from "@/components/console";
+import DeviceDockMount from "@/components/home/DeviceDockMount";
 import HeroScreen from "@/components/home/HeroScreen";
 import { ResourceCarousel } from "@/components/ResourceCarousel";
 import { getPosts } from "@/app/utils/utils";
@@ -68,24 +69,27 @@ export default function Home() {
               stats={consoleData.stats}
             />
             <span className={styles.heroDivider} aria-hidden="true" />
-            <div className={styles.reference}>
-              <div className={styles.refTitle}>Shipping Week</div>
-              <div className={styles.week}>
-                {consoleData.shippingWeek.map((d, index) => (
-                  <div key={index} className={styles.dayCol}>
-                    <span className={styles.dayLabel}>{d.day}</span>
-                    <span
-                      className={classNames(
-                        styles.dayMark,
-                        d.mark === "ship" && styles.ship,
-                      )}
-                    />
-                  </div>
-                ))}
+            {/* The dock: the 3D reference unit (design.md §5.13). */}
+            <DeviceDockMount />
+          </div>
+          {/* Shipping week strip under the tri-panel (design.md §6.1 v2). */}
+          <div className={styles.shippingStrip}>
+            <span className={styles.refTitle}>Shipping Week</span>
+            <div className={styles.week}>
+            {consoleData.shippingWeek.map((d, index) => (
+              <div key={index} className={styles.dayCol}>
+                <span className={styles.dayLabel}>{d.day}</span>
+                <span
+                  className={classNames(
+                    styles.dayMark,
+                    d.mark === "ship" && styles.ship,
+                  )}
+                />
               </div>
-              <span className={styles.legend}>● ship · ○ build</span>
-              <div className={styles.grille} aria-hidden="true" />
+            ))}
             </div>
+            <span className={styles.legend}>● ship · ○ build</span>
+            <div className={styles.grille} aria-hidden="true" />
           </div>
         </Panel>
         <p className={styles.subline}>{home.subline}</p>
