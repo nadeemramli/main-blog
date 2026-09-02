@@ -76,12 +76,12 @@
 /* Boot sequence (design.md §7): flicker on, then lines stagger in.
    Only ever applied post-hydration, once per session. */
 .boot {
-  animation: flicker 280ms steps(1, end);
+  animation: flicker var(--console-dur-boot) steps(1, end);
 }
 
 .boot .line {
   opacity: 0;
-  animation: lineIn 200ms ease-out forwards;
+  animation: lineIn var(--console-dur-boot-line) ease-out forwards;
 }
 
 @keyframes flicker {

@@ -34,7 +34,7 @@ When the dev server misbehaves with errors like `Cannot read properties of undef
 ## Tech stack
 
 - **next 16**, **react / react-dom 19**, **@next/mdx 16**, **next-mdx-remote 6** (v6 is the React-19-compatible major)
-- **framer-motion 12** (animations on about-page cards), **embla-carousel-react 8** (resource carousels)
+- **framer-motion 12** (Gauge needle spring, `MotionConfig` in `Providers`, and — as the v2 console lands — the scroll rail and nav carriage), **embla-carousel-react 8** (resource carousels)
 - **sass** (SCSS modules + the once-ui token system), **postcss** + `postcss-preset-env`/`postcss-custom-media`
 - **gray-matter** (MDX frontmatter), **react-icons** (icon registry), **sharp** (image handling)
 - TypeScript is loose: `strict: false` but `strictNullChecks: true`, `allowJs: true` (resource files are `.js`). `tsconfig.json` is partly Next-managed (`jsx: react-jsx`, `.next/dev/types` include were auto-added by Next 16 — leave them).
@@ -82,7 +82,7 @@ Vendored design-system library — treat as a dependency you happen to be able t
 3. `once-ui/tokens/theme.scss` targets those selectors (`[data-theme="dark"]`, `[data-brand=...]`, etc.) to set CSS custom properties.
 4. Components reference tokens via props like `background="neutral-weak"` / `onBackground="brand-strong"`, which resolve to `var(--…)`.
 
-The current live theme is **dark** (`style.theme = "dark"`). **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
+The live theme is **light** (`style.theme = "light"`, sand neutral); the console's own day/night palette is a separate `data-console` attribute (see design.md). **Icons** used anywhere (e.g. in `social`) must first be registered in `src/once-ui/icons.ts` (maps names → react-icons).
 
 ### App-specific components (`src/components/`)
 Custom components layered on top of Once UI. Barrel: `src/components/index.ts` (exports a subset: `Header`, `Footer`, `Mailchimp`, `ProjectCard`, `HeadingLink`, `RouteGuard`).
@@ -90,7 +90,7 @@ Custom components layered on top of Once UI. Barrel: `src/components/index.ts` (
 - **Content:** `ProjectCard`, `ResourceCard`, `ResourceCarousel` + `InfiniteResourceCarousel` (Embla / CSS-marquee), `BlogContent`, `Mailchimp` (debounced newsletter form posting to `mailchimp.action`).
 - **MDX/navigation helpers:** `mdx.tsx` (`CustomMDX`), `HeadingLink` (copy-permalink heading), `TableOfContents` (IntersectionObserver active-section tracking), `ScrollToHash`.
 - **Skills (about page):** `HierarchicalSkillTracker`, `SkillRadarChart` (canvas radar), `SkillSection` — custom data-viz, all client components.
-- **`components/about/`:** `CaseStudyCard`, `SideProjectCard`, `HowIWorkSteps`, `ToolsStackGrid` — animated (framer-motion) building blocks for the about page.
+- **`components/about/`:** `SideProjectCard`, `HowIWorkSteps`, `ToolsStackGrid` — console-styled building blocks for the about page (static; no framer-motion).
 - **`components/projects/Projects.tsx`** and **`components/resource/Posts.tsx`** — list builders that call `getPosts()` / read `resources` and render cards by range.
 
 ### Route gating (no server auth)
@@ -101,7 +101,7 @@ Static: every page's metadata points at **`public/og/default.png`** — a 1920×
 
 ### Fonts
 Two independent font setups — don't conflate them:
-- **App UI fonts:** self-hosted via `next/font/local` in `layout.tsx`, files in **`src/app/fonts/`** (`inter.woff2`, `space-grotesk.woff2`, `source-code-pro.woff2`). These map to `--font-primary`, `--font-secondary`, `--font-code`. They were converted from `next/font/google` so the build needs no network access. Commit these `.woff2` files.
+- **App UI fonts:** self-hosted via `next/font/local` in `layout.tsx`, files in **`src/app/fonts/`** (`inter.woff2`, `jetbrains-mono.woff2`). These map to `--font-primary`, `--font-secondary`, `--font-code`. They were converted from `next/font/google` so the build needs no network access. Commit these `.woff2` files.
 - **OG image font:** `public/fonts/Inter.ttf`, used only by `og/route.tsx`. Keep it.
 
 ### Static export
@@ -111,7 +111,7 @@ Two independent font setups — don't conflate them:
 
 `design.md` is fully implemented. The architecture an agent must know:
 
-- **Tokens:** `src/styles/console-tokens.scss` defines every `--console-*` custom property (colors, type, radii, spacing, the neumorphic shadow pairs). Imported in `layout.tsx` AFTER the Once UI sheets. **Mint discipline:** console components use `--console-*` vars exclusively — never `--scheme-*` ramps, never hardcoded colors/shadows. Canonical mint is `#76D2B6`.
+- **Tokens:** `src/styles/console-tokens.scss` defines every `--console-*` custom property (colors, type, radii, spacing, motion durations/eases, depth, the z scale, and the neumorphic shadow pairs). Imported in `layout.tsx` AFTER the Once UI sheets. **Shadow pairs are composed from a light vector** `--light-dx/--light-dy` (canonical top-left `-1,-1` as the `var()` fallback) and six shadow inks, so a pointer lamp can move them and night mode can recolour them; never write a literal shadow or duration in a console component. **Mint discipline:** console components use `--console-*` vars exclusively — never `--scheme-*` ramps, never hardcoded colors/shadows. Canonical mint is `#76D2B6`.
 - **Components:** `src/components/console/` — `Panel` (device shell), `Screen` (LCD; statuses: sync = red pulse, live = mint, idle = amber, locked = red steady, off = dotless), `Gauge`, `Rocker`, `Led`, `MicroLcd`, `Key` (router-aware: internal hrefs render `next/link`), `Badge`, `Reveal` (scroll reveal), `Screws`/`BootIn` (hardware/per-page boot), `PageTransition` (90ms settle), `DitherCanvasMount` (raw-WebGL desk grain). Barrel: `@/components/console`.
 - **Status canon** (everywhere — screens, LEDs, badges): red = activity/attention, mint = healthy/online, amber = standby/pending, none = off/archived. Red is a status language only (≤1% of any viewport).
 - **Motion rules:** every effect checks `usePrefersReducedMotion` (`src/components/hooks/`) and renders final-state when reduced. Blink budget: one focal blinking element per screen (hero cursor, /now tail cursor); microdots exempt; decoration never blinks; nothing animates on archived/off devices. Max one decorative hardware detail per shell.

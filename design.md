@@ -61,13 +61,26 @@ rounded:
   pill: "9999px"               # toggles, badges, nav
 
 shadows:
-  # Neumorphism recipe — the entire material system depends on these four
+  # Neumorphism recipe — the entire material system depends on these pairs.
+  # v2: every pair is composed from a light vector (--light-dx, --light-dy) and
+  # six shadow inks (shade / highlight × soft / base / hard). The canonical lamp
+  # is top-left (-1, -1), which yields exactly the literal recipes below; the
+  # pointer lamp (§7) moves the vector at runtime, night mode (§2) recolours
+  # the inks. With no JS the var() fallbacks make the pairs byte-identical.
   raised: "8px 8px 20px rgba(123,119,105,0.45), -8px -8px 20px rgba(255,255,255,0.75)"
   raised-sm: "4px 4px 10px rgba(123,119,105,0.4), -4px -4px 10px rgba(255,255,255,0.7)"
   inset: "inset 4px 4px 10px rgba(123,119,105,0.45), inset -4px -4px 10px rgba(255,255,255,0.6)"
   pressed: "inset 2px 2px 6px rgba(123,119,105,0.5), inset -2px -2px 6px rgba(255,255,255,0.5)"
-  lcd-depth: "inset 0 2px 12px rgba(0,0,0,0.85)"   # screen sits behind glass
+  lcd-depth: "inset 0 2px 12px rgba(0,0,0,0.85)"   # screen sits behind glass — never directional
   hover-lift: "12px 12px 28px rgba(123,119,105,0.5), -10px -10px 24px rgba(255,255,255,0.8)"
+
+motion:
+  # Durations and eases are tokens (src/styles/console-tokens.scss), never literals.
+  dur: { press: "120ms", cap: "150ms", lift: "200ms", settle: "90ms", reveal: "400ms", boot: "280ms", boot-line: "200ms", type: "420ms", flare: "600ms", condense: "220ms" }
+  stagger: { shell: "80ms", line: "60ms", log: "70ms" }
+  ease: { out: "cubic-bezier(0.22,1,0.36,1)", inout: "cubic-bezier(0.65,0,0.35,1)", mech: "cubic-bezier(0.2,0.9,0.3,1.04)" }
+  depth: { perspective: "1200px", tilt-max: "4deg", reveal-rx: "8deg", reveal-y: "24px" }
+  z: { desk: 0, page: 1, rail: 5, header: 9, overlay: 20, toast: 30 }
 ---
 
 # Operator Console — nadeemramli.com Design System
@@ -299,6 +312,15 @@ small LCD chips) + Inter prose column at body-lg, max 68ch. Result metrics get t
 treatment — numbers glow, context is printed.
 
 ## 7. Motion & Effects (Full budget — locked)
+
+- **Foundation (v2):** durations, eases, stagger steps, depth (perspective, tilt cap, reveal
+  hinge) and the z scale are tokens in `console-tokens.scss` — components never carry motion
+  literals. Every neumorphic shadow pair is composed from the light vector `--light-dx/--light-dy`
+  (canonical top-left `-1,-1` as the `var()` fallback). Panel and Key transforms are single
+  composed expressions (`perspective · rotateX · rotateY · translateY(--lift-y)`;
+  `translate(--mag-x, --mag-y + --press-y)`) so lift, tilt, drift and press never overwrite one
+  another. Screens expose `data-status`; a booting screen's wrapper exposes `data-boot="on"`.
+  One shared rAF ticker (`components/motion/ticker.ts`) drives every runtime effect.
 
 - **WebGL dither desk (the ambient layer):** full-viewport canvas behind everything.
   Ordered-dither / Bayer grain over a very slow warm gradient drift in the cream family

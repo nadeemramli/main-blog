@@ -55,7 +55,10 @@ export default function HeroScreen({
       : undefined;
 
   return (
-    <div className={booting ? styles.boot : undefined}>
+    <div
+      className={booting ? styles.boot : undefined}
+      data-boot={booting ? "on" : undefined}
+    >
       <Screen nodeId="NODE-NR.01" status="sync" scanlines>
         <div className={`${styles.operatorLabel} ${styles.line}`} style={lineDelay(0)}>
           OPERATOR

@@ -3,7 +3,7 @@
 .header {
   position: sticky;
   top: 16px;
-  z-index: 9;
+  z-index: var(--console-z-header);
   display: flex;
   justify-content: center;
   width: 100%;

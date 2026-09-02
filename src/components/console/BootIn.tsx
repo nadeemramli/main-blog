@@ -24,7 +24,10 @@ export function BootIn({ className, children }: BootInProps) {
   }, [reduced]);
 
   return (
-    <div className={classNames(booting && styles.boot, className)}>
+    <div
+      className={classNames(booting && styles.boot, className)}
+      data-boot={booting ? "on" : undefined}
+    >
       {children}
     </div>
   );

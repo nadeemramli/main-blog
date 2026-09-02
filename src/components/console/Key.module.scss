@@ -18,8 +18,17 @@
   cursor: pointer;
   user-select: none;
   transition:
-    box-shadow 120ms ease,
-    transform 120ms ease;
+    box-shadow var(--console-dur-press) ease,
+    transform var(--console-dur-press) ease;
+
+  /* Composed transform: magnetic drift (PointerLight writes --mag-x/--mag-y
+     on free-standing caps) + press. Press stays the only vertical movement
+     a key makes on its own (design.md §5.5). */
+  --press-y: 0px;
+  transform: translate(
+    var(--mag-x, 0px),
+    calc(var(--mag-y, 0px) + var(--press-y))
+  );
 
   &:focus-visible {
     outline: 2px solid var(--console-mint);
@@ -28,8 +37,8 @@
 
   /* The key physically depresses (design.md §5.5). */
   &:active {
+    --press-y: 1px;
     box-shadow: var(--console-shadow-pressed);
-    transform: translateY(1px);
   }
 
   &:disabled {
@@ -37,16 +46,16 @@
     cursor: not-allowed;
 
     &:active {
+      --press-y: 0px;
       box-shadow: var(--console-shadow-raised-sm);
-      transform: none;
     }
   }
 }
 
 /* Held-down key, e.g. the active nav item. */
 .pressed {
+  --press-y: 1px;
   box-shadow: var(--console-shadow-pressed);
-  transform: translateY(1px);
 }
 
 /* One mint key per page (design.md §5.5, §9). */

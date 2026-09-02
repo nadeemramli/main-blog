@@ -3,6 +3,13 @@
 // token sheets so these values win the cascade. Console components in
 // src/components/console/ must use these vars exclusively — never the Once UI
 // --scheme-* ramps, never hardcoded colors or shadows.
+//
+// v2 ("The Lit Desk"): every neumorphic shadow pair is composed from a light
+// vector (--light-dx, --light-dy) so a pointer-driven lamp can move the
+// highlight and shade together. The vector is deliberately NOT declared here:
+// every use carries the canonical top-left (-1, -1) as its var() fallback, so
+// with no JS (SSR, reduced motion, coarse pointers) the pairs are byte-identical
+// to the static recipe. PointerLight writes the vector on <html> at runtime.
 :root {
   /* ── Environment ─────────────────────────────────────────── */
   --console-bg: #d5d2c6; /* warm cream — the desk */
@@ -14,6 +21,8 @@
   --console-panel-high: #edeae0; /* topmost raised elements (keys, caps) */
   --console-well: #cbc8bc; /* recessed wells / inset tracks */
   --console-border: #a09d94; /* hairline seams only */
+  /* Translucent faceplate for the condensed header (glass over the grain). */
+  --console-panel-glass: color-mix(in srgb, var(--console-panel) 78%, transparent);
 
   /* ── LCD / screen ────────────────────────────────────────── */
   --console-lcd-bg: #0e0f0d;
@@ -21,6 +30,9 @@
   --console-lcd-text: #76d2b6; /* mint phosphor */
   --console-lcd-dim: #3e6e5e;
   --console-lcd-glow: rgba(118, 210, 182, 0.35);
+  --console-lcd-bloom: rgba(118, 210, 182, 0.14); /* inset phosphor bloom on live glass */
+  --console-glass-specular: rgba(255, 255, 255, 0.07); /* lamp reflection on glass */
+  --console-glass-vignette: rgba(0, 0, 0, 0.32); /* curved-glass edge falloff */
 
   /* ── Ink (print on the device body) ──────────────────────── */
   --console-text-primary: #111827;
@@ -55,19 +67,76 @@
   --console-section-gap: 96px;
   --console-page-max-width: 1120px;
 
-  /* ── Shadows (the neumorphic material — design.md §9) ────── */
-  --console-shadow-raised: 8px 8px 20px rgba(123, 119, 105, 0.45),
-    -8px -8px 20px rgba(255, 255, 255, 0.75);
-  --console-shadow-raised-sm: 4px 4px 10px rgba(123, 119, 105, 0.4),
-    -4px -4px 10px rgba(255, 255, 255, 0.7);
-  --console-shadow-inset: inset 4px 4px 10px rgba(123, 119, 105, 0.45),
-    inset -4px -4px 10px rgba(255, 255, 255, 0.6);
-  --console-shadow-pressed: inset 2px 2px 6px rgba(123, 119, 105, 0.5),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.5);
-  --console-shadow-lcd-depth: inset 0 2px 12px rgba(0, 0, 0, 0.85);
-  --console-shadow-hover-lift: 12px 12px 28px rgba(123, 119, 105, 0.5),
-    -10px -10px 24px rgba(255, 255, 255, 0.8);
+  /* ── Motion (design.md §7) ───────────────────────────────── */
+  --console-dur-press: 120ms; /* key depress */
+  --console-dur-cap: 150ms; /* rocker cap slide */
+  --console-dur-lift: 200ms; /* shell hover lift */
+  --console-dur-settle: 90ms; /* page transition phosphor settle (locked) */
+  --console-dur-reveal: 400ms; /* shell reveal */
+  --console-dur-boot: 280ms; /* LCD flicker */
+  --console-dur-boot-line: 200ms; /* LCD line fade-in */
+  --console-dur-type: 420ms; /* log line type-in */
+  --console-dur-flare: 600ms; /* LED entry flare */
+  --console-dur-condense: 220ms; /* header condense */
+  --console-stagger-shell: 80ms;
+  --console-stagger-line: 60ms;
+  --console-stagger-log: 70ms;
+  --console-ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* reveals, lifts */
+  --console-ease-inout: cubic-bezier(0.65, 0, 0.35, 1); /* header condense */
+  --console-ease-mech: cubic-bezier(0.2, 0.9, 0.3, 1.04); /* caps, carriage */
+
+  /* ── Depth ───────────────────────────────────────────────── */
+  --console-perspective: 1200px;
+  --console-tilt-max: 4deg; /* interactive shell tilt cap */
+  --console-reveal-rx: 8deg; /* reveal hinge angle */
+  --console-reveal-y: 24px; /* reveal rise */
+
+  /* ── Z scale (matches values already in use) ─────────────── */
+  --console-z-desk: 0; /* DitherCanvas, canvas backplates */
+  --console-z-page: 1; /* main content, Footer */
+  --console-z-rail: 5; /* ScrollRail, TableOfContents */
+  --console-z-header: 9; /* Header */
+  --console-z-overlay: 20; /* dialogs, image enlarge */
+  --console-z-toast: 30;
+
+  /* ── Shadow inks (the neumorphic material — design.md §9) ── */
+  --console-shade: rgba(123, 119, 105, 0.45);
+  --console-shade-soft: rgba(123, 119, 105, 0.4);
+  --console-shade-hard: rgba(123, 119, 105, 0.5);
+  --console-highlight: rgba(255, 255, 255, 0.75);
+  --console-highlight-soft: rgba(255, 255, 255, 0.6);
+  --console-highlight-hard: rgba(255, 255, 255, 0.8);
+  --console-highlight-press: rgba(255, 255, 255, 0.5);
+  --console-highlight-deep: rgba(255, 255, 255, 0.5);
+
+  /* ── Shadow pairs — composed from the light vector ───────── */
+  /* Shade sits opposite the lamp, highlight faces it. Canonical lamp is
+     top-left (-1, -1): shade +8/+8, highlight -8/-8 — the original recipe. */
+  --console-shadow-raised: calc(var(--light-dx, -1) * -8px)
+      calc(var(--light-dy, -1) * -8px) 20px var(--console-shade),
+    calc(var(--light-dx, -1) * 8px) calc(var(--light-dy, -1) * 8px) 20px
+      var(--console-highlight);
+  --console-shadow-raised-sm: calc(var(--light-dx, -1) * -4px)
+      calc(var(--light-dy, -1) * -4px) 10px var(--console-shade-soft),
+    calc(var(--light-dx, -1) * 4px) calc(var(--light-dy, -1) * 4px) 10px
+      var(--console-highlight-soft);
+  --console-shadow-inset: inset calc(var(--light-dx, -1) * -4px)
+      calc(var(--light-dy, -1) * -4px) 10px var(--console-shade),
+    inset calc(var(--light-dx, -1) * 4px) calc(var(--light-dy, -1) * 4px) 10px
+      var(--console-highlight-soft);
+  --console-shadow-pressed: inset calc(var(--light-dx, -1) * -2px)
+      calc(var(--light-dy, -1) * -2px) 6px var(--console-shade-hard),
+    inset calc(var(--light-dx, -1) * 2px) calc(var(--light-dy, -1) * 2px) 6px
+      var(--console-highlight-press);
+  --console-shadow-hover-lift: calc(var(--light-dx, -1) * -12px)
+      calc(var(--light-dy, -1) * -12px) 28px var(--console-shade-hard),
+    calc(var(--light-dx, -1) * 10px) calc(var(--light-dy, -1) * 10px) 24px
+      var(--console-highlight-hard);
   /* Tighter pair tuned for surfaces on the deep zone (footer faceplate). */
-  --console-shadow-raised-deep: 5px 5px 14px rgba(123, 119, 105, 0.4),
-    -5px -5px 14px rgba(255, 255, 255, 0.5);
+  --console-shadow-raised-deep: calc(var(--light-dx, -1) * -5px)
+      calc(var(--light-dy, -1) * -5px) 14px var(--console-shade-soft),
+    calc(var(--light-dx, -1) * 5px) calc(var(--light-dy, -1) * 5px) 14px
+      var(--console-highlight-deep);
+  /* Glass depth is not directional — the lamp never moves it. */
+  --console-shadow-lcd-depth: inset 0 2px 12px rgba(0, 0, 0, 0.85);
 }

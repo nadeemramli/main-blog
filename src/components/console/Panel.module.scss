@@ -7,6 +7,14 @@
   padding: var(--console-panel-padding);
   color: var(--console-text-primary);
   font-family: var(--console-font-sans);
+
+  /* One composed transform so hover lift and pointer tilt never overwrite
+     each other. Plain panels keep every var at zero — visually identical to
+     an untransformed element. TiltPanel writes --tilt-x/--tilt-y. */
+  --lift-y: 0px;
+  transform: perspective(var(--console-perspective))
+    rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+    translateY(var(--lift-y));
 }
 
 .padLg {
@@ -19,12 +27,12 @@
 
 .interactive {
   transition:
-    box-shadow 200ms ease-out,
-    transform 200ms ease-out;
+    box-shadow var(--console-dur-lift) var(--console-ease-out),
+    transform var(--console-dur-lift) var(--console-ease-out);
 
   &:hover {
+    --lift-y: -2px;
     box-shadow: var(--console-shadow-hover-lift);
-    transform: translateY(-2px);
   }
 }
 
@@ -33,7 +41,7 @@
     transition: none;
 
     &:hover {
-      transform: none;
+      --lift-y: 0px;
     }
   }
 }

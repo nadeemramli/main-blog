@@ -1,4 +1,4 @@
-/* Shell reveal (design.md §7): rise 16px + fade, 400ms ease-out.
+/* Shell reveal (design.md §7): rise + fade, 400ms ease-out.
    Hidden state only ever applies on the client after the reduced-motion
    preference is known — SSR output is always visible (LCP safety). */
 .hidden {
@@ -8,6 +8,6 @@
 
 .reveal {
   transition:
-    opacity 400ms ease-out,
-    transform 400ms ease-out;
+    opacity var(--console-dur-reveal) ease-out,
+    transform var(--console-dur-reveal) ease-out;
 }

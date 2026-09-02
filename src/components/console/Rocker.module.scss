@@ -25,7 +25,7 @@
   background: var(--console-panel-high);
   border-radius: var(--console-radius-pill);
   box-shadow: var(--console-shadow-raised-sm);
-  transition: transform 150ms ease;
+  transition: transform var(--console-dur-cap) ease;
 }
 
 .capB {
@@ -42,7 +42,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--console-text-tertiary);
-  transition: color 150ms ease;
+  transition: color var(--console-dur-cap) ease;
 }
 
 .active {

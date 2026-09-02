@@ -6,6 +6,8 @@ interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   as?: React.ElementType;
   interactive?: boolean;
   padding?: "default" | "lg" | "none";
+  /** React 19: plain prop. TiltPanel uses it to drive --tilt-x/--tilt-y. */
+  ref?: React.Ref<HTMLElement>;
   children: React.ReactNode;
 }
 

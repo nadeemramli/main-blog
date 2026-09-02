@@ -6,7 +6,7 @@
 
 /* The smooth cut: a 90ms phosphor settle — no stutters, no movement. */
 .enter {
-  animation: pageEnter 90ms linear;
+  animation: pageEnter var(--console-dur-settle) linear;
 }
 
 @keyframes pageEnter {

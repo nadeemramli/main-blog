@@ -20,7 +20,11 @@ export const Screen = ({
   ...rest
 }: ScreenProps) => {
   return (
-    <div className={classNames(styles.bezel, className)} {...rest}>
+    <div
+      className={classNames(styles.bezel, className)}
+      data-status={status}
+      {...rest}
+    >
       <div className={styles.glass}>
         {scanlines && <div className={styles.scanlines} aria-hidden="true" />}
         {(nodeId || status) && (
