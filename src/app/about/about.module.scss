@@ -267,3 +267,14 @@
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
+
+/* Phone faceplate: the silkscreen leaves the corner (it would print over
+   the second row of social keys) and sits under the identity block. */
+@media (max-width: 768px) {
+  .silkscreen {
+    position: static;
+    display: block;
+    margin-top: 12px;
+    text-align: right;
+  }
+}

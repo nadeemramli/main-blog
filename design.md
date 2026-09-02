@@ -176,6 +176,14 @@ information is printed on the body.** When deciding how to render any element, a
 - Responsive: shells stack to single column below 768px; tri-panel modules stack in order
   control → screen → reference. Gauge scales down before it wraps. LCD readout-xl steps
   down via clamp. Never let a shell exceed viewport width minus 32px gutters.
+- **Mobile pass (v2, ≤768px):** the desk gets smaller at the token level — section gap 56px,
+  shell padding 20/22px, shell radius 28/20px, readout-xl `clamp(28px, 7.4vw, 56px)` so the
+  operator name holds one line on a 360px glass. Page gutter 16px (`page-gutter` in
+  `console-mobile.scss`), `overflow-x: clip` on the document so no shell, arrow or 3D reveal
+  can scroll the desk sideways. Touch: keys grow to 44px tall on coarse pointers; header caps
+  32×36 with the clock showing HH:MM only; footer icon keys 36px so all seven sit in one row.
+  Manual-page sidebars stop sticking in single column. The dock shows the printed outline in a
+  150px landscape well; the rail, lamp, tilt and 3D unit never load.
 
 ## 5. Component Library
 

@@ -282,3 +282,28 @@
     line-height: 32px;
   }
 }
+
+/* ── Mobile touch pass ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* The cluster sits closer to the top edge on a phone. */
+  .header {
+    top: 8px;
+    padding: 0 12px;
+  }
+
+  /* 32×36 caps: the largest that fit six across with the clock and lamp. */
+  .navKey {
+    width: 32px;
+    height: 36px;
+  }
+
+  /* HH:MM only — the seconds return on desktop. */
+  .seconds {
+    display: none;
+  }
+
+  .lamp > span:nth-child(n + 2) {
+    height: 34px;
+    line-height: 34px;
+  }
+}

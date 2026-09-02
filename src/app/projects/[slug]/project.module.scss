@@ -155,3 +155,11 @@
   max-width: 68ch;
   min-width: 0;
 }
+
+/* Single column on a phone: the sidebar prints above the prose and must
+   not stick (a sticky sidebar over a single column overlaps the text). */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+  }
+}

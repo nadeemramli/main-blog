@@ -4,6 +4,8 @@ import "@/once-ui/tokens/index.scss";
 import "@/styles/console-tokens.scss";
 // Lenis smooth-scroll base rules (html.lenis, .lenis-stopped, data-lenis-prevent).
 import "lenis/dist/lenis.css";
+// Mobile-only layout rules (page gutter, overflow clip).
+import "@/styles/console-mobile.scss";
 
 import classNames from "classnames";
 
@@ -137,6 +139,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
           <Flex fillWidth minHeight="16"></Flex>
           <Header />
           <Flex
+            className="page-gutter"
             position="relative"
             zIndex={0}
             fillWidth

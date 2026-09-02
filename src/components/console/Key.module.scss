@@ -90,3 +90,11 @@ a.primary:visited {
     transition: none;
   }
 }
+
+/* Touch: keys grow to a 44px tall target on coarse pointers. */
+@media (pointer: coarse) {
+  .key:not(.icon) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}

@@ -1,0 +1,20 @@
+/* Mobile layout rules that can't live on a component (design.md §4 v2).
+   Imported in layout.tsx after the token sheet. */
+
+/* Page gutter: once-ui's paddingX="l" is 40px, which spends 80px of a
+   360px phone. 16px on mobile, unchanged on desktop. */
+@media (max-width: 768px) {
+  .page-gutter.page-gutter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Nothing on the desk may create a horizontal scroll on a phone
+   (carousel arrows, tilted shells, 3D reveals). */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}

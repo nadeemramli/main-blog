@@ -124,6 +124,12 @@
     padding: 24px 20px 0;
   }
 
+  /* Seven icon keys in one row at 36px. */
+  .iconKey {
+    width: 36px;
+    height: 36px;
+  }
+
   /* The grille yields before the fine print wraps. */
   .grille {
     display: none;

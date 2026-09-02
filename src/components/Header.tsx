@@ -44,7 +44,14 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({
     return () => clearInterval(intervalId);
   }, [timeZone, locale]);
 
-  return <>{currentTime}</>;
+  // Seconds hide on mobile (CSS) so the chip fits the 360px cluster.
+  const [hm, s] = [currentTime.slice(0, 5), currentTime.slice(5)];
+  return (
+    <>
+      {hm}
+      <span className={styles.seconds}>{s}</span>
+    </>
+  );
 };
 
 export default TimeDisplay;

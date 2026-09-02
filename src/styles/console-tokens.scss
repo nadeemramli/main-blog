@@ -221,3 +221,19 @@
   --console-highlight-press: rgba(255, 244, 224, 0.05);
   --console-highlight-deep: rgba(255, 244, 224, 0.05);
 }
+
+/* ── Mobile (≤768px): the desk gets smaller, the devices don't get
+   thinner-skinned. Spacing, radii and the hero readout step down at the
+   token level so every shell follows (design.md §4 v2). ─────────── */
+@media (max-width: 768px) {
+  :root {
+    --console-section-gap: 56px;
+    --console-panel-padding: 20px;
+    --console-panel-padding-lg: 22px;
+    --console-radius-panel: 28px;
+    --console-radius-panel-inner: 20px;
+    /* One line for the operator name on a 360px glass. */
+    --console-fs-readout-xl: clamp(28px, 7.4vw, 56px);
+    --console-fs-display-lg: clamp(30px, 8vw, 48px);
+  }
+}
